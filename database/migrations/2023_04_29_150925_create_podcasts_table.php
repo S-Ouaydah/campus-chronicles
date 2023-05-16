@@ -13,7 +13,25 @@ return new class extends Migration
     {
         Schema::create('podcasts', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->string('image');
+            $table->unsignedBigInteger('creator_id');
+            $table->unsignedInteger('subscriber_count');
+            $table->unsignedBigInteger('category_id');
+
+            // Foreign key constraint
+            $table->foreign('creator_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            // $table->foreign('category_id')
+            //     ->references('id')
+            //     ->on('categories')
+            //     ->onDelete('cascade');
+                
             $table->timestamps();
+            
         });
     }
 
