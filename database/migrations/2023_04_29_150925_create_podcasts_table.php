@@ -25,11 +25,11 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            // $table->foreign('category_id')
-            //     ->references('id')
-            //     ->on('categories')
-            //     ->onDelete('cascade');
-            
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('posdcast_categories')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
