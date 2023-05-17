@@ -16,13 +16,21 @@ class Podcast extends Model
         'category_id'
     ];
 
+    public function episodes()
+    {
+        return $this->hasMany(Episode::class);
+    }
+
     public function creator()
     {
         return $this->belongsTo(User::class);
     }
-
     public function category()
     {
         return $this->belongsTo(PodcastCategories::class);
+    }
+    public function subscribers()
+    {
+        return $this->belongsToMany(User::class, 'subscriptions');
     }
 }

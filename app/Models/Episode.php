@@ -9,7 +9,7 @@ class Episode extends Model
 {
     use HasFactory;
 
-    protected $fillable = 
+    protected $fillable =
     [
         'name',
         'description',
@@ -20,5 +20,18 @@ class Episode extends Model
     public function podcast()
     {
         return $this->belongsTo(Podcast::class);
+    }
+    public function creator()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes');
+    }
+    public function listens()
+    {
+        return $this->belongsToMany(User::class, 'listens');
     }
 }

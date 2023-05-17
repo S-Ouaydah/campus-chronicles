@@ -9,10 +9,15 @@ class PodcastCategories extends Model
 {
     use HasFactory;
 
-    protected $fillable = 
+    protected $fillable =
     [
         'name',
         'description',
         'podcast_count'
     ];
+
+    public function podcasts()
+    {
+        return $this->hasMany(Podcast::class);
+    }
 }
