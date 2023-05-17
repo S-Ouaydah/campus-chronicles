@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PodcastCategories extends Model
 {
     use HasFactory;
+
+    protected $fillable = 
+    [
+        'name',
+        'description',
+        'podcast_count'
+    ];
 }
