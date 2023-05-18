@@ -17,14 +17,6 @@ return new class extends Migration
             $table->text('description');
             $table->string('audio_path');
 
-            // Foreign keys
-            $table->foreignId('podcast_id')
-                ->constrained()
-                ->onDelete('cascade');
-            $table->foreignId('creator_id')
-                ->constrained('users')
-                ->onDelete('cascade');
-                
             $table->timestamps();
         });
     }

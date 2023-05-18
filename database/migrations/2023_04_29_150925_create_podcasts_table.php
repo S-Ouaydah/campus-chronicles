@@ -20,16 +20,6 @@ return new class extends Migration
             $table->unsignedInteger('subscriber_count');
             $table->unsignedBigInteger('category_id');
 
-            // Foreign key constraint
-            $table->foreign('creator_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('posdcast_categories')
-                ->onDelete('cascade');
-
             $table->timestamps();
         });
     }
