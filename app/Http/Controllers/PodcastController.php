@@ -20,7 +20,9 @@ class PodcastController extends Controller
      */
     public function create()
     {
-        //
+        return view('podcast.create', [
+ 
+        ]);
     }
 
     /**
@@ -62,4 +64,5 @@ class PodcastController extends Controller
     {
         //
     }
+
 }

@@ -31,6 +31,14 @@ Route::get('/explore', function () {
     return view('explore');
 })->name('explore');
 
+Route::get('/history', function () {
+    return view('history');
+})->name('history');
+
+Route::get('/liked', function () {
+    return view('liked');
+})->name('liked');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
