@@ -5,9 +5,8 @@
         </h2>
     </header>
 
-    <x-primary-button
-        x-data=""
-        x-on:click.prevent=""
-    >{{ __('Create') }}</x-primary-button>
+    <a href="{{ route('podcast-create-form') }}">
+        <x-primary-button>{{ __('Create') }}</x-primary-button>
+    </a>
 
 </section>
