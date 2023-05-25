@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EpisodeController;
+use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Episode;
@@ -25,14 +26,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified' ,'verifyisae'])->name('dashboard');
 
-Route::get('/home', function () {
-    return view('home');
-})->middleware(['auth', 'verified'])->name('home');
-
-
-Route::get('/explore', function () {
-    return view('explore');
-})->name('explore');
+Route::get('/explore', [ExploreController::class, 'show'])->name('explore');
 
 Route::get('/history', function () {
     return view('history');

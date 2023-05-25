@@ -12,7 +12,6 @@ class PodcastCategories extends Model
     protected $fillable =
     [
         'name',
-        'description',
         'podcast_count'
     ];
 
