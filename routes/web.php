@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\EpisodeController;
+use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Episode;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,10 +46,20 @@ Route::get('/create-podcast', function () {
     return view('podcast.create-form');
 })->name('podcast-create-form');
 
+Route::post('/submit-create-form', [PodcastController::class, 'store']);
+
+Route::post('/dashboard', [EpisodeController::class, 'store'])->name('episode.store');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/podcast', [PodcastController::class, 'edit'])->name('podcast.create');
+//     Route::patch('/podcast', [PodcastController::class, 'update'])->name('podcast.store');
+//     Route::delete('/podcast', [PodcastController::class, 'destroy'])->name('podcast.destroy');
+// });
 
 require __DIR__.'/auth.php';

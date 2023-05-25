@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Episode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EpisodeController extends Controller
 {
@@ -28,7 +29,23 @@ class EpisodeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'podcast_id' => 'required|exists:podcasts,id',
+        ]);
+        $currentuser = Auth::user();
+
+        $formData = new Episode();
+        $formData->creator_id = $currentuser->id;
+        $formData->title = $validatedData['title'];
+        $formData->description = $validatedData['description'];
+        $formData->podcast_id = $validatedData['podcast_id'];
+        $formData->audio_path = "null"; //temporary
+
+        if ($formData->save()) {
+            return redirect('/dashboard');
+        }
     }
 
     /**

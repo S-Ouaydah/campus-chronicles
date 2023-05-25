@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Podcast;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PodcastController extends Controller
 {
@@ -30,7 +32,24 @@ class PodcastController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'category_id' => 'required|exists:podcast_categories,id',
+        ]);
+        $currentuser = Auth::user();
+
+        $formData = new Podcast();
+        $formData->creator_id = $currentuser->id;
+        $formData->title = $validatedData['title'];
+        $formData->description = $validatedData['description'];
+        $formData->category_id = $validatedData['category_id'];
+
+        if ($formData->save()) {
+            return redirect('/dashboard')->with('success', 'Form submitted successfully!');
+        }
+        return redirect('/dashboard')->flash('error', 'an error has occured!');
+    
     }
 
     /**
