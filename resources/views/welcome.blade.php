@@ -25,7 +25,8 @@
 
     <!-- Styles -->
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    @vite(['resources/scss/app.scss','resources/css/app.css', 'resources/js/app.js'])
 
 
 </head>
@@ -52,14 +53,14 @@
                 </div>
 
 
-                <input class="bg-gray-200 rounded-2xl px-5 xl:px-10 py-2.5 flex-auto outline-none" type="search"
+                <input class="bg-gray-200 rounded-2xl px-5 xl:px-10 py-2.5 flex-auto outline-none border-none" type="search"
                     placeholder="search....">
                 <div class="nav4">
                     @auth
                         <a href="{{ url('/dashboard') }}"
-                            class="text-black hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                            class="text-black hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
                     @else
-                        {{-- <a href="{{ route('login') }}" class=" text-5xl text-black hover:text-gray-900 dark:text-black dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a> --}}
+           
                         <a href="{{ route('login') }}" class="  text-white rounded-2xl bg-black px-6  py-2.5  ml-5">Log
                             in</a>
 
