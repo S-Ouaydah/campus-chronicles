@@ -23,7 +23,7 @@ class PodcastController extends Controller
     public function create()
     {
         return view('podcast.create', [
- 
+
         ]);
     }
 
@@ -49,15 +49,20 @@ class PodcastController extends Controller
             return redirect('/dashboard')->with('success', 'Form submitted successfully!');
         }
         return redirect('/dashboard')->flash('error', 'an error has occured!');
-    
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Podcast $podcast)
+    public function show(String $id)
     {
-        //
+        $podcast = Podcast::findOrFail($id);
+
+        return view('podcast.podcast', [
+            'podcast' => $podcast,
+            'episodes' => $podcast->getEpisodes(),
+        ]);
     }
 
     /**

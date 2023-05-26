@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/pod/{id}', [PodcastController::class, 'show'])->name('podcast.show');
+
+
 Route::get('/', function () {
     return view('welcome');
 });

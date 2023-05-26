@@ -10,8 +10,9 @@ class Podcast extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
         'description',
+        'image_url',
         'creator_id',
         'category_id'
     ];
@@ -32,5 +33,11 @@ class Podcast extends Model
     public function subscribers()
     {
         return $this->belongsToMany(User::class, 'subscriptions');
+    }
+
+    // Functions
+    public function getEpisodes()
+    {
+        return $this->episodes()->get();
     }
 }

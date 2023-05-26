@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('image')->nullable();
+            $table->string('image_url')->nullable();
             $table->unsignedBigInteger('creator_id');
             $table->unsignedInteger('subscriber_count')->default(0);
             $table->unsignedBigInteger('category_id');
