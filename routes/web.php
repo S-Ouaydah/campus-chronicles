@@ -42,9 +42,9 @@ Route::get('/history', function () {
     return view('history');
 })->name('history');
 
-Route::get('/liked', function () {
-    return view('liked');
-})->name('liked');
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
 
 Route::get('/create-podcast', function () {
     return view('podcast.create-form');
@@ -55,9 +55,9 @@ Route::post('/submit-create-form', [PodcastController::class, 'store']);
 Route::post('/dashboard', [EpisodeController::class, 'store'])->name('episode.store');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/settings', [ProfileController::class, 'edit'])->name('settings.edit');
+    Route::patch('/settings', [ProfileController::class, 'update'])->name('settings.update');
+    Route::delete('/settings', [ProfileController::class, 'destroy'])->name('settings.destroy');
 });
 
 // Route::middleware('auth')->group(function () {

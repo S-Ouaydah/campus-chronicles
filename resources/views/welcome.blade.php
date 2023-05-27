@@ -53,7 +53,7 @@
                 </div>
 
 
-                <input class="bg-gray-200 rounded-2xl px-5 xl:px-10 py-2.5 flex-auto outline-none border-none" type="search"
+                <input class="bg-gray-200 rounded-2xl px-5 xl:px-10 py-2.5 flex-auto focus:ring-0 outline-none border-none" type="search"
                     placeholder="search....">
                 <div class="nav4">
                     @auth
