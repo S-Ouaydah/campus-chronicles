@@ -47,7 +47,7 @@ class PodcastCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PodcastCategories $podcastCategories)
+    public function edit(PodcastCategory $podcastCategory)
     {
         //
     }
@@ -55,7 +55,7 @@ class PodcastCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PodcastCategories $podcastCategories)
+    public function update(Request $request, PodcastCategory $podcastCategory)
     {
         //
     }
@@ -63,7 +63,7 @@ class PodcastCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PodcastCategories $podcastCategories)
+    public function destroy(PodcastCategory $podcastCategory)
     {
         //
     }

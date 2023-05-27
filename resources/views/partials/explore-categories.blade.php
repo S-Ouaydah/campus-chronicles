@@ -11,7 +11,8 @@
     <div class="p-6 text-gray-900">
 
         <div class="flex flex-wrap">
-        @foreach ($categories as $category)
+            @if($categories)
+            @foreach ($categories as $category)
             <div class="w-full md:w-1/5 p-4 ">
                 <a href="category/<?= $category->name ?>" class="">
                     <div class="w-full bg-gray-200 rounded-lg p-4 truncate">
@@ -19,7 +20,12 @@
                     </div>
                 </a>
             </div>
-        @endforeach
+            @endforeach
+            @else
+            <div class="w-full md:w-1/5 p-4 ">
+                <h5 class="text-gray-900 text-sm"> no categories found ! </h5>
+            </div>
+            @endif
         </div>
 
     </div>
