@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\ExploreController;
+use App\Http\Controllers\PodcastCategoryController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Episode;
@@ -43,6 +44,8 @@ Route::get('/create-podcast', function () {
 Route::post('/submit-create-form', [PodcastController::class, 'store']);
 
 Route::post('/dashboard', [EpisodeController::class, 'store'])->name('episode.store');
+
+Route::get('/category/{name}',[PodcastCategoryController::class, 'show' ]);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

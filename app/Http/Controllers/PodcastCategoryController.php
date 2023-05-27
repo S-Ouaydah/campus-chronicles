@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PodcastCategories;
+use App\Models\PodcastCategory;
 use Illuminate\Http\Request;
 
-class PodcastCategoriesController extends Controller
+class PodcastCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,9 +34,14 @@ class PodcastCategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PodcastCategories $podcastCategories)
+    public function show(Request $request)
     {
-        //
+        $name = $request->input('name');
+        $category = PodcastCategory::where('name', $name)->first();
+
+        return view('welcome', [        // change view when created
+            'category' => $category,
+        ]);
     }
 
     /**

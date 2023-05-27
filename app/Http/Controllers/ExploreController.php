@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use App\Models\PodcastCategories;
+use App\Models\PodcastCategory;
 
 class ExploreController extends Controller
 {
@@ -40,7 +40,7 @@ class ExploreController extends Controller
      */
     public function show()
     {
-        $categories = PodcastCategories::all();
+        $categories = PodcastCategory::all();
         return view('explore',[
             'categories' => $categories,
         ]);
