@@ -43,7 +43,7 @@
 
 
 
-                <a href="/"><img src="https://i.ibb.co/0K6f6Cv/logo-1.png"></a>
+                <a href="/"><img  src="https://i.ibb.co/0K6f6Cv/logo-1.png"></a>
                 <div class="nav2">
 
                     <a href="{{ route('explore') }}" class="  text-black rounded-2xl  xl:px-6  py-2  xl:ml-5">Discover</a>

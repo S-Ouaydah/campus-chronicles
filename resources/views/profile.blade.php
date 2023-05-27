@@ -35,12 +35,12 @@
             <h2 class="text-xl font-semibold mt-20">Top Podcaster this month </h2>
             <div class="pt-5 flex">
 
-                <div class="h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
-                <div class="h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
-                <div class="h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
-                <div class="h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
-                <div class="h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
-                <div class="h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
+                <div class="bg-[url('https://i.ibb.co/BtDyWFb/5770f01a32c3c53e90ecda61483ccb08.jpg')] bg-contain h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
+                <div class="bg-[url('https://i.ibb.co/BtDyWFb/5770f01a32c3c53e90ecda61483ccb08.jpg')] bg-contain h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
+                <div class="bg-[url('https://i.ibb.co/BtDyWFb/5770f01a32c3c53e90ecda61483ccb08.jpg')] bg-contain h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
+                <div class="bg-[url('https://i.ibb.co/BtDyWFb/5770f01a32c3c53e90ecda61483ccb08.jpg')] bg-contain h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
+                <div class="bg-[url('https://i.ibb.co/BtDyWFb/5770f01a32c3c53e90ecda61483ccb08.jpg')] bg-contain h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
+                <div class="bg-[url('https://i.ibb.co/BtDyWFb/5770f01a32c3c53e90ecda61483ccb08.jpg')] bg-contain h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div>
                 
                 {{-- <div class="h-[200px] w-[200px] mr-5  bg-[#D9D9D9] rounded-full"></div> --}}
 
