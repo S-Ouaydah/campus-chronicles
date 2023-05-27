@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PodcastCategories;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
+use App\Models\PodcastCategory;
 
-class PodcastCategoriesController extends Controller
+class ExploreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,15 +38,18 @@ class PodcastCategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PodcastCategories $podcastCategories)
+    public function show()
     {
-        //
+        $categories = PodcastCategory::all();
+        return view('explore',[
+            'categories' => $categories,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PodcastCategories $podcastCategories)
+    public function edit()
     {
         //
     }
@@ -50,7 +57,7 @@ class PodcastCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PodcastCategories $podcastCategories)
+    public function update(Request $request)
     {
         //
     }
@@ -58,7 +65,7 @@ class PodcastCategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PodcastCategories $podcastCategories)
+    public function destroy()
     {
         //
     }
