@@ -1,55 +1,94 @@
 <nav x-data="{ open: false }" class="  ">
     <!-- Primary Navigation Menu -->
     <div class="w-full px-[2%] mx-auto pt-8 sm:px-6 lg:px-8 absolute ">
-        <div class="flex justify-between  ">
-            <div class="flex">
+        <div class="flex justify-between gap-16 items-center ">
+            <div class="flex" >
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="shrink-0 flex ">
                     <a href="{{ route('dashboard') }}">
                         {{-- <x-application-logo class="block h-9 w-auto fill-current text-white" /> --}}
-                        <img class="h-6"src="https://i.ibb.co/FBLwJBP/logo-white.png">
+                        @if (Request()->route()->getName() == 'profile' ||
+                                Request()->route()->getName() == 'dashboard')
+                            <img class="h-6"src="https://i.ibb.co/FBLwJBP/logo-white.png">
+                        @else
+                            <img class="h-6"src="https://i.ibb.co/stTsyMP/logo-black.png">
+                        @endif
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
-                    @if (auth()->check() && auth()->user()->isISAE)
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
-                    @endif
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                        {{ __('For You') }}
-                    </x-nav-link>
 
-
-                    <x-nav-link :href="route('explore')" :active="request()->routeIs('explore')">
-                        {{ __('Explore') }}
-                    </x-nav-link>
-
-
-                </div>
             </div>
+            <!-- Navigation Links -->
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
+
+                <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    {{ __('For You') }}
+                </x-nav-link>
+
+                @if (auth()->check() && auth()->user()->isISAE)
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('My Studio') }}
+                    </x-nav-link>
+                @endif
+
+
+                <x-nav-link :href="route('explore')" :active="request()->routeIs('explore')">
+                    {{ __('Explore') }}
+                </x-nav-link>
+
+
+            </div>
+            <input class="bg-gray-200 rounded-2xl px-5 xl:px-10 py-2.5 flex-auto focus:ring-0 outline-none border-none" type="search"
+                    placeholder="search....">
             @auth
                 <!-- Settings Dropdown -->
-                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <div class="hidden sm:flex sm:items-center sm:ml-6 h-[42px]">
 
                     <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button
-                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::user()->name }}</div>
 
-                                <div class="ml-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </x-slot>
+
+                        @if (Request()->route()->getName() == 'profile' ||
+                                Request()->route()->getName() == 'dashboard')
+                            <x-slot name="trigger">
+                                <button
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md  hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    {{-- <div class="bg-white h-8 w-8 rounded-full"> --}}
+                                    <div
+                                        class="bg-[url('https://i.ibb.co/BtDyWFb/5770f01a32c3c53e90ecda61483ccb08.jpg')] bg-contain h-8 w-8 rounded-full">
+                                    </div>
+                                    <div class="text-white pl-5">{{ Auth::user()->name }}</div>
+
+                                    <div class="ml-1">
+                                        <svg class="fill-current h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
+                        @else
+                            <x-slot name="trigger">
+                                <button
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md  hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    {{-- <div class="bg-black h-8 w-8 rounded-full"> --}}
+                                    <div
+                                        class="bg-[url('https://i.ibb.co/BtDyWFb/5770f01a32c3c53e90ecda61483ccb08.jpg')] bg-contain h-8 w-8 rounded-full">
+                                    </div>
+                                    <div class="text-black pl-5">{{ Auth::user()->name }}</div>
+
+                                    <div class="ml-1">
+                                        <svg class="fill-current h-4 w-4 text-balck" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
+                        @endif
 
 
 

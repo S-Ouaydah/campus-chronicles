@@ -3,8 +3,11 @@
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 use App\Models\Episode;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LikeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +45,7 @@ Route::get('/history', function () {
     return view('history');
 })->name('history');
 
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
+Route::get('/profile',  [ProfileController::class, 'view'])->name('profile');
 
 Route::get('/create-podcast', function () {
     return view('podcast.create-form');
@@ -55,10 +56,15 @@ Route::post('/submit-create-form', [PodcastController::class, 'store']);
 Route::post('/dashboard', [EpisodeController::class, 'store'])->name('episode.store');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/settings', [ProfileController::class, 'edit'])->name('settings.edit');
-    Route::patch('/settings', [ProfileController::class, 'update'])->name('settings.update');
-    Route::delete('/settings', [ProfileController::class, 'destroy'])->name('settings.destroy');
+    Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::patch('/settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::delete('/settings', [SettingsController::class, 'destroy'])->name('settings.destroy');
 });
+
+
+
+
+
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/podcast', [PodcastController::class, 'edit'])->name('podcast.create');
