@@ -15,6 +15,6 @@ class VerifyISAE
             return $next($request);
         }
 
-        return redirect()->route('home')->with('error', 'You do not have access to this page.');
+        return redirect()->route('explore')->with('error', 'You do not have access to this page.');
     }
 }

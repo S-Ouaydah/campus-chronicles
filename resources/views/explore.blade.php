@@ -13,7 +13,7 @@
                 <h2 class="text-lg font-medium text-gray-900 p-4">
                     {{ __('There\'s no categories') }}
                 </h2>
-                
+
             </div>
             @endif
         </div>
