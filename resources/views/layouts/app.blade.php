@@ -10,8 +10,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.cdnfonts.com/css/made-tommy-soft-outline" rel="stylesheet">
-    {{-- <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
+    {{-- TODO check why default css in npm not taken, vite? --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -19,12 +18,13 @@
             font-family: 'MADE Tommy Soft', sans-serif !important;
         }
     </style>
-
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
 
     <!-- Scripts -->
 
     @vite(['resources/scss/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 
 <body class=" antialiased">
@@ -45,6 +45,7 @@
             {{ $slot }}
         </main>
     </div>
+    @livewireScripts
 </body>
 
 </html>
