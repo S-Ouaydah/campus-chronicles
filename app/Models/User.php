@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -33,7 +35,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    
+
 
     /**
      * The attributes that should be cast.
@@ -51,15 +53,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Podcast::class);
     }
-    public function likes()
+    public function likes(): BelongsToMany
     {
         return $this->belongsToMany(Episode::class, 'likes');
     }
-    public function listens()
+    public function listens(): BelongsToMany
     {
         return $this->belongsToMany(Episode::class, 'listens');
     }
-    public function subscriptions()
+    public function subscriptions(): BelongsToMany
     {
         return $this->belongsToMany(Podcast::class, 'subscriptions');
     }

@@ -23,7 +23,7 @@ use App\Http\Controllers\LikeController;
 */
 
 
-Route::get('/pod/{id}', [PodcastController::class, 'show'])->name('podcast.show');
+Route::get('/podcast/{id}', [PodcastController::class, 'show'])->name('podcast.show');
 
 
 Route::get('/', function () {

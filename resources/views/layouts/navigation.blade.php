@@ -51,6 +51,7 @@
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md  hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                     {{-- <div class="bg-white h-8 w-8 rounded-full"> --}}
                                     <div
+                                    {{-- TODO add profile pic to users XD --}}
                                         class="bg-[url('https://i.ibb.co/BtDyWFb/5770f01a32c3c53e90ecda61483ccb08.jpg')] bg-contain h-8 w-8 rounded-full">
                                     </div>
                                     <div class="text-white pl-5">{{ Auth::user()->name }}</div>

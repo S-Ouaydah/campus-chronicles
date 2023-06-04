@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->unsignedInteger('sequence');
             $table->string('audio_path');
 
             $table->timestamps();

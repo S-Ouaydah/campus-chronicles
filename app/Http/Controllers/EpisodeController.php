@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Episode;
+use App\Models\Podcast;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,6 +42,8 @@ class EpisodeController extends Controller
         $formData->title = $validatedData['title'];
         $formData->description = $validatedData['description'];
         $formData->podcast_id = $validatedData['podcast_id'];
+        // get sequence from podcast_id nb of episodes
+        $formData->sequence = Podcast::find($formData->podcast_id)->episodes->count() + 1;
         $formData->audio_path = "null"; //temporary
 
         if ($formData->save()) {

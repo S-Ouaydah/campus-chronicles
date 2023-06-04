@@ -2,3 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn {
+    @apply font-bold py-2 px-4 rounded;
+}
+.btn-primary {
+    color: white;
+    background-color: theme('colors.primary.base');
+}
+.btn-primary:hover {
+    background-color: theme('colors.primary.dark');
+}
+@media (min-width: 768px) {
+ .md\:truncate-none{
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal !important;
+ }
+}
+.truncate-3 {
+    @apply truncate;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}

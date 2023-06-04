@@ -17,12 +17,14 @@ class Episode extends Model
             'description',
             'podcast_id',
             'audio_path',
+            'sequence',
         ];
 
     public function podcast()
     {
         return $this->belongsTo(Podcast::class);
     }
+    // NOTE creator is redundant, but it's here for clarity?
     public function creator()
     {
         return $this->belongsTo(User::class);
@@ -47,31 +49,42 @@ class Episode extends Model
     public function getPodcastName(){
         return $this->podcast->title;
     }
-
+    //NOTE To be used where?
     public function getEpCreatorName(){
         return $this->creator->name;
     }
-    public function getLikeDate()
-    {
-        $createdAt = Carbon::parse($this->created_at);
-        $now = Carbon::now()->setTimezone(date_default_timezone_get());
-    
-        if ($createdAt->isSameMinute($now)) {
-            // Return time in seconds ago if it's the same minute as now
-            return $createdAt->diffInSeconds($now) . ' seconds ago';
-        } elseif ($createdAt->isSameHour($now)) {
-            // Return time in minutes ago if it's the same hour as now
-            return $createdAt->diffInMinutes($now) . ' minutes ago';
-        } elseif ($createdAt->isSameDay($now)) {
-            // Return time in hours ago if it's the same day as today
-            return $createdAt->diffInHours($now) . ' hours ago';
-        } elseif ($createdAt->diffInDays($now) <= 7) {
-            // Return "last (name of the day)" if it's in the last 7 days
-            return 'last ' . $createdAt->format('l');
-        } else {
-            // Return date in year, month, day format for other cases
-            return $createdAt->format('Y-m-d');
-        }
+    public function getSequence(){
+        return $this->sequence;
     }
+    // TODO there is a built-in method for this, i think this is it. test it.
+    public function getLikeDate(){
+        $date = $this->created_at;
+        return Carbon::parse($date)->diffForHumans();
+    }
+    // public function getLikeDate()
+    // {
+    //     $createdAt = Carbon::parse($this->created_at);
+    //     $now = Carbon::now()->setTimezone(date_default_timezone_get());
+
+    //     if ($createdAt->isSameMinute($now)) {
+    //         // Return time in seconds ago if it's the same minute as now
+    //         return $createdAt->diffInSeconds($now) . ' seconds ago';
+    //     } elseif ($createdAt->isSameHour($now)) {
+    //         // Return time in minutes ago if it's the same hour as now
+    //         return $createdAt->diffInMinutes($now) . ' minutes ago';
+    //     } elseif ($createdAt->isSameDay($now)) {
+    //         // Return time in hours ago if it's the same day as today
+    //         return $createdAt->diffInHours($now) . ' hours ago';
+    //     } elseif ($createdAt->diffInDays($now) <= 7) {
+    //         // Return "last (name of the day)" if it's in the last 7 days
+    //         return 'last ' . $createdAt->format('l');
+    //     } elseif ($createdAt->diffInDays($now) <= 365) {
+    //         // Return date in "month day" format if it's in the same year
+    //         return $createdAt->format('F j');
+    //     } else {
+    //         // Return date in "year month day" format for other cases
+    //         return $createdAt->format('Y-m-d');
+    //     }
+    // }
 
 }
