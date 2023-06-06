@@ -12,7 +12,6 @@
     <link href="https://fonts.cdnfonts.com/css/made-tommy-soft-outline" rel="stylesheet">
     {{-- TODO check why default css in npm not taken, vite? --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         html {
             font-family: 'MADE Tommy Soft', sans-serif !important;

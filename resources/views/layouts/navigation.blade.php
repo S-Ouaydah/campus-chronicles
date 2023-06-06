@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="  ">
     <!-- Primary Navigation Menu -->
-    <div class="w-full px-[2%] mx-auto py-8 sm:px-6 lg:px-8 ">
+    <div class="w-full px-[2%] mx-auto py-8 sm:px-6 lg:px-8 absolute">
         <div class="flex justify-between gap-16 items-center ">
             <div class="flex" >
                 <!-- Logo -->
