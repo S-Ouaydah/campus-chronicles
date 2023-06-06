@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -62,6 +63,26 @@ class User extends Authenticatable
     public function subscriptions()
     {
         return $this->belongsToMany(Podcast::class, 'subscriptions');
+    }
+    public function fetchPfp(){
+        $user = Auth::user();
+        if(empty($user->pfp_path)) return "storage/usersPfp/default.jpg";
+        else return $this->pfp_path;
+    }
+
+    public function fetchBio(){
+         return $this->bio;
+    }
+
+
+    public function updatePfp($pfp_path){
+
+        $this->pfp_path = $pfp_path;
+
+    }
+
+    public function updateBio(){
+
     }
 
 

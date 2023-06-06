@@ -63,6 +63,8 @@ Route::middleware('auth')->group(function () {
 
 
 
+
+
 // Route::middleware('auth')->group(function () {
 //     Route::get('/podcast', [PodcastController::class, 'edit'])->name('podcast.create');
 //     Route::patch('/podcast', [PodcastController::class, 'update'])->name('podcast.store');
