@@ -19,22 +19,22 @@ class UpdateUserProfilePicture extends Component
 
     public function updatedProfilePicture()
     {
-        // $this->validate([
-        //     'profilePicture' => 'image|max:1024', // 1MB Max
-        // ]);
-        
+        // TODO give an error
+        $this->validate([
+            'profilePicture' => 'image|max:1048576', // 1MB Max
+        ]);
 
         $user = Auth::user();
         $previousProfilePicture = $user->pfp_path;
 
         // Delete the previous profile picture if it exists
         if ($previousProfilePicture) {
-            Storage::delete('storage/usersPfp/' . basename($previousProfilePicture));
+            Storage::delete('public/user_profiles/' . basename($previousProfilePicture));
         }
 
         // Store the new profile picture
-        $newProfilePicture = $this->profilePicture->store('public/usersPfp');
-        $user->pfp_path = "storage/usersPfp/". basename($newProfilePicture);
+        $newProfilePicture = $this->profilePicture->store('public/user_profiles');
+        $user->pfp_path = "storage/user_profiles/". basename($newProfilePicture);
         $user->save();
 
         // Emit an event to refresh the parent component
@@ -43,11 +43,10 @@ class UpdateUserProfilePicture extends Component
 
     public function render()
     {
-        $pfpPath = Auth::user()->fetchPfp();
         return view('livewire.update-user-profile-picture',[
-            "pfpPath" => $pfpPath,
+            "pfpPath" => Auth::user()->profile_pic(),
 
         ]);
-            
+
     }
 }

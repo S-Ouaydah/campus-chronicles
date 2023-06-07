@@ -38,20 +38,12 @@ class Episode extends Model
     {
         return $this->belongsToMany(User::class, 'listens');
     }
-
+    //FIXME - shouldnt this be in users instead of episodes?
     public static function getLikesByCurrentUser()
     {
         return static::join('likes', 'episodes.id', '=', 'likes.episode_id')
             ->where('likes.user_id', Auth::id())
             ->get();
-    }
-
-    public function getPodcastName(){
-        return $this->podcast->title;
-    }
-    //NOTE To be used where?
-    public function getEpCreatorName(){
-        return $this->creator->name;
     }
     public function getSequence(){
         return $this->sequence;
