@@ -3,15 +3,21 @@
 
     <div class="h-[500px] bg-black  pl-[6%]">
         <div class="relative top-[200px] flex items-center">
-                @livewire('update-user-profile-picture')
+            @livewire('update-user-profile-picture')
 
-            
+
 
             <div class="text-white ml-20">
                 <h2 class="text-4xl font-medium">{{ Auth::user()->name }}</h2>
                 <h4 class="text-base font-medium opacity-50">leolorenzi#9087</h4>
+                {{-- <div class="flex items-center leading-none pt-4 gap-2">
+                    <p class="font-normal text-sm  opacity-90">{{ $userBio }}</p>
+                    <i class="fa-solid fa-square-pen opacity-90"></i>
 
-                <p class="font-normal text-sm pt-4 opacity-90">{{ $userBio }}</p>
+                </div> --}}
+                @livewire('edit-bio')
+
+
             </div>
         </div>
     </div>
