@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@user.com',
             'isISAE' => false,
         ]);
-        \App\Models\User::factory()->create([
+        $creator = \App\Models\User::factory()->create([
             'name' => 'Test Isae',
             'email' => 'test@isae.edu.lb',
             'isISAE' => true,
@@ -69,5 +69,7 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         });
+        $episodes = \App\Models\Episode::inRandomOrder()->limit(10)->get();
+        $creator->likes()->attach($episodes);
     }
 }

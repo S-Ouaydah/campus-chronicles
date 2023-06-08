@@ -79,10 +79,10 @@
                                     <div class="w-[45px] h-[45px] bg-[#868686] rounded"></div>
                                     <div class="pl-4 w-[200px]">
                                         <h4 class="font-medium ">{{ $episode->title }}</h4>
-                                        <p class="opacity-75 text-sm">{{ $episode->getPodcastName() }}</p>
+                                        <p class="opacity-75 text-sm">{{ $episode->podcast->title }}</p>
                                     </div>
                                 </div>
-                                <h4 class="text-sm opacity-75 w-[150px] text-start">{{ $episode->creator()->name }}
+                                <h4 class="text-sm opacity-75 w-[150px] text-start">{{ $episode->creator->name }}
                                 </h4>
                                 <h4 class="text-sm opacity-75 w-[150px] text-start">{{ $episode->getLikeDate() }}</h4>
                                 <div class="flex gap-10 items-center">
