@@ -93,7 +93,7 @@ class EditBio extends Component
     public function saveBio()
     {
         $this->validate([
-            'bio' => ['required', 'max:255', $this->linesCountRule(3)],
+            'bio' => ['nullable', 'max:255', $this->linesCountRule(3)],
         ], [], [
                 'bio' => 'Bio',
             ]);
