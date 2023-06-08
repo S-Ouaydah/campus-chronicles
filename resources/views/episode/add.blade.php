@@ -16,7 +16,7 @@
             </h2>
 
             <div class="flex flex-col space-y-6 ">
-                
+
                 <!-- title -->
                 <x-input-label for="title" value="{{ __('Title') }}" class="sr-only" />
 
@@ -28,15 +28,18 @@
                 <textarea id="description" name="description" class="rounded-lg border-gray-300 focus:outline-none focus:border-transparent form-textarea mt-1 resize-none" placeholder="Description" required></textarea>
 
                 <!-- audio -->
-                <x-input-label for="audio_path" value="{{ __('Audio Path') }}" class="sr-only" />
+                <x-input-label for="audio_path" value="{{ __('Audio') }}" class="" />
 
-                <input type="file"   id="audio_path" name="audio_path">
-                
+                <input type="file" id="audio_path" name="audio_path">
+
                 <!-- podcast -->
-                <x-input-label for="podcast_id" value="{{ __('Podcast ID') }}" class="sr-only" />
+                <x-input-label for="podcast_id" value="{{ __('Podcast Name') }}" class="sr-only" />
 
-                <input type="number"  class="rounded-lg border-gray-300 focus:outline-none focus:border-transparent form-input mt-1" id="podcast_id" name="podcast_id" placeholder="Podcast ID">
-
+                <select class="rounded-lg border-gray-300 focus:outline-none focus:border-transparent form-input mt-1" id="podcast_id" name="podcast_id">
+                    @foreach( $podcasts as $podcast )
+                    <option value="<?= $podcast->id ?>"><?= $podcast->title ?></option>
+                    @endforeach
+                </select>
 
                 <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
             </div>

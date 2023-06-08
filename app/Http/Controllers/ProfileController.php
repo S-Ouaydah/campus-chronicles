@@ -15,12 +15,14 @@ class ProfileController extends Controller
 {
 
     public function view(){
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
 // TODO switch to using likes() relation in user model
         $episodes = Episode::getLikesByCurrentUser();
         $items = $episodes->all();
         $sortedEpisodes = $episodes->sortByDesc('created_at');
-        $pfpPath = Auth::user()->profile_pic();
-        $userBio = Auth::user()->bio();
+        $pfpPath = $user->profile_pic();
+        $userBio = $user->bio();
         $showForm = false;
 
 
