@@ -8,7 +8,7 @@
             ->route()
             ->getName() == 'dashboard'
     ) {
-        echo 'absolute';
+        echo 'absolute z-10';
     } ?>">
         <div class="flex justify-between gap-16 items-center ">
             <div class="flex">
