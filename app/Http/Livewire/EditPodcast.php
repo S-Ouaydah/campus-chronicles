@@ -12,11 +12,16 @@ class EditPodcast extends Component
 
     public $editMode = false;
 
+    public $originalTitle;
+    public $originalDescription;
+
     public function mount($podcast)
     {
         $this->podcast = $podcast;
         $this->title = $podcast->title;
         $this->description = $podcast->description;
+        $this->originalTitle = $this->title;
+        $this->originalDescription = $this->description;
     }
     public function edit()
     {
@@ -24,6 +29,9 @@ class EditPodcast extends Component
     }
     public function discard()
     {
+        $this->title = $this->originalTitle;
+        $this->description = $this->originalDescription;
+
         $this->editMode = false;
     }
     public function save()

@@ -7,7 +7,6 @@
                     alt="podcast image">
             </div>
             <div class="relative w-2/3 px-1/12 flex flex-col ">
-                {{-- TODO livewire ajax in place editing --}}
                 @auth
                     @if (auth()->user()->isISAE && auth()->user()->id == $podcast->creator_id)
                         <button wire:click="discard" class="absolute right-0 m-12 px-6 btn btn-primary">
@@ -19,7 +18,7 @@
                 <div>
                     <textarea wire:model.lazy="description" class="text-md h-full overflow-hidden truncate md:truncate-none w-[90%] bg-transparent h-52 max-h-52"></textarea>
                 </div>
-                {{-- NOTE replace static profile pic --}}
+                {{-- NOTE add profile pic --}}
                 <p class="text-xl">~{{ $podcast->creator->name }}~</p>
                 <button wire:click="save" class="btn btn-primary px-2 my-2 bg-primary-base">Save</button>
             </div>
@@ -34,7 +33,6 @@
                     alt="podcast image">
             </div>
             <div class="relative w-2/3 px-1/12 flex flex-col ">
-                {{-- TODO livewire ajax in place editing --}}
                 @auth
                     @if (auth()->user()->isISAE && auth()->user()->id == $podcast->creator_id)
                         <button wire:click="edit" class="absolute right-0 m-12 px-6 btn btn-primary">
@@ -46,7 +44,7 @@
                 <div>
                     <p class="text-md h-full overflow-hidden truncate md:truncate-none">{{ $podcast->description }}</p>
                 </div>
-                {{-- NOTE replace static profile pic --}}
+                {{-- NOTE add profile pic --}}
                 <p class="text-xl">~{{ $podcast->creator->name }}~</p>
             </div>
     @endif
