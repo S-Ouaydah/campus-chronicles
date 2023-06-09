@@ -1,8 +1,17 @@
 <nav x-data="{ open: false }" class="  ">
     <!-- Primary Navigation Menu -->
-    <div class="w-full px-[2%] mx-auto py-8 sm:px-6 lg:px-8 <?php if (Request()->route()->getName() == 'profile' || Request()->route()->getName() == 'dashboard'){echo "absolute";}?>">
+    <div class="w-full px-[2%] mx-auto py-8 sm:px-6 lg:px-8 <?php if (
+        Request()
+            ->route()
+            ->getName() == 'profile' ||
+        Request()
+            ->route()
+            ->getName() == 'dashboard'
+    ) {
+        echo 'absolute';
+    } ?>">
         <div class="flex justify-between gap-16 items-center ">
-            <div class="flex" >
+            <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex ">
                     <a href="{{ route('dashboard') }}">
@@ -35,17 +44,17 @@
 
 
             </div>
-            <input class="bg-gray-200 rounded-2xl px-5 xl:px-10 py-2.5 flex-auto focus:ring-0 outline-none border-none" type="search"
-                    placeholder="search....">
+            <input class="bg-gray-200 rounded-2xl px-5 xl:px-10 py-2.5 flex-auto focus:ring-0 outline-none border-none"
+                type="search" placeholder="search....">
 
             <div class="container w-[30%]">
                 <audio crossorigin playsinline>
-                    <source src="{{asset('storage/Broken Elegance - I Need You.mp3')}}" type="audio/mp3">
+                    <source src="{{ asset('storage/Broken Elegance - I Need You.mp3') }}" type="audio/mp3">
                 </audio>
             </div>
             @php
-    use App\Models\User;
-@endphp
+                use App\Models\User;
+            @endphp
 
 
             @auth
@@ -62,9 +71,8 @@
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md  hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                     {{-- <div class="bg-white h-8 w-8 rounded-full"> --}}
-                                    <div
-                                    {{-- TODO add profile pic to  XD --}}
-                                        class="bg-cover h-8 w-8 rounded-full" style="background-image: url('{{ asset(Auth::user()->fetchPfp()) }}');">
+                                    <div {{-- TODO add profile pic to  XD --}} class="bg-cover h-8 w-8 rounded-full"
+                                        style="background-image: url('{{ asset(Auth::user()->fetchPfp()) }}');">
                                     </div>
                                     <div class="text-white pl-5">{{ Auth::user()->name }}</div>
 
@@ -83,8 +91,8 @@
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md  hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                     {{-- <div class="bg-black h-8 w-8 rounded-full"> --}}
-                                  <div
-                                        class="bg-cover h-8 w-8 rounded-full" style="background-image: url('{{ asset(Auth::user()->pfp_path) }}');">
+                                    <div class="bg-cover h-8 w-8 rounded-full"
+                                        style="background-image: url('{{ asset(Auth::user()->pfp_path) }}');">
                                     </div>
                                     <div class="text-black pl-5">{{ Auth::user()->name }}</div>
 
