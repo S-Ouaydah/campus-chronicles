@@ -24,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'bio',
         'isISAE'
     ];
 
@@ -66,13 +67,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Podcast::class, 'subscriptions');
     }
-    public function fetchPfp(){
+    public function profile_pic(){
         $user = Auth::user();
-        if(empty($user->pfp_path)) return "storage/usersPfp/default.jpg";
-        else return $this->pfp_path;
+        if(empty($user->pfp_path)) return "storage/user_profiles/default.jpg";
+        return $this->pfp_path;
     }
 
-    public function fetchBio(){
+
+    public function bio(){
          return $this->bio;
     }
 

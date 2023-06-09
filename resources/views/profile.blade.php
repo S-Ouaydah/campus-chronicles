@@ -1,23 +1,15 @@
 <x-app-layout>
+    <div class="bg-black pl-8">
+        <div class="relative p-1/12 flex items-center">
 
-
-    <div class="h-[500px] bg-black  pl-[6%]">
-        <div class="relative top-[200px] flex items-center">
             @livewire('update-user-profile-picture')
-
-
 
             <div class="text-white ml-20">
                 <h2 class="text-4xl font-medium">{{ Auth::user()->name }}</h2>
-                <h4 class="text-base font-medium opacity-50">leolorenzi#9087</h4>
-                {{-- <div class="flex items-center leading-none pt-4 gap-2">
-                    <p class="font-normal text-sm  opacity-90">{{ $userBio }}</p>
-                    <i class="fa-solid fa-square-pen opacity-90"></i>
+                {{-- <h4 class="text-base font-medium opacity-50">leolorenzi#9087</h4> --}}
 
-                </div> --}}
                 @livewire('edit-bio')
-
-
+                
             </div>
         </div>
     </div>
@@ -48,9 +40,6 @@
                     class="bg-[url('https://i.ibb.co/BtDyWFb/5770f01a32c3c53e90ecda61483ccb08.jpg')] bg-contain h-[150px] w-[150px] xl:h-[200px] xl:w-[200px] mr-5  bg-[#D9D9D9] rounded-full">
                 </div>
 
-
-
-
             </div>
         </div>
         <div>
@@ -71,7 +60,7 @@
 
 
         <div class="flex justify-between mt-20">
-            <div class="w-[49%]">
+            <div class="w-1/2">
                 <h2 class=" text-xl font-semibold">Likes</h2>
                 <div class="mt-4 h-[800px] bg-[#D9D9D9] rounded-xl">
 
@@ -80,7 +69,7 @@
                     @if ($items === [])
 
                         <div class="w-full h-full flex justify-center items-center">
-                            <h4 class="text-xl opacity-80">No Data Available</h4>
+                            <h4 class="text-xl opacity-80">Seems Like You Don't Like Us!</h4>
                         </div>
                     @else
                         @foreach ($sortedEpisodes as $episode)
@@ -89,10 +78,10 @@
                                     <div class="w-[45px] h-[45px] bg-[#868686] rounded"></div>
                                     <div class="pl-4 w-[200px]">
                                         <h4 class="font-medium ">{{ $episode->title }}</h4>
-                                        <p class="opacity-75 text-sm">{{ $episode->getPodcastName() }}</p>
+                                        <p class="opacity-75 text-sm">{{ $episode->podcast->title }}</p>
                                     </div>
                                 </div>
-                                <h4 class="text-sm opacity-75 w-[150px] text-start">{{ $episode->getEpCreatorName() }}
+                                <h4 class="text-sm opacity-75 w-[150px] text-start">{{ $episode->creator->name }}
                                 </h4>
                                 <h4 class="text-sm opacity-75 w-[150px] text-start">{{ $episode->getLikeDate() }}</h4>
                                 <div class="flex gap-10 items-center">

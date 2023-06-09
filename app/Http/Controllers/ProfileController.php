@@ -11,22 +11,23 @@ use Livewire\TemporaryUploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 
-
 class ProfileController extends Controller
 {
 
     public function view(){
-
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+// TODO switch to using likes() relation in user model
         $episodes = Episode::getLikesByCurrentUser();
         $items = $episodes->all();
         $sortedEpisodes = $episodes->sortByDesc('created_at');
-        $pfpPath = Auth::user()->fetchPfp();
-        $userBio = Auth::user()->fetchBio();
+        $pfpPath = $user->profile_pic();
+        $userBio = $user->bio();
         $showForm = false;
-        
 
 
-        
+
+
 
         return view('profile', [
             "episodes" => $episodes,
@@ -36,14 +37,14 @@ class ProfileController extends Controller
             "userBio" => $userBio,
             "showForm"=> $showForm,
 
-           
+
         ]);
 
-    
+
     }
    
 
-    
-    
+
+
 
 }

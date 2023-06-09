@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\PodcastCategoryController;
@@ -30,17 +31,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified' ,'verifyisae'])->name('dashboard');
-
 Route::get('/explore', [ExploreController::class, 'show'])->name('explore');
 
 Route::get('/history', function () {
     return view('history');
 })->name('history');
 
-Route::get('/profile',  [ProfileController::class, 'view'])->name('profile');
+Route::get('/profile',  [ProfileController::class, 'view'])->middleware(['auth'])->name('profile');
 
 Route::get('/create-podcast', function () {
     return view('podcast.create-form');
@@ -48,7 +45,6 @@ Route::get('/create-podcast', function () {
 
 Route::post('/submit-create-form', [PodcastController::class, 'store']);
 
-Route::post('/dashboard', [EpisodeController::class, 'store'])->name('episode.store');
 
 Route::get('/category/{name}',[PodcastCategoryController::class, 'show' ]);
 
@@ -58,17 +54,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/settings', [SettingsController::class, 'destroy'])->name('settings.destroy');
 });
 
+Route::middleware(['auth' , 'verified' ,'verifyisae'])->group(function() {
+    Route::get('/dashboard', [DashboardController::class, 'show'])->name('dashboard');
+    Route::post('/dashboard/episode', [EpisodeController::class, 'store'])->name('episode.store');
+    Route::post('/dashboard/podcast', [PodcastController::class, 'store'])->name('podcast.store');
+});
 
-
-
-
-
-
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/podcast', [PodcastController::class, 'edit'])->name('podcast.create');
-//     Route::patch('/podcast', [PodcastController::class, 'update'])->name('podcast.store');
-//     Route::delete('/podcast', [PodcastController::class, 'destroy'])->name('podcast.destroy');
-// });
 
 require __DIR__.'/auth.php';
