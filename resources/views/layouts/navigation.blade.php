@@ -43,7 +43,13 @@
                     <source src="{{asset('storage/Broken Elegance - I Need You.mp3')}}" type="audio/mp3">
                 </audio>
             </div>
+            @php
+    use App\Models\User;
+@endphp
+
+
             @auth
+
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6 h-[42px]">
 
@@ -58,7 +64,7 @@
                                     {{-- <div class="bg-white h-8 w-8 rounded-full"> --}}
                                     <div
                                     {{-- TODO add profile pic to  XD --}}
-                                        class="bg-cover h-8 w-8 rounded-full" style="background-image: url('{{ asset(Auth::user()->pfp_path) }}');">
+                                        class="bg-cover h-8 w-8 rounded-full" style="background-image: url('{{ asset(Auth::user()->fetchPfp()) }}');">
                                     </div>
                                     <div class="text-white pl-5">{{ Auth::user()->name }}</div>
 
@@ -77,8 +83,8 @@
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md  hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                     {{-- <div class="bg-black h-8 w-8 rounded-full"> --}}
-                                    <div
-                                        class=" bg-cover h-8 w-8 rounded-full"  style="background-image: url('{{ asset(Auth::user()->pfp_path) }}');">
+                                  <div
+                                        class="bg-cover h-8 w-8 rounded-full" style="background-image: url('{{ asset(Auth::user()->pfp_path) }}');">
                                     </div>
                                     <div class="text-black pl-5">{{ Auth::user()->name }}</div>
 
