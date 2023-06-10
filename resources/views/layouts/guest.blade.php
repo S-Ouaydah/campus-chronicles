@@ -26,5 +26,10 @@
                 {{ $slot }}
             </div>
         </div>
+        <div class="container w-[30%]">
+            <audio crossorigin playsinline>
+                <source src="{{ asset('storage/Broken Elegance - I Need You.mp3') }}" type="audio/mp3">
+            </audio>
+        </div>
     </body>
 </html>

@@ -44,6 +44,7 @@
             {{ $slot }}
         </main>
     </div>
+    @livewire('player')
     @livewireScripts
 </body>
 
