@@ -2,7 +2,7 @@
     <h1 class="text-2xl pb-3">Episodes
         @if (session()->has('message'))
 
-            <div class="alert alert-success">
+            <div class="alert alert-danger">
 
                 {{ session('message') }}
 
@@ -19,6 +19,13 @@
                     <img class="absolute rounded-lg w-full h-full object-cover" src="{{ $podcast->image_url }}" alt="podcast image" >
                     <div class="absolute opacity-30 rounded-lg w-full h-full object-cover bg-white  mix-blend-screen text-7xl font-extrabold text-center pt-1/4"></div>
                     <div class="absolute opacity-60 rounded-lg w-full h-full object-cover bg-black text-white mix-blend-multiply text-7xl font-extrabold text-center pt-1/4">{{ $episode->getSequence()+1 }}</div>
+
+                    <button wire:click="$emit('playAudio','{{$episode->audio_path}}')" class="flex cursor-pointer">
+                        <span class="absolute fa-stack fa-lg w-full h-full text-3xl text-center flex items-center">
+                            <i class="fa fa-circle fa-stack-2x text-lime-500"></i>
+                            <i class="fa fa-play fa-stack-1x fa-inverse pl-1"></i>
+                        </span>
+                    </button>
                 </div>
                 <div class="w-2/3">
                     <div  class="text-xl">{{ $episode->title }}</div>

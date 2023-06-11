@@ -46,6 +46,7 @@
     </div>
     @livewire('player')
     @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>
