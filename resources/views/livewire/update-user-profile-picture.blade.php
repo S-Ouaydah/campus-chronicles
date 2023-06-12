@@ -1,9 +1,4 @@
-{{-- <div>
-    <label for="profilePicture" class="cursor-pointer">
-        <i class="fas fa-edit"></i>
-    </label>
-    <input type="file" id="profilePicture" class="hidden" wire:model="profilePicture">
-</div> --}}
+
 <div   class="relative m-0 p-0">
     <label for="profilePicture" class="cursor-pointer" wire:click="openProfilePictureUpload">
         <i wire:click="openProfilePictureUpload"
@@ -18,10 +13,13 @@
     </div>
 
 </div>
-@push('scripts')
+{{-- @push('scripts')
     <script>
+        console.log("this.source");
+        console.log(@this);
+
         window.addEventListener('openProfilePictureUpload', () => {
             document.getElementById('profilePicture').click();
         });
     </script>
-@endpush
+@endpush --}}

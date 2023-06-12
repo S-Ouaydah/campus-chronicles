@@ -34,6 +34,29 @@ class Episode extends Model
     {
         return $this->belongsToMany(User::class, 'likes');
     }
+    public function like()
+    {
+        $user = auth()->user();
+
+        if($user){
+            $this->likes()->attach($user->id);
+        }
+    }
+    public function unlike()
+    {
+        $user = auth()->user();
+        if($user){
+            $this->likes()->detach($user->id);
+        }
+    }
+    public function isLikedBy()
+    {
+        $user = auth()->user();
+        if($user){
+            return $this->likes()->where('user_id', $user->id)->exists();
+        }
+        return false;
+    }
     public function listens()
     {
         return $this->belongsToMany(User::class, 'listens');

@@ -1,6 +1,4 @@
 <x-app-layout>
-
-
     <div class="bg-black pl-8">
         <div class="relative p-1/12 flex items-center">
 
@@ -10,7 +8,8 @@
                 <h2 class="text-4xl font-medium">{{ Auth::user()->name }}</h2>
                 {{-- <h4 class="text-base font-medium opacity-50">leolorenzi#9087</h4> --}}
 
-                <p class="font-normal text-sm pt-4 opacity-90">{{ Auth::user()->bio }}</p>
+                @livewire('edit-bio')
+                
             </div>
         </div>
     </div>
