@@ -14,7 +14,9 @@
             @if($categories)
             @foreach ($categories as $category)
             <div class="w-full md:w-1/5 p-4 ">
-                <a href="category/<?= $category->name ?>" class="">
+
+            <!-- category/<?//= $category->name ?>  this was in href-->
+                <a href="" class="">
                     <div class="w-full bg-gray-200 rounded-lg p-4 truncate">
                         <h5 class="text-gray-900 text-sm"> {{ $category->name }} </h5>
                     </div>

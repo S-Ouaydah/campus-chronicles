@@ -8,7 +8,7 @@
     <x-primary-button style="margin: 0 5px;" x-data="" x-on:click.prevent="$dispatch('open-modal', 'add-episode-form')">{{ __('Add') }}</x-primary-button>
 
     <x-modal name="add-episode-form" :show="false" focusable>
-        <form method="post" action="{{ route('episode.store') }}" class="p-6">
+        <form method="post" action="{{ route('episode.store') }}" class="p-6" enctype="multipart/form-data">
             @csrf
 
             <h2 class="text-lg font-medium text-gray-900">
@@ -28,9 +28,9 @@
                 <textarea id="description" name="description" class="rounded-lg border-gray-300 focus:outline-none focus:border-transparent form-textarea mt-1 resize-none" placeholder="Description" required></textarea>
 
                 <!-- audio -->
-                <x-input-label for="audio_path" value="{{ __('Audio') }}" class="" />
+                <x-input-label for="audio_file" value="{{ __('Audio') }}" class="" />
 
-                <input type="file" id="audio_path" name="audio_path">
+                <input type="file" id="audio_file" name="audio_file" accept="audio/mp3">
 
                 <!-- podcast -->
                 <x-input-label for="podcast_id" value="{{ __('Podcast Name') }}" class="sr-only" />

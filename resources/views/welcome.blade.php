@@ -48,9 +48,7 @@
 
                     <a href="{{ route('explore') }}"
                         class="  text-black rounded-2xl  xl:px-6  py-2  xl:ml-5">Discover</a>
-
-                    <a href="" class="  black rounded-2xl  xl:px-6  py-2  xl:ml-5">Categories</a>
-                    <a href="" class="  text-black rounded-2xl  xl:px-6  py-2  xl:ml-5">About Us</a>
+                        
                 </div>
 
 

@@ -39,14 +39,7 @@ Route::get('/history', function () {
 
 Route::get('/profile',  [ProfileController::class, 'view'])->middleware(['auth'])->name('profile');
 
-Route::get('/create-podcast', function () {
-    return view('podcast.create-form');
-})->name('podcast-create-form');
-
-Route::post('/submit-create-form', [PodcastController::class, 'store']);
-
-
-Route::get('/category/{name}',[PodcastCategoryController::class, 'show' ]);
+// Route::get('/category/{name}',[PodcastCategoryController::class, 'show' ]);
 
 Route::middleware('auth')->group(function () {
     Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');

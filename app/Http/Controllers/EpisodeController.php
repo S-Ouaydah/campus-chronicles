@@ -6,6 +6,7 @@ use App\Models\Episode;
 use App\Models\Podcast;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class EpisodeController extends Controller
 {
@@ -36,15 +37,29 @@ class EpisodeController extends Controller
             'podcast_id' => 'required|exists:podcasts,id',
         ]);
         $currentuser = Auth::user();
-
         $formData = new Episode();
+        
         $formData->creator_id = $currentuser->id;
         $formData->title = $validatedData['title'];
         $formData->description = $validatedData['description'];
         $formData->podcast_id = $validatedData['podcast_id'];
+        
+        $epcount = Podcast::find($formData->podcast_id)->episodes->count() + 1;
+        $filename = $validatedData['podcast_id'] . "_" . $epcount;
         // get sequence from podcast_id nb of episodes
-        $formData->sequence = Podcast::find($formData->podcast_id)->episodes->count() + 1;
-        $formData->audio_path = "null"; //temporary
+        $formData->sequence = $epcount;
+
+
+        $formData->audio_path = "storage/audio_paths/" . $filename;
+
+
+        // Get the file object
+        $file = $request->file('audio_file');
+
+        // Save the file to storage with a specific filename
+        if (!Storage::putFileAs('public/audio_paths', $file, $filename.'.mp3')) {
+            //err handling
+        }
 
         if ($formData->save()) {
             return redirect('/dashboard');
