@@ -36,7 +36,7 @@ class EditPodcast extends Component
     {
         $this->title = $this->originalTitle;
         $this->description = $this->originalDescription;
-        $this->pod_pic = $this->originalPodPic;
+        $this->pod_pic = null;
 
         $this->editMode = false;
     }
@@ -57,7 +57,6 @@ class EditPodcast extends Component
     }
     public function render()
     {
-        return view('livewire.edit-podcast',['editMode' => $this->editMode]);
-
+        return view('livewire.edit-podcast', ['editMode' => $this->editMode]);
     }
 }
