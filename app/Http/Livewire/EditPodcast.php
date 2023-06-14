@@ -8,6 +8,8 @@ use Livewire\WithFileUploads;
 class EditPodcast extends Component
 {
     use WithFileUploads;
+
+
     public $podcast;
     public $title;
     public $description;
@@ -18,6 +20,8 @@ class EditPodcast extends Component
     public $originalTitle;
     public $originalDescription;
     public $originalPodPic;
+
+    
 
     public function mount($podcast)
     {

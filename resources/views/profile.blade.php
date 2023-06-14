@@ -9,7 +9,7 @@
                 {{-- <h4 class="text-base font-medium opacity-50">leolorenzi#9087</h4> --}}
 
                 @livewire('edit-bio')
-                
+
             </div>
         </div>
     </div>
@@ -42,8 +42,8 @@
 
             </div>
         </div>
-        <div>
-            <h2 class="text-xl font-semibold mt-20">Top Podcast this month </h2>
+        {{-- <div>
+            <h2 class="text-xl font-semibold mt-20">Subscribtions</h2>
             <div class="pt-5 flex">
 
                 <div class="h-[200px] w-[300px] mr-5 bg-[#D9D9D9] rounded-xl"></div>
@@ -54,8 +54,47 @@
                 <div class="h-[200px] w-[300px] mr-5 bg-[#D9D9D9] rounded-xl"></div>
 
             </div>
-        </div>
+        </div> --}}
 
+        <div>
+            <h2 class="text-xl font-semibold mt-20">Subscriptions</h2>
+            @if ($subscriptions->isEmpty())
+                  <div
+                        class="h-[200px] w-[300px] mr-4 bg-black rounded-xl bg-cover text-white   flex flex-col	 items-start justify-center shrink-0  mt-5 select-none	pl-10">
+                        <h4 class="text-3xl font-bold">Your Subscriptions :</h4>
+                        <h4 class="text-2xl opacity-75" >{{ $subscriptions->count() }} Podcast</h4>
+                    </div>
+            @else
+                <div class="flex items-center">
+                    <div
+                        class="h-[200px] w-[300px] mr-4 bg-black rounded-xl bg-cover text-white   flex flex-col	 items-start justify-center shrink-0  mt-5 select-none	pl-10">
+                        <h4 class="text-3xl font-bold">Podcasts You Subscribe :</h4>
+                        <h4 class="text-2xl opacity-75" >{{ $subscriptions->count() }} Podcasts</h4>
+                    </div>
+
+                    <div class="swiper-container mt-5 overflow-x-hidden w-full	">
+                        <div class="swiper-wrapper">
+                         
+                            @foreach ($subscriptions as $subscription)
+                                <div class="swiper-slide w-auto mr-4">
+                                    <a href="{{ route('podcast.show', $subscription->podcast->id) }}">
+                                        <div class="h-[200px] w-[300px] mr-4 !hover:bg-[#D9D9D9] rounded-xl bg-cover"
+                                            style="background-image: url('{{ asset($subscription->podcast->image_url) }}');">
+
+                                            
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                </div>
+                <div class="swiper-pagination  relative mt-10"></div>
+
+
+            @endif
+        </div>
 
 
 

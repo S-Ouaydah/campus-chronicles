@@ -20,7 +20,7 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
     <!-- Scripts -->
 
@@ -49,6 +49,27 @@
     @livewire('player')
     @livewireScripts
     @stack('scripts')
+ 
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 'auto',
+            spaceBetween: 10, // Adjust the spacing between slides
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    </script>
+    <Style>
+    .swiper-pagination-bullet-active{
+        background-color:black ;
+        width:16px;
+        border-radius:5px;
+    }
+    
+    </style>
 </body>
 
 </html>

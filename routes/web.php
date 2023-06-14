@@ -23,6 +23,12 @@ use App\Http\Controllers\LikeController;
 |
 */
 
+// routes/web.php
+
+
+Route::get('/profile', [ProfileController::class, 'getSubsByUser'])->name('profile.index');
+
+
 
 Route::get('/podcast/{id}', [PodcastController::class, 'show'])->name('podcast.show');
 
