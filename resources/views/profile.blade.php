@@ -69,7 +69,7 @@
                     @if ($items === [])
 
                         <div class="w-full h-full flex justify-center items-center">
-                            <h4 class="text-xl opacity-80">Seems Like You Don't Like Us!</h4>
+                            <h4 class="text-xl opacity-80">No liked episodes found!</h4>
                         </div>
                     @else
                         @foreach ($sortedEpisodes as $episode)

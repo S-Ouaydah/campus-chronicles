@@ -27,6 +27,7 @@
 
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     @vite(['resources/scss/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 
 
 </head>
@@ -52,9 +53,10 @@
                 </div>
 
 
-                <input
+                <!-- <input
                     class="bg-gray-200 rounded-2xl px-5 xl:px-10 py-2.5 flex-auto focus:ring-0 outline-none border-none"
-                    type="search" placeholder="search....">
+                    type="search" placeholder="search...."> -->
+                @livewire('search-bar')
                 <div class="nav4">
                     @auth
                         <a href="{{ url('/dashboard') }}"
@@ -126,7 +128,7 @@
     </div>
   </div>
 </div>
-
+@livewireScripts
 </body>
 
 </html>
