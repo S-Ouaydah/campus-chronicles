@@ -16,7 +16,7 @@
                 {{-- <a href="{{ route('episode', ['episode' => $episode->id]) }}" class="text-lg">{{ $episode->title }}</a> --}}
                 <div class="relative rounded-lg w-1/8 pb-1/8 mr-6">
                     {{-- <img class="absolute rounded-lg w-full h-full object-cover" src="{{ asset('storage/' . $podcast->image_url) }}" alt="podcast image" > --}}
-                    <img class="absolute rounded-lg w-full h-full object-cover" src="{{ asset($podcast->image_url)}}" alt="podcast image" >
+                    <img class="absolute rounded-lg w-full h-full object-cover" src="{{ $podcast->image_url }}" alt="podcast image" >
                     <div class="absolute opacity-30 rounded-lg w-full h-full object-cover bg-white  mix-blend-screen text-7xl font-extrabold text-center pt-1/4"></div>
                     <div class="absolute opacity-60 rounded-lg w-full h-full object-cover bg-black text-white mix-blend-multiply text-7xl font-extrabold text-center pt-1/4">{{ $episode->getSequence()+1 }}</div>
 

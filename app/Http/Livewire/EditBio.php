@@ -51,7 +51,7 @@ class EditBio extends Component
             $lastLine = $lines[2];
 
             // Check if the last line is full
-            if (strlen($lastLine) >= 38) { // Adjust the character limit (64) as needed
+            if (strlen($lastLine) >= 42) { // Adjust the character limit (64) as needed
                 // Remove the last character from the last line
                 $lines[2] = substr($lastLine, 0, -1);
                 $this->bio = implode("\n", $lines);
