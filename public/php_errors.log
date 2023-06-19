@@ -1,0 +1,1 @@
+[12-Jun-2023 22:26:33 UTC] PHP Fatal error:  Trait "App\Http\Livewire\WithFileUploads" not found in C:\laragon\www\campus-chronicles\app\Http\Livewire\EditPodcast.php on line 7

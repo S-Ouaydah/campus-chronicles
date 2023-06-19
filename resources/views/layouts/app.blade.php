@@ -7,6 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('ico.ico') }}">
+
 
     <!-- Fonts -->
     <link href="https://fonts.cdnfonts.com/css/made-tommy-soft-outline" rel="stylesheet">
