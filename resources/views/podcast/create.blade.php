@@ -8,7 +8,7 @@
     <x-primary-button style="margin: 0 5px;" x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-podcast-form')">{{ __('Create') }}</x-primary-button>
 
     <x-modal name="create-podcast-form" :show="false" focusable>
-        <form method="post" action="{{ route('podcast.store') }}" class="p-6"  enctype="multipart/form-data">
+        <form method="post" action="{{ route('podcast.store') }}" class="p-6">
             @csrf
 
             <h2 class="text-lg font-medium text-gray-900">
@@ -17,9 +17,7 @@
 
             <div class="flex flex-col space-y-6 ">
                 <!-- image  -->
-                <x-input-label for="pod_pic" value="{{ __('Image') }}" class="sr-only" />
-                <input id="pod_pic" name="pod_pic" type="file" enctype="multipart/form-data" required>
-            
+                <x-input-label for="image" value="{{ __('Image') }}" class="sr-only" />
 
 
                 <!-- title -->

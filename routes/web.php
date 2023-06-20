@@ -7,6 +7,7 @@ use App\Http\Controllers\PodcastCategoryController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SearchController;
 use App\Models\Episode;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LikeController;
@@ -46,6 +47,8 @@ Route::get('/history', function () {
 Route::get('/profile',  [ProfileController::class, 'view'])->middleware(['auth'])->name('profile');
 
 // Route::get('/category/{name}',[PodcastCategoryController::class, 'show' ]);
+
+Route::get('/search' , [SearchController::class, 'view'])->name('search');
 
 Route::middleware('auth')->group(function () {
     Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');

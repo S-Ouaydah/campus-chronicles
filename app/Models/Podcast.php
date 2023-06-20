@@ -12,14 +12,9 @@ class Podcast extends Model
     protected $fillable = [
         'title',
         'description',
-        
+        'image_url',
         'creator_id',
         'category_id'
-    ];
-
-    protected $visible = [
-        'image_url',
-        
     ];
 
     public function episodes()
