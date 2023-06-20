@@ -48,7 +48,7 @@
                 <div class="nav2">
 
                     <a href="{{ route('explore') }}"
-                        class="  text-black rounded-2xl  xl:px-6  py-2  xl:ml-5">Discover</a>
+                        class="  text-black rounded-2xl  xl:px-6  py-2  xl:ml-5">Explore</a>
                         
                 </div>
 
@@ -78,7 +78,7 @@
 
     </div>
 
-    <div class="landing flex gap-40 items-center justify-evenly w-full">
+    <div class="landing flex gap-40 items-center justify-evenly w-full select-none">
 
 
         <div class='left'>

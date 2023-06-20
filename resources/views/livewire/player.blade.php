@@ -9,7 +9,8 @@
 @push('scripts')
     <script>
         Livewire.on('playAudio', source => {
-            var path = location.origin + "/storage/" + source;
+            
+            var path = location.origin +'/'+ source +'.mp3';
             player.source = {
                 type: 'audio',
                 sources: [

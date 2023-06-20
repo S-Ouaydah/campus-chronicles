@@ -13,7 +13,7 @@
                         <div class="w-[45px] h-[45px] bg-[#868686] rounded bg-cover"
                             style="background-image: url('{{ asset($episode->podcast->image_url) }}');">
                         </div>
-                        <div class="pl-4  w-[150px] 2xl:w-[300px] 3xl:w-[400px]">
+                        <div class="pl-4  w-[150px]  2xl:w-[230px] 3xl:w-[400px]">
                             <h4 class="font-medium truncate">{{ $episode->title }}</h4>
                             <a href="{{ route('podcast.show', $episode->podcast->id) }}">
                                 <p class="opacity-75 text-sm truncate">{{ $episode->podcast->title }}

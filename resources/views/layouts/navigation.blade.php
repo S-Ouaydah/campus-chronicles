@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="  ">
+<nav x-data="{ open: false }" class=" select-none ">
     <!-- Primary Navigation Menu -->
     <div class="w-full px-[2%] mx-auto py-8 sm:px-6 lg:px-8 <?php if (
         Request()
@@ -14,15 +14,23 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex ">
-                    <a href="{{ route('dashboard') }}">
+                    @auth
+                    <a href="{{ url('/explore') }}">
+                                  {{-- <x-application-logo class="block h-9 w-auto fill-current text-white" /> --}}
+                                  @if (Request()->route()->getName() == 'profile' ||
+                                  Request()->route()->getName() == 'dashboard')
+                              <img class="h-6"src="https://i.ibb.co/FBLwJBP/logo-white.png">
+                          @else
+                              <img class="h-6"src="https://i.ibb.co/stTsyMP/logo-black.png">
+                          @endif
+                      </a>
+                    @endauth
+                    @guest
+                    <a href="/">
                         {{-- <x-application-logo class="block h-9 w-auto fill-current text-white" /> --}}
-                        @if (Request()->route()->getName() == 'profile' ||
-                                Request()->route()->getName() == 'dashboard')
-                            <img class="h-6"src="https://i.ibb.co/FBLwJBP/logo-white.png">
-                        @else
                             <img class="h-6"src="https://i.ibb.co/stTsyMP/logo-black.png">
-                        @endif
                     </a>
+                    @endguest
                 </div>
 
 
@@ -44,15 +52,35 @@
 
 
             </div>
-            
-            
-            @livewire('search-bar')
-            
 
-            
+
+            @livewire('search-bar')
+
+
+
             @php
                 use App\Models\User;
             @endphp
+
+
+            @guest
+                @auth
+                    <a href="{{ url('/dashboard') }}"
+                        class="text-black hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
+                @else
+                    <div>
+                        <a href="{{ route('login') }}" class=" font-medium text-white rounded-2xl bg-black px-6  py-2.5  ml-5">Log
+                            in</a>
+
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}"
+                                class=" bg-[#71C719] px-6  py-2.5 font-medium  rounded-2xl ml-4 text-black hover:text-gray-900 dark:text-black  ">Register</a>
+                        @endif
+                    </div>
+
+                @endauth
+            @endguest
 
 
             @auth
