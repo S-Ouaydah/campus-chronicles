@@ -23,7 +23,7 @@
                 </div>
                 <input wire:model.lazy="pod_pic" type="file" class="text-4xl mt-12 mb-3 w-2/3 bg-transparent">
                 {{-- NOTE add profile pic --}}
-                <p class="text-xl">~{{ $podcast->creator->name }}~</p>
+                <p class="text-xl">{{ $podcast->creator->name }}</p>
                 <button wire:click="save" class="btn btn-primary px-2 my-2 bg-primary-base">Save</button>
             </div>
 
@@ -44,12 +44,12 @@
                         </button>
                     @endif
                 @endauth
-                <h1 class="text-4xl pt-12 pb-3">{{ $podcast->title }}</h1>
-                <div>
-                    <p class="text-md h-full overflow-hidden truncate md:truncate-none">{{ $podcast->description }}</p>
+                <h1 class="text-4xl pt-12 pb-3 font-medium">{{ $podcast->title }}</h1>
+                <div class="mt-3">
+                    <p class="text-md h-full overflow-hidden truncate md:truncate-none ">{{ $podcast->description }}</p>
                 </div>
                 {{-- NOTE add profile pic --}}
-                <p class="text-xl">~{{ $podcast->creator->name }}~</p>
+                <p class="text-xl mt-3">{{ $podcast->creator->name }}</p>
                 <livewire:subscribe-button :podcastId="$podcast->id" />
             </div>
     @endif

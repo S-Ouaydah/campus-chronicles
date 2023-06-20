@@ -49,10 +49,10 @@
     @livewire('player')
     @livewireScripts
     @stack('scripts')
- 
+
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script>
+    <script>
         var swiper = new Swiper('.swiper-container', {
             slidesPerView: 'auto',
             spaceBetween: 10, // Adjust the spacing between slides
@@ -63,12 +63,38 @@
         });
     </script>
     <Style>
-    .swiper-pagination-bullet-active{
-        background-color:black ;
-        width:16px;
-        border-radius:5px;
-    }
-    
+        .swiper-pagination-bullet-active {
+            background-color: black;
+            width: 16px;
+            border-radius: 5px;
+        }
+
+        .scrollbar-right::-webkit-scrollbar {
+            width: 6px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+
+        }
+
+        
+
+        .scrollbar-right::-webkit-scrollbar-track {}
+
+        .scrollbar-right::-webkit-scrollbar-thumb {
+
+            background-color: #888;
+            border-radius: 4px;
+        }
+
+        .scrollbar-right::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .truncate {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
 </body>
 

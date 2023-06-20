@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Episode;
 
 class User extends Authenticatable
 {
@@ -85,8 +86,10 @@ class User extends Authenticatable
 
     }
 
-    public function updateBio(){
 
+    public function likedEpisodes()
+    {
+        return $this->belongsToMany(Episode::class, 'likes', 'user_id', 'episode_id')->withTimestamps();
     }
 
 

@@ -35,7 +35,7 @@
 
                 <button wire:click="like({{$episode->id}})" class="max-h-10 px-4 btn ">
                     @if ($episode->isLikedBy(auth()->user()))
-                        <i class="fas fa-heart text-red-600"></i>
+                        <i class="fas fa-heart text-black"></i>
                     @else
                         <i class="far fa-heart"></i>
                     @endif

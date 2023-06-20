@@ -8,7 +8,7 @@
     <input id="profilePicture"  type="file" class="hidden" wire:model="profilePicture"  >
 
     {{-- @livewire('profile-picture-upload') --}}
-    <div id="profile-picture-upload" class=" bg-cover h-[200px] w-[200px] rounded-full" style="background-image: url('{{ asset($pfpPath) }}');">
+    <div id="profile-picture-upload" class=" bg-cover h-[250px] w-[250px] rounded-full" style="background-image: url('{{ asset($pfpPath) }}');">
 
     </div>
 

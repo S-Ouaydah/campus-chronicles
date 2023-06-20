@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Episode;
+use Illuminate\Support\Facades\Auth;
+
 
 class PodcastEpisodes extends Component
 {
@@ -17,17 +19,22 @@ class PodcastEpisodes extends Component
     }
     public function like($episodeId)
     {
-        $user = auth()->user();
-        if(!$user){
+        $user = Auth::user();
+        if (!$user) {
             return redirect()->route('login');
         }
+    
         $episode = Episode::findOrFail($episodeId);
-        // $episode = Episode::find($episodeId)->first();
-        if($episode->isLikedBy($user)){
+    
+        $likes = $episode->getLikesByCurrentUser();
+    
+        if ($likes->contains('episode_id', $episode->id)) {
+            // Episode is already liked by the user, so unlike it
             $episode->unlike();
-            return;
+        } else {
+            // Like the episode
+            $episode->like();
         }
-        $episode->like();
     }
     public function render()
     {
