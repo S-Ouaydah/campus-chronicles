@@ -62,13 +62,28 @@ class Episode extends Model
     {
         return $this->belongsToMany(User::class, 'listens');
     }
-    //FIXME - shouldnt this be in users instead of episodes?
+    //FIXME - shouldnt this be in users instead of episodes? / no bc you getting episode info not user info
     public static function getLikesByCurrentUser()
     {
         return static::join('likes', 'episodes.id', '=', 'likes.episode_id')
             ->where('likes.user_id', Auth::id())
             ->get();
     }
+
+
+//     function getNewEpisodes()
+// {
+//     return Episode::orderBy('created_at', 'desc')
+//         ->limit(5)
+//         ->get();
+// }
+
+   
+
+
+
+   
+
 
     public function getSequence()
     {
@@ -82,14 +97,15 @@ class Episode extends Model
 
 
 
-    public function getDuration() {
+    public function getDuration()
+    {
         $getID3 = new \getID3;
-
-        $audioPath = storage_path('app/public/'.str_replace("storage/", "", $this->audio_path));
-
+    
+        $audioPath = storage_path('app/public/' . str_replace("storage/", "", $this->audio_path));
+    
         // Get the file extension
         $fileExtension = pathinfo($audioPath, PATHINFO_EXTENSION);
-        
+    
         // Analyze the file based on its extension
         switch ($fileExtension) {
             case 'mp3':
@@ -108,10 +124,22 @@ class Episode extends Model
                 break;
         }
         $fileInfo = $getID3->analyze($audioPath);
-        return $fileInfo['playtime_string'];
-        
-  
+        $playtimeString = $fileInfo['playtime_string'];
+    
+        // Convert "mm:ss" to "hh:mm:ss" format
+        sscanf($playtimeString, "%d:%d", $minutes, $seconds);
+        $hours = 0;
+    
+        if ($minutes >= 60) {
+            $hours = floor($minutes / 60);
+            $minutes = $minutes % 60;
+        }
+    
+        $duration = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+    
+        return $duration;
     }
+    
   
     // // // TODO there is a built-in method for this, i think this is it. test it.
     public function getLikeDate(){
@@ -119,6 +147,13 @@ class Episode extends Model
         $date = $this->created_at;
         return Carbon::parse($date)->diffForHumans();
     }
+
+    function getLastFiveEpisodes()
+{
+    return Episode::orderBy('created_at', 'desc')
+        ->limit(5)
+        ->get();
+}
     // public function getLikeDate()
     // {
     //     date_default_timezone_set('Europe/Moscow');

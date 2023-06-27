@@ -73,7 +73,7 @@
 
                                             <div
                                                 class="h-[167px] w-[250px]   xl:h-[200px] xl:w-[300px] mr-4  rounded-xl bg-cover  px-6 py-6 absolute  bg-black">
-                                                {{-- <h2 class="text-white text-base">Description:</h2> --}}
+                                                
 
                                                 <p class="relative text-white opacity-70 h-full text-xs xl:text-sm ">
                                                     {{ $subscription->podcast->description }}
@@ -116,39 +116,14 @@
 
 
         <div class="flex justify-between mt-20">
-            <div class="w-1/2 ">
-                <h2 class=" text-xl font-semibold">Likes</h2>
-                <livewire:likes-list :items="$items" :sortedEpisodes="$sortedEpisodes"  />
-
-
-
+            <div class="w-[58%]">
+                {{-- <h2 class=" text-xl font-semibold">Likes</h2> --}}
+                <livewire:likes-list :items="$items" :sortedEpisodes="$sortedEpisodes" />
             </div>
+            <div class="w-[41%]">
 
-
-
-
-
-            <div class="w-[49%]">
-
-                <h2 class=" text-xl font-semibold">History</h2>
-                <div class="mt-4 h-[800px] bg-[#D9D9D9] rounded-xl">
-                    <div class="w-full h-[80px] py-14 px-10 flex justify-between items-center">
-                        <div class="flex">
-                            <div class="w-[45px] h-[45px] bg-[#868686] rounded"></div>
-                            <div class="pl-4 ">
-                                <h4 class="font-medium">Lorem Ipsum</h4>
-                                <p class="opacity-75 text-sm">Episode 5
-                                </p>
-                            </div>
-                        </div>
-                        <h4 class="text-sm opacity-75">Emma Grace</h4>
-                        <h4 class="text-sm opacity-75">16/5/2023</h4>
-                        <div class="flex gap-10 items-center">
-                            <h4 class="text-sm opacity-75">21:15</h4><i class="text-xl fa-solid fa-heart"></i>
-                        </div>
-                    </div>
-                </div>
-
+                {{-- <h2 class=" text-xl font-semibold">History</h2> --}}
+                <livewire:history-list  :sortedHistory="$sortedHistory" />
             </div>
 
 
