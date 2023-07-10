@@ -58,13 +58,20 @@ class Player extends Component
             if ($this->episodeId && $this->durationPlayed >= 10) {
                 $listen = Listen::where('user_id', $userId)
                     ->where('episode_id', $this->episodeId)
-                    ->whereRaw("TIME_TO_SEC($timeColumn) < ?", [$totalTime])
+                    ->whereRaw("TIME_TO_SEC($timeColumn) < ?", [$totalTime-1])
                     ->first();
 
                 if ($listen) {
                     // Update the existing row
                     $listen->isComplete = $completed;
-                    $listen->time_played =gmdate('H:i:s', $this->durationPlayed); 
+                    if($completed){
+                        $listen->time_played =gmdate('H:i:s', $this->durationPlayed +1); 
+                    }else{
+                        $listen->time_played =gmdate('H:i:s', $this->durationPlayed ); 
+                    }
+
+                    
+                    
                     $listen->save();
                     if ($this->durationPlayed === $totalTime)
                         return;
