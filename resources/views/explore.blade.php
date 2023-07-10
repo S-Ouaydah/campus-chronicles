@@ -5,7 +5,7 @@
         </h2>
     </x-slot> --}}
     @auth
-        <div class="mx-[9%] 3xl:mx-[10%] mt-4">
+        <div class="mx-[5%]  3xl:mx-[10%] mt-4">
             <div class="w-full h-[550px] 3xl:h-[600px] flex justify-between select-none">
                 <div class="w-[70%] mr-4 h-[550px] 3xl:h-[600px] flex flex-col justify-between">
                     <div class=" h-[44%] mb-4 bg-black rounded-3xl p-12 flex flex-col justify-evenly">

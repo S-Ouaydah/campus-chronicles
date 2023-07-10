@@ -64,7 +64,7 @@ class Player extends Component
                 if ($listen) {
                     // Update the existing row
                     $listen->isComplete = $completed;
-                    $listen->time_played = $this->durationPlayed;
+                    $listen->time_played =gmdate('H:i:s', $this->durationPlayed); 
                     $listen->save();
                     if ($this->durationPlayed === $totalTime)
                         return;

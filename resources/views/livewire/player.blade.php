@@ -65,11 +65,11 @@
                 }],
             };
 
-            player.play(); // Play the audio
+             // Play the audio
             setTimeout(function() {
                 player.currentTime = timePlayed; // Set the current time to the desired time played
                 player.play();
-            }, 100);
+            }, 200);
 
             var contInt = setInterval(function() {
                 timePlayed = player.currentTime;
