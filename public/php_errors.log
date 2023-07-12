@@ -18,3 +18,7 @@
 [26-Jun-2023 17:55:00 UTC] PHP Fatal error:  Constant expression contains invalid operations in C:\laragon\www\campus-chronicles\app\Http\Livewire\ContinueListening.php on line 15
 [26-Jun-2023 17:55:01 UTC] PHP Fatal error:  Constant expression contains invalid operations in C:\laragon\www\campus-chronicles\app\Http\Livewire\ContinueListening.php on line 15
 [26-Jun-2023 17:55:01 UTC] PHP Fatal error:  Constant expression contains invalid operations in C:\laragon\www\campus-chronicles\app\Http\Livewire\ContinueListening.php on line 15
+[11-Jul-2023 21:01:13 UTC] PHP Fatal error:  Can't use function return value in write context in C:\laragon\www\campus-chronicles\storage\framework\views\5034d8ed4d2c2447076393c4f26ac55b.php on line 59
+[11-Jul-2023 21:01:13 UTC] PHP Fatal error:  Can't use function return value in write context in C:\laragon\www\campus-chronicles\storage\framework\views\5034d8ed4d2c2447076393c4f26ac55b.php on line 59
+[11-Jul-2023 21:01:14 UTC] PHP Fatal error:  Can't use function return value in write context in C:\laragon\www\campus-chronicles\storage\framework\views\5034d8ed4d2c2447076393c4f26ac55b.php on line 59
+[11-Jul-2023 21:01:14 UTC] PHP Fatal error:  Can't use function return value in write context in C:\laragon\www\campus-chronicles\storage\framework\views\5034d8ed4d2c2447076393c4f26ac55b.php on line 59

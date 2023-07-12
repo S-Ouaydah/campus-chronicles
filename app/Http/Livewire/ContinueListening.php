@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Listen;
 use App\Models\Episode;
+use Carbon\Carbon;
+
 
 class ContinueListening extends Component
 {
@@ -46,32 +48,66 @@ class ContinueListening extends Component
             ->limit(1)
             ->get();
     }
-
     public function getNextToWatch()
     {
         $userId = auth()->id();
     
-        $latestListen = Listen::where('user_id', $userId)
-            ->orderBy('created_at', 'desc')
-            ->first();
+        $completedPodcasts = Listen::select('episodes.podcast_id')
+            ->join('episodes', 'listens.episode_id', '=', 'episodes.id')
+            ->where('listens.user_id', $userId)
+            ->where('listens.isComplete', 1)
+            ->groupBy('episodes.podcast_id')
+            ->pluck('episodes.podcast_id')
+            ->toArray();
     
-        if ($latestListen) {
-            $podcastId = $latestListen->episode->podcast_id;
-            $sequence = $latestListen->episode->sequence;
+        $nextEpisodes = [];
+        
+        foreach ($completedPodcasts as $podcastId) {
+            $latestListen = Listen::where('user_id', $userId)
+                ->where('isComplete', 1)
+                ->whereHas('episode', function ($query) use ($podcastId) {
+                    $query->where('podcast_id', $podcastId);
+                })
+                ->orderBy('created_at', 'desc')
+                ->first();
     
-            $nextEpisodes = Episode::where('podcast_id', $podcastId)
-                ->where('sequence', '>', $sequence)
-                ->take(1)
-                ->get()
-                ->toArray();
+            if ($latestListen) {
+                $sequence = $latestListen->episode->sequence;
     
-            if (!empty($nextEpisodes)) {
-                return $nextEpisodes;
+                $nextEpisode = Episode::where('podcast_id', $podcastId)
+                    ->where('sequence', '>', $sequence)
+                    ->orderBy('sequence')
+                    ->first();
+    
+                if ($nextEpisode) {
+                    $nextEpisodes[] = $nextEpisode;
+                }
             }
         }
     
-        return [];
+        return $nextEpisodes;
     }
+    
+
+    public function isNewEp($episodeId)
+    {
+        $episode = Episode::find($episodeId);
+
+        if ($episode) {
+            $createdAt = Carbon::parse($episode->created_at);
+            $lastWeek = Carbon::now()->subWeek();
+
+            return $createdAt->greaterThanOrEqualTo($lastWeek);
+        }
+
+        return false;
+    }
+    
+    
+    
+    
+    
+    
 
     public function removeFromContinue($listenId)
     {

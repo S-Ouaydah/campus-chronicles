@@ -3,7 +3,7 @@
                     <div class="flex justify-between h-full">
                         @foreach ($lastNewEpisodes as $index => $episode)
                             <div
-                                class="w-[64%] h-full mr-4 bg-black rounded-3xl p-12 flex flex-col justify-evenly {{ $index !== $activeEpisodeIndex ? 'hidden' : '' }}">
+                                class="w-[64%] h-full mr-4 bg-[#090909] rounded-3xl p-12 flex flex-col justify-evenly {{ $index !== $activeEpisodeIndex ? 'hidden' : '' }}">
                                 <h2 class="text-[#71C719] text-4xl font-medium">New Episodes</h2>
                                 <h4 class="text-white text-2xl mt-2 font-medium">{{ $episode->podcast->title }}<br><span
                                         class="text-[#5A5A5A]">By </span>{{ $episode->creator->name }}</h4>
