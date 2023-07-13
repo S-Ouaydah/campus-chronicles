@@ -10,7 +10,7 @@
     ) {
         echo 'absolute z-10';
     } ?>">
-        <div class="flex justify-between gap-16 items-center ">
+        <div class="flex justify-between gap-16 items-center mx-[2%] ">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex ">

@@ -23,9 +23,6 @@ class LikesList extends Component
     {
         $this->items = $items;
         $this->sortedEpisodes = $sortedEpisodes;
-        
-        
-        
     }
     public function unlikeEpisode($episodeId)
     {
@@ -40,8 +37,6 @@ class LikesList extends Component
     {
 
         $episodes = Episode::getLikesByCurrentUser();
-        
-
         return view('livewire.likes-list', [
             'episodes' => $episodes,
         ]);

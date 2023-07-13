@@ -34,13 +34,13 @@
 
 <body class="antialiased">
     <div
-        class="relative sm:flex sm:justify-center sm:items-center min-h-screen  bg-center bg-trueGray-200  dark:trueGray-20  selection:text-white ">
+        class="relative sm:flex sm:justify-center sm:items-center min-h-screen  bg-center bg-trueGray-200  dark:trueGray-20  selection:text-white  ">
 
 
         @if (Route::has('login'))
 
             <div
-                class="flex items-center px-[2%] sm:gap-1 xl:gap-16 w-full sm:fixed sm:top-0 sm:left-0 pt-8 text-left font-medium text-sm xl:text-base leading-none">
+                class="flex items-center px-[4%] sm:gap-1 xl:gap-16 w-full sm:fixed sm:top-0 sm:left-0 pt-8 text-left font-medium text-sm xl:text-base leading-none  ">
 
 
 

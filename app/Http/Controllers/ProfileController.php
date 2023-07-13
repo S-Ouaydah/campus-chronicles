@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Episode;
+use App\Models\Listen;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +28,11 @@ class ProfileController extends Controller
         $pfpPath = $user->profile_pic();
         $userBio = $user->bio();
         $showForm = false;
-        $user = Auth::user();
         $subscriptions = Subscriptions::getSubsByUser($user->id);
+
+
+        $historyTable = Listen::getHistoryByUser($user->id);
+        $sortedHistory = $historyTable->sortByDesc('updated_at');
 
 
 
@@ -43,6 +47,9 @@ class ProfileController extends Controller
             "showForm" => $showForm,
             "user" => $user,
             "subscriptions" => $subscriptions,
+            "historyTable" => $historyTable,
+            "sortedHistory" => $sortedHistory,
+            
             
 
 

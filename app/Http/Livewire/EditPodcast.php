@@ -12,6 +12,7 @@ class EditPodcast extends Component
     public $podcast;
     public $title;
     public $description;
+    public $pod_pic;
 
     public $editMode = false;
 
@@ -28,6 +29,7 @@ class EditPodcast extends Component
         $this->description = $podcast->description;
         $this->originalTitle = $this->title;
         $this->originalDescription = $this->description;
+        $this->originalPodPic = $this->podcast->image_url;
     }
     public function edit()
     {
@@ -37,11 +39,17 @@ class EditPodcast extends Component
     {
         $this->title = $this->originalTitle;
         $this->description = $this->originalDescription;
+        $this->pod_pic = $this->originalPodPic;
 
         $this->editMode = false;
     }
     public function save()
     {
+        if ($this->pod_pic) {
+            $filename = $this->pod_pic->getClientOriginalName();
+            $imagePath = $this->pod_pic->storeAs('public/podcast-pics', $filename);
+            $this->podcast->image_url = 'storage/podcast-pics/' . $filename;
+        }
         $this->podcast->update([
             'title' => $this->title,
             'description' => $this->description,

@@ -21,6 +21,7 @@
                     <textarea wire:model.lazy="description"
                         class="text-md  overflow-hidden truncate md:truncate-none w-[90%] bg-transparent h-52 max-h-52"></textarea>
                 </div>
+                <input wire:model.lazy="pod_pic" type="file" class="text-4xl mt-12 mb-3 w-2/3 bg-transparent">
                 {{-- NOTE add profile pic --}}
                 <p class="text-xl">{{ $podcast->creator->name }}</p>
                 <button wire:click="save" class="btn btn-primary px-2 my-2 bg-primary-base">Save</button>

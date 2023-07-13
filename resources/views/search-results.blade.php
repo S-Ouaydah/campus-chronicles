@@ -8,29 +8,42 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <h2>Podcasts</h2>
             <ul>
-                @foreach ($podcasts as $podcast)
-                <li>
-                    <a 
-                        class="list-item"
-                        href="{{ route('podcast.show', $podcast['id']) }}">
-                        {{ $podcast['title'] }} 
-                    </a>
-                </li>
-                @endforeach
+                @if (!$podcasts->isEmpty())
+                    @foreach ($podcasts as $podcast)
+                    <li>
+                        <a 
+                            class="list-item"
+                            href="{{ route('podcast.show', $podcast['id']) }}">
+                            {{ $podcast['title'] }} 
+                        </a>
+                    </li>
+                    @endforeach
+                @else
+                    <li>No podcasts found !</li>
+                @endif
             </ul>
 
             <h2>Episodes</h2>
             <ul>
-                @foreach ($episodes as $episode)
-                <li>{{ $episode->title }}</li>
-                @endforeach
+                
+                @if (!$episodes->isEmpty())
+                    @foreach ($episodes as $episode)
+                    <li>{{ $episode->title }}</li>
+                    @endforeach
+                @else
+                    <li>No episodes found !</li>
+                @endif
             </ul>
 
             <h2>Creators</h2>
             <ul>
-                @foreach ($users as $user)
-                <li>{{ $user->name }}</li>
-                @endforeach
+                @if (!$users->isEmpty())
+                    @foreach ($users as $user)
+                    <li>{{ $user->name }}</li>
+                    @endforeach
+                @else
+                    <li>No creators found !</li>
+                @endif
             </ul>
         </div>
 
