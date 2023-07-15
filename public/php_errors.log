@@ -22,3 +22,5 @@
 [11-Jul-2023 21:01:13 UTC] PHP Fatal error:  Can't use function return value in write context in C:\laragon\www\campus-chronicles\storage\framework\views\5034d8ed4d2c2447076393c4f26ac55b.php on line 59
 [11-Jul-2023 21:01:14 UTC] PHP Fatal error:  Can't use function return value in write context in C:\laragon\www\campus-chronicles\storage\framework\views\5034d8ed4d2c2447076393c4f26ac55b.php on line 59
 [11-Jul-2023 21:01:14 UTC] PHP Fatal error:  Can't use function return value in write context in C:\laragon\www\campus-chronicles\storage\framework\views\5034d8ed4d2c2447076393c4f26ac55b.php on line 59
+[15-Jul-2023 10:23:33 UTC] PHP Fatal error:  Constant expression contains invalid operations in C:\laragon\www\campus-chronicles\app\Http\Livewire\FeaturedPodcast.php on line 12
+[15-Jul-2023 10:23:38 UTC] PHP Fatal error:  Constant expression contains invalid operations in C:\laragon\www\campus-chronicles\app\Http\Livewire\FeaturedPodcast.php on line 12

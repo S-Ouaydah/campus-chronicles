@@ -1,8 +1,10 @@
-<div class="mt-3">
-
- @if ($subscribed)
-        <button wire:click="unsubscribe" class="text-white bg-black py-2 px-5 rounded text-normal">Unsubscribe</button>
-    @else
-    <button wire:click="subscribe" class="text-white bg-black py-2 px-5 rounded text-normal">Subscribe</button>
-    @endif
+<div class="">
+    <button wire:click="{{ $subscribed ? 'unsubscribe' : 'subscribe' }}" wire:loading.attr="disabled"
+        class="py-2 px-5 rounded text-lg font-medium {{ $buttonClass }}"> 
+        @if ($subscribed)
+            Unsubscribe
+        @else
+            Subscribe
+        @endif
+    </button>
 </div>

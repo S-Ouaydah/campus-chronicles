@@ -29,9 +29,9 @@
                             <div>
                                 <h4 class="font-medium opacity-80 ">{{ $episode->time_played }} out of
                                     {{ $episode->episode->getDuration() }}</h4>
-                                <div class="w-[100%] h-2 flex justify-start bg-black mt-2 ">
+                                <div class="w-[100%] h-2 flex justify-start bg-[#C0EE9B] mt-2 ">
 
-                                    <div class="h-2 bg-[#C0EE9B]  "
+                                    <div class="h-2 bg-black  "
                                         style="width: {{ ((strtotime($episode->time_played) - strtotime('00:00:00')) / (strtotime($episode->episode->getDuration()) - strtotime('00:00:00'))) * 100 }}%;">
                                     </div>
 

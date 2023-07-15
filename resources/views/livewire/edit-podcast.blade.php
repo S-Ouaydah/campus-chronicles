@@ -50,7 +50,10 @@
                 </div>
                 {{-- NOTE add profile pic --}}
                 <p class="text-xl mt-3">{{ $podcast->creator->name }}</p>
-                <livewire:subscribe-button :podcastId="$podcast->id" />
+                <livewire:subscribe-button :currentPage="'other-page'" :podcastId="$podcast->id" />
+
+
+          
             </div>
     @endif
     </section>
