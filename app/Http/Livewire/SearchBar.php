@@ -31,7 +31,7 @@ class SearchBar extends Component
     //     }
     //     $this->highlightindex++;
     // }
-    
+
     // public function decrementHighlight()
     // {
     //     if ($this->highlightindex === 0) {
@@ -44,8 +44,8 @@ class SearchBar extends Component
     public function updatedQuery()
     {
         // sleep(2);  data delay testing
-        $this->podcasts = Podcast::where('title', 'like', '%'. $this->query .'%') 
-            ->get() 
+        $this->podcasts = Podcast::whereRaw('lower(title) like ?', ['%' . strtolower($this->query) . '%'])
+            ->get()
             ->toArray();
     }
 
