@@ -15,16 +15,6 @@ class EditBio extends Component
     public $originalBio;
     public $user;
 
-    public function checkMe(){
-        $this->updatedBio();
-    }
-    public function updatedBio()
-    {
-        // if (strlen($this->bio) >= 256) {
-        //     $this->bio = substr($this->bio, 0, 255);
-        // }
-        return;
-    }
     public function mount()
     {
         $this->user = Auth::user();
