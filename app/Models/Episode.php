@@ -78,11 +78,11 @@ class Episode extends Model
 //         ->get();
 // }
 
-   
 
 
 
-   
+
+
 
 
     public function getSequence()
@@ -100,12 +100,11 @@ class Episode extends Model
     public function getDuration()
     {
         $getID3 = new \getID3;
-    
+
         $audioPath = storage_path('app/public/' . str_replace("storage/", "", $this->audio_path));
-    
         // Get the file extension
         $fileExtension = pathinfo($audioPath, PATHINFO_EXTENSION);
-    
+
         // Analyze the file based on its extension
         switch ($fileExtension) {
             case 'mp3':
@@ -124,23 +123,28 @@ class Episode extends Model
                 break;
         }
         $fileInfo = $getID3->analyze($audioPath);
+        //handle error
+        if (isset($fileInfo['error'])) {
+            return '00:00';
+        }
+
         $playtimeString = $fileInfo['playtime_string'];
-    
+
         // Convert "mm:ss" to "hh:mm:ss" format
         sscanf($playtimeString, "%d:%d", $minutes, $seconds);
         $hours = 0;
-    
+
         if ($minutes >= 60) {
             $hours = floor($minutes / 60);
             $minutes = $minutes % 60;
         }
-    
+
         $duration = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
-    
+
         return $duration;
     }
-    
-  
+
+
     // // // TODO there is a built-in method for this, i think this is it. test it.
     public function getLikeDate(){
         date_default_timezone_set('Europe/Moscow');
@@ -181,7 +185,7 @@ class Episode extends Model
     //     }
     // }
 
-  
+
 
 
 
