@@ -38,6 +38,11 @@
             <!-- Navigation Links -->
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
 
+                @if (auth()->check() && auth()->user()->isAdmin)
+                    <x-nav-link :href="route('admindashboard')" :active="request()->routeIs('admindashboard')">
+                        {{ __('Admin Dashboard') }}
+                    </x-nav-link>
+                @endif
 
                 @if (auth()->check() && auth()->user()->isISAE)
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -145,12 +150,6 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
-                            {{-- <x-dropdown-link :href="route('history')">
-                                {{ __('History') }}
-                            </x-dropdown-link> --}}
-
-
-
                             <x-dropdown-link :href="route('settings.edit')">
                                 {{ __('Account Settings') }}
                             </x-dropdown-link>
@@ -211,12 +210,6 @@
                     <x-dropdown-link :href="route('profile')">
                         {{ __('Profile') }}
                     </x-dropdown-link>
-
-
-                    {{-- <x-dropdown-link :href="route('history')">
-                        {{ __('History') }}
-                    </x-dropdown-link> --}}
-
 
                     <x-responsive-nav-link :href="route('settings.edit')">
                         {{ __('Settings') }}

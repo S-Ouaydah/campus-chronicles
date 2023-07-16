@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\ExploreController;
@@ -54,6 +55,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
     Route::patch('/settings', [SettingsController::class, 'update'])->name('settings.update');
     Route::delete('/settings', [SettingsController::class, 'destroy'])->name('settings.destroy');
+});
+
+Route::middleware(['auth' , 'verified' ,'isAdmin'])->group(function() {
+    Route::get('/admindashboard', [AdminController::class, 'show'])->name('admindashboard');
+    Route::post('/admindashboard/category', [AdminController::class, 'store'])->name('category.store');
+    Route::delete('/admindashboard/category/{category}', [AdminController::class, 'destroy_category'])->name('category.destroy');
+    Route::delete('/admindashboard/user/{user}', [AdminController::class, 'destroy_user'])->name('user.destroy');
+    
 });
 
 Route::middleware(['auth' , 'verified' ,'verifyisae'])->group(function() {
