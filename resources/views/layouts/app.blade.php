@@ -43,7 +43,10 @@
         <main>
             {{ $slot }}
         </main>
+        <div class=" mt-20 bg-black mx-[5%]  3xl:mx-[10%]  h-[300px] rounded-t-3xl"></div>
     </div>
+
+    
     @livewire('player')
     @livewireScripts
     @stack('scripts')
@@ -53,7 +56,7 @@
     <script>
         var swiper = new Swiper('.swiper-container', {
             slidesPerView: 'auto',
-            spaceBetween: 10, // Adjust the spacing between slides
+            spaceBetween: 10,
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,

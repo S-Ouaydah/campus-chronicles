@@ -1,4 +1,4 @@
-<div class="w-full fixed bottom-0 flex flex-nowrap h-12">
+<div class="w-full fixed bottom-0 flex flex-nowrap h-12 z-10">
     <img src="{{ asset($imageUrl) }}" class="contain h-12 w-12">
 
     <div class="flex-grow " wire:ignore>
