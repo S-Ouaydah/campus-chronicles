@@ -18,7 +18,7 @@
             <div class="flex flex-col space-y-6 ">
                 <!-- image  -->
                   <x-input-label for="pod_pic" value="{{ __('Image') }}" class="sr-only" />
-                <input id="pod_pic" name="pod_pic" type="file" enctype="multipart/form-data" required>
+                <input id="pod_pic" name="pod_pic" type="file" enctype="multipart/form-data" accept="image/*" required>
 
 
                 <!-- title -->
@@ -48,7 +48,9 @@
                 <select disabled class="rounded-lg border-gray-300 focus:outline-none focus:border-transparent form-input mt-1"> </select>
                 @endif
 
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" /> 
+                @if ($errors->any())
+                <p class="text-red-500">Failed to submit the form. Please check the entered information.</p>
+                @endif
             </div>
 
             <div class="mt-6 flex justify-end">

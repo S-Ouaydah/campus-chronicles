@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Subscriptions;
 use App\Models\Podcast;
+use Illuminate\Support\Facades\Auth;
 
 class SubscribeButton extends Component
 {
@@ -20,6 +21,11 @@ class SubscribeButton extends Component
 
     public function subscribe()
     {
+        $user = Auth::user();
+        if (!$user) {
+            session()->flash('message', 'Login to subscribe!');
+            return redirect()->route('login');
+        }
         $userId = auth()->id();
 
         Subscriptions::create([
