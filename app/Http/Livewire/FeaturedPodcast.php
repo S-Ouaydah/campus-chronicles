@@ -37,7 +37,8 @@ class FeaturedPodcast extends Component
     public function render()
     {
         $today = Carbon::today();
-        $featuredPodcast = Podcast::all()->nth($today->dayOfYear() % Podcast::count())->first();
+        // $featuredPodcast = Podcast::all()->nth($today->dayOfYear() % Podcast::count())->first();
+        $featuredPodcast = Podcast::all()->first();
         $featuredPodcastEps = $featuredPodcast->episodes;
         return view('livewire.featured-podcast',[
             "featuredPodcast" => $featuredPodcast,

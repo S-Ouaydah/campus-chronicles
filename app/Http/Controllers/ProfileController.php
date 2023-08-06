@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Episode;
 use App\Models\Listen;
+use App\Models\Podcast;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,7 @@ use Livewire\WithFileUploads;
 use Livewire\TemporaryUploadedFile;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Subscriptions;
-
+use PhpParser\Node\Expr\Cast\String_;
 
 class ProfileController extends Controller
 {
@@ -50,7 +51,30 @@ class ProfileController extends Controller
             "historyTable" => $historyTable,
             "sortedHistory" => $sortedHistory,
             
-            
+
+
+        ]);
+
+
+    }
+  
+    public function profile_view(String $uid)
+    {
+        /** @var \App\Models\User $user */
+        $user = User::findOrFail($uid);
+        $podcasts = $user->podcasts;
+        $pfpPath = $user->profile_pic();
+        $userBio = $user->bio();
+
+
+
+
+        return view('notmyprofile', [
+            "pfpPath" => $pfpPath,
+            "userBio" => $userBio,
+            "podcasts" => $podcasts,
+            "user" => $user,
+       
 
 
         ]);

@@ -13,10 +13,7 @@
 
         <p class=" opacity-90 m-0 max-w-[400px] break-all">{!! nl2br(e($bio)) !!}</p>
 
-          
-
-            {{-- <p class=" opacity-90  max-w-[400px] break-all leading-none">{!! nl2br(e($bio)) !!}</p> --}}
-            <i wire:click="startEditing" class="ml-4 fa-solid fa-pen text-sm "></i>
+        <i wire:click="startEditing" class="ml-4 fa-solid fa-pen text-sm "></i>
         </div>
     @endif
 </div>

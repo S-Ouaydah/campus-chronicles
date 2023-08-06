@@ -17,7 +17,7 @@
 
             <div class="flex flex-col space-y-6 ">
                 <!-- image  -->
-                  <x-input-label for="pod_pic" value="{{ __('Image') }}" class="sr-only" />
+                <x-input-label for="pod_pic" value="{{ __('Image') }}" class="" />
                 <input id="pod_pic" name="pod_pic" type="file" enctype="multipart/form-data" accept="image/*" required>
 
 

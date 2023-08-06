@@ -54,7 +54,7 @@ class User extends Authenticatable
     }
     public function podcasts()
     {
-        return $this->hasMany(Podcast::class);
+        return $this->hasMany(Podcast::class, 'creator_id');
     }
     public function likes(): BelongsToMany
     {
