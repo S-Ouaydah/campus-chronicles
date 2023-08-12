@@ -1,4 +1,4 @@
-<div class="w-full fixed bottom-0 flex flex-nowrap h-12 z-10" wire:init="inited">
+<div class="w-full fixed bottom-0 flex flex-nowrap h-12 z-10" >
     <img src="{{ asset($imageUrl) }}" class="contain h-12 w-12">
 
     <div class="flex-grow " wire:ignore>
@@ -12,6 +12,9 @@
 
 @push('scripts')
 <script>
+    var palying;
+    var epId;
+    var imgUrl;
     var timePlayed;
     var totalTime;
     var isComplete;
@@ -20,35 +23,21 @@
     //     console.log("in ready listner")
     //     const player = event.detail.plyr;
     // });
-    document.addEventListener("hello", function(event) { // (1)
-        alert("Hello from " + event.target.tagName); // Hello from H1
-    });
-    Livewire.on('playAudio', (source,episodeId,imageUrl) => {
-        console.log("in oplay audio")
-        console.log(source)
-        var path = location.origin + '/' + source + '.mp3';
-        player.source = {
-            type: 'audio',
-            sources: [{
-                    src: path,
-                    type: 'audio/mp3',
+    // player.on("pause", (event) => {
+    //     console.log("inside pause");
+    //     palying = false;
+    // });
+    // player.on("playing", (event) => {
+    //     console.log("inside playing");
+    //     palying = true;
+    // });
 
-                },
-
-
-            ],
-        };
-        // NOTE playing from player.on ready in app.js
-        // player.play();
-
-
-
-
-        var playInt = setInterval(function() {
+    var playInt = setInterval(function() {
+            playing = player.playing;
             timePlayed = player.currentTime;
             totalTime = player.duration;
             isComplete = Math.abs(timePlayed - totalTime) <= 1;
-            window.livewire.emit('saveProgress', timePlayed, totalTime, isComplete,source,episodeId,imageUrl);
+            window.livewire.emit('saveProgress', timePlayed, totalTime, isComplete,player.source,epId,imgUrl,player.playing);
 
 
 
@@ -58,13 +47,40 @@
                 clearInterval(playInt); // Stop the interval
             }
         }, 500);
+
+    document.addEventListener("hello", function(event) {
+        console.log("Hello from " +  @js($playing));
+        // @this.inited
+        if (@js($playing)) {
+            player.play();
+        }
+    });
+    Livewire.on('playAudio', (source,episodeId,imageUrl) => {
+        console.log("in oplay audio")
+        console.log(source)
+        epId = episodeId;
+        imgUrl = imageUrl;
+        var path = location.origin + '/' + source + '.mp3' ;
+        player.source = {
+            type: 'audio',
+            sources: [{
+                    src: path,
+                    type: 'audio/mp3',
+
+                },
+            ],
+        };
+        // NOTE playing from player.on ready in app.js
+        player.play();
+
+
     });
 
 
     Livewire.on('continueAudio', (audioPath, episodeId, imageUrl, timePlayed) => {
 
 
-        var path = location.origin + '/' + audioPath + '.mp3';
+        var path = location.origin + '/' + audioPath;
         player.source = {
             type: 'audio',
             sources: [{
@@ -92,8 +108,5 @@
         }, 1000);
     });
 
-    Livewire.on('inited', source => {
-        console.log("in inited");
-    });
 </script>
 @endpush

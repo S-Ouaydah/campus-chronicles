@@ -20,12 +20,14 @@ console.log("after player");
 player.on("ready", (event) => {
     const instance = event.detail.plyr;
     console.log("inside ready");
+    document.dispatchEvent(new Event("hello", { bubbles: true }));
     // tryPlay(player);
     // setTimeout(() => {
     // }, 1000); // Adjust the delay as needed
 });
 function tryPlay(player) {
     var playPromise = player.play();
+    console.log("inside try");
 
     if (playPromise != undefined) {
         playPromise

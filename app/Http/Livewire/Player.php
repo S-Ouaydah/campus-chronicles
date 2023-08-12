@@ -15,18 +15,19 @@ class Player extends Component
     public $imageUrl;
     public $durationPlayed;
     public $timePlayed;
+    public $playing;
+
+    protected $listeners = ['playAudio', 'continueAudio', 'saveProgress'];
 
 
-    protected $listeners = ['playAudio', 'continueAudio', 'saveProgress', 'inited'];
-    public function inited()
+    public function mount()
     {
-        $x=2;
+        $this->durationPlayed = 0; // Initialize durationPlayed to 0
         $this->getCookie();
         $this->playAudio($this->audio,$this->episodeId,$this->imageUrl);
 
-        // dd($this->audio);
-
     }
+
     public function playAudio($audioPath, $episodeId, $imageUrl)
     {
         if ($audioPath == null || $this->audio == $audioPath) {
@@ -48,18 +49,11 @@ class Player extends Component
         $this->timePlayed = $timePlayed;
     }
 
-    public function mount()
-    {
-        $this->durationPlayed = 0; // Initialize durationPlayed to 0
-    }
-
-
-
-    public function saveProgress($timePlayed, $totalTime, $completed,$source,$episodeId,$imageUrl)
+    public function saveProgress($timePlayed, $totalTime, $completed,$source,$episodeId,$imageUrl,$playing)
     {
         $this->durationPlayed = $timePlayed;
 
-        $this->setCookie($episodeId, $source, $imageUrl);
+        $this->setCookie($episodeId, $source, $imageUrl,$playing);
 
         if (Auth::check()) {
             $userId = Auth::id();
@@ -100,26 +94,27 @@ class Player extends Component
         }
     }
 
-    public function getCookie() { 
-        
+    public function getCookie() {
         /** @var object $cookie */
         $cookie = json_decode(Cookie::get('plyrCookie'));
         if ($cookie) {
             $this->audio = $cookie->audio_path;
             $this->episodeId = $cookie->episodeId;
             $this->imageUrl = $cookie->imgUrl;
-            $this->playAudio($this->audio,$this->episodeId,$this->imageUrl);
+            $this->playing = $cookie->playing;
+            // $this->playAudio($this->audio,$this->episodeId,$this->imageUrl);
         }
     }
 
-    public function setCookie($episodeId, $audioPath, $imgUrl) {
+    public function setCookie($episodeId, $audioPath, $imgUrl,$playing) {
         $cookieValues = [
             'audio_path' => $audioPath,
             'episodeId' => $episodeId,
-            'imgUrl' => $imgUrl
+            'imgUrl' => $imgUrl,
+            'playing' => $playing,
         ];
         Cookie::queue('plyrCookie', json_encode($cookieValues), 3600*24);
-        
+
     }
 
 
