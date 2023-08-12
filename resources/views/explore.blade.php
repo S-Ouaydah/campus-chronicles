@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            @livewire('continue-listening')
+            {{-- @livewire('continue-listening') --}}
             <div class="mt-10 select-none">
                 <h1 class="mt-20 text-xl font-medium">Recommended For You</h1>
                 <div class="swiper-container mt-5">

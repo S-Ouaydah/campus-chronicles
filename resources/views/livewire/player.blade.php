@@ -19,42 +19,42 @@
     var totalTime;
     var isComplete;
 
-    // element.addEventListener('ready', (event) => {
-    //     console.log("in ready listner")
-    //     const player = event.detail.plyr;
-    // });
-    // player.on("pause", (event) => {
-    //     console.log("inside pause");
-    //     palying = false;
-    // });
-    // player.on("playing", (event) => {
-    //     console.log("inside playing");
-    //     palying = true;
-    // });
-
-    var playInt = setInterval(function() {
+    var playInt;
+    function interval() {
+        playInt = setInterval(function() {
             playing = player.playing;
             timePlayed = player.currentTime;
             totalTime = player.duration;
             isComplete = Math.abs(timePlayed - totalTime) <= 1;
-            window.livewire.emit('saveProgress', timePlayed, totalTime, isComplete,player.source,epId,imgUrl,player.playing);
-
+            window.livewire.emit('saveProgress', timePlayed, totalTime, isComplete,player.source,@js($episodeId),@js($imageUrl),player.playing,player.currentTime);
+            // console.log("epid:" + @js($episodeId))
+            // console.log("img:" + @js($imageUrl))
 
 
             // Check for a certain case
             if (timePlayed >= player.duration) {
-
                 clearInterval(playInt); // Stop the interval
             }
         }, 500);
+    }
 
-    document.addEventListener("hello", function(event) {
+    document.addEventListener("Pready", function(event) {
         console.log("Hello from " +  @js($playing));
-        // @this.inited
+        player.forward(@js($position))
         if (@js($playing)) {
             player.play();
         }
     });
+    document.addEventListener("Pplay", function(event) {
+        console.log("Hello from pplay");
+        interval();
+    });
+    document.addEventListener("Ppause", function(event) {
+        console.log("Hello from ppause");
+        clearInterval(playInt);
+        window.livewire.emit('saveProgress', timePlayed, totalTime, isComplete,player.source,@js($episodeId),@js($imageUrl),player.playing,player.currentTime);
+    });
+
     Livewire.on('playAudio', (source,episodeId,imageUrl) => {
         console.log("in oplay audio")
         console.log(source)

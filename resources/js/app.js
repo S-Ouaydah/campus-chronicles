@@ -20,11 +20,22 @@ console.log("after player");
 player.on("ready", (event) => {
     const instance = event.detail.plyr;
     console.log("inside ready");
-    document.dispatchEvent(new Event("hello", { bubbles: true }));
+    document.dispatchEvent(new Event("Pready", { bubbles: true }));
     // tryPlay(player);
     // setTimeout(() => {
     // }, 1000); // Adjust the delay as needed
 });
+player.on("play", (event) => {
+    const instance = event.detail.plyr;
+    console.log("inside play");
+    document.dispatchEvent(new Event("Pplay", { bubbles: true }));
+});
+player.on("pause", (event) => {
+    const instance = event.detail.plyr;
+    console.log("inside pause");
+    document.dispatchEvent(new Event("Ppause", { bubbles: true }));
+});
+
 function tryPlay(player) {
     var playPromise = player.play();
     console.log("inside try");

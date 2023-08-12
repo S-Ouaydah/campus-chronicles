@@ -16,15 +16,16 @@ class Player extends Component
     public $durationPlayed;
     public $timePlayed;
     public $playing;
+    public $position;
 
     protected $listeners = ['playAudio', 'continueAudio', 'saveProgress'];
 
 
     public function mount()
     {
-        $this->durationPlayed = 0; // Initialize durationPlayed to 0
+        // $this->durationPlayed = 0; // Initialize durationPlayed to 0
         $this->getCookie();
-        $this->playAudio($this->audio,$this->episodeId,$this->imageUrl);
+        // $this->playAudio($this->audio,$this->episodeId,$this->imageUrl);
 
     }
 
@@ -49,11 +50,11 @@ class Player extends Component
         $this->timePlayed = $timePlayed;
     }
 
-    public function saveProgress($timePlayed, $totalTime, $completed,$source,$episodeId,$imageUrl,$playing)
+    public function saveProgress($timePlayed, $totalTime, $completed,$source,$episodeId,$imageUrl,$playing,$position)
     {
         $this->durationPlayed = $timePlayed;
 
-        $this->setCookie($episodeId, $source, $imageUrl,$playing);
+        $this->setCookie($episodeId, $source, $imageUrl,$playing,$position);
 
         if (Auth::check()) {
             $userId = Auth::id();
@@ -102,18 +103,20 @@ class Player extends Component
             $this->episodeId = $cookie->episodeId;
             $this->imageUrl = $cookie->imgUrl;
             $this->playing = $cookie->playing;
+            $this->position = $cookie->position;
             // $this->playAudio($this->audio,$this->episodeId,$this->imageUrl);
         }
     }
 
-    public function setCookie($episodeId, $audioPath, $imgUrl,$playing) {
+    public function setCookie($episodeId, $audioPath, $imgUrl,$playing,$position) {
         $cookieValues = [
             'audio_path' => $audioPath,
             'episodeId' => $episodeId,
             'imgUrl' => $imgUrl,
             'playing' => $playing,
+            'position' => $position,
         ];
-        Cookie::queue('plyrCookie', json_encode($cookieValues), 3600*24);
+        Cookie::queue('plyrCookie', json_encode($cookieValues), 3600*8); //valid for 8 hours
 
     }
 
