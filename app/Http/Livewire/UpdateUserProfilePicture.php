@@ -12,11 +12,13 @@ class UpdateUserProfilePicture extends Component
     use WithFileUploads;
 
     public $profilePicture;
-    public function openProfilePictureUpload()
-    {
-        $this->dispatchBrowserEvent('openProfilePictureUpload');
-    }
+    // TODO: Add a dispatch event? or use the one emitted down? to change the navbar profile picture realtime
+    // public function openProfilePictureUpload()
+    // {
+    //     $this->dispatchBrowserEvent('openProfilePictureUpload');
+    // }
 
+    // NOTE: following function fires when there is a change in $profilePicture
     public function updatedProfilePicture()
     {
         // TODO give an error

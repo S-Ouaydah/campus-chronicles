@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class EditPodcast extends Component
 {
@@ -12,24 +14,23 @@ class EditPodcast extends Component
     public $podcast;
     public $title;
     public $description;
-    public $pod_pic;
+    public $podPic;
 
     public $editMode = false;
 
     public $originalTitle;
     public $originalDescription;
-    public $originalPodPic;
 
-    
 
     public function mount($podcast)
     {
         $this->podcast = $podcast;
+
         $this->title = $podcast->title;
         $this->description = $podcast->description;
+
         $this->originalTitle = $this->title;
         $this->originalDescription = $this->description;
-        $this->originalPodPic = $this->podcast->image_url;
     }
     public function edit()
     {
@@ -39,23 +40,44 @@ class EditPodcast extends Component
     {
         $this->title = $this->originalTitle;
         $this->description = $this->originalDescription;
-        $this->pod_pic = $this->originalPodPic;
+        // $this->pod_pic = $this->originalPodPic;
 
         $this->editMode = false;
     }
     public function save()
     {
-        if ($this->pod_pic) {
-            $filename = $this->pod_pic->getClientOriginalName();
-            $imagePath = $this->pod_pic->storeAs('public/podcast-pics', $filename);
-            $this->podcast->image_url = 'storage/podcast-pics/' . $filename;
-        }
+        // if ($this->pod_pic) {
+        //     $filename = $this->pod_pic->getClientOriginalName();
+        //     $imagePath = $this->pod_pic->storeAs('public/podcast-pics', $filename);
+        //     $this->podcast->image_url = 'storage/podcast-pics/' . $filename;
+        // }
+        $this->originalTitle = $this->title;
+        $this->originalDescription = $this->description;
+
         $this->podcast->update([
             'title' => $this->title,
             'description' => $this->description,
         ]);
         $this->editMode = false;
     }
+    public function updatedPodPic()
+    {
+        // TODO give an error
+        $this->validate([
+            'podPic' => 'image|max:2048576', // 2MB Max
+        ]);
+        $user = Auth::user();
+        $previousPodPic = $user->pod_pic;
+        if ($previousPodPic) {
+            Storage::delete('public/podcast-pics/' . basename($previousPodPic));
+        }
+        //store the new podcast picture
+        $newPodPic = $this->podPic->store('public/podcast-pics');
+        $this->podcast->image_url = "storage/podcast-pics/". basename($newPodPic);
+        $this->podcast->save();
+
+
+     }
     public function render()
     {
         return view('livewire.edit-podcast',['editMode' => $this->editMode]);

@@ -44,7 +44,7 @@
 
 
 
-                <a href="/"><img class="h-6" src="https://i.ibb.co/stTsyMP/logo-black.png"></a>
+                <a href="/"><img class="h-6" src="{{asset('logo-black.png')}}"></a>
                 <div class="nav2">
 
                     <a href="{{ route('explore') }}"
@@ -60,7 +60,7 @@
                 <div class="nav4">
                     @auth
                         <a href="{{ url('/dashboard') }}"
-                            class="text-black hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
+                            class="text-black hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm ">Home</a>
                     @else
                         <a href="{{ route('login') }}" class="  text-white rounded-2xl bg-black px-6  py-2.5  ml-5">Log
                             in</a>
@@ -89,7 +89,7 @@
 
             <div class="relative mt-7">
                 <img
-                    class="absolute right-[0%] h-[6rem]"src="https://i.ibb.co/hRHqgLy/3847936-arrow-arrow-wraps-bottom-bottom-line-nope-icon.png">
+                    class="absolute right-[0%] h-[6rem]"src="{{asset('arrow-landing.png')}}">
                 <h1 class="text-5xl font-bold"><span class="tracking-widest">Educational</span><br>podcasts
                     that<br>inspire you to <span
                         class="underline decoration-8 underline-offset-auto  decoration-[#71C719]">grow</span></h1>
@@ -122,7 +122,7 @@
 
         </div>
         <div class='right'>
-            <img class="h-[30rem] xl:h-[35rem]"src="https://i.ibb.co/LPLmkPz/gd.png">
+            <img class="h-[30rem] xl:h-[35rem]"src="{{asset('landing-pic.png')}}">
         </div>
 
     </div>
