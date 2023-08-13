@@ -40,7 +40,7 @@
                 @endif
                 <h1 class="text-4xl pt-12 pb-3 font-medium">{{ $podcast->title }}</h1>
                 <div class="mt-3">
-                    <p class="text-md h-full overflow-hidden truncate md:truncate-none ">{{ $podcast->description }}</p>
+                    <p class="text-md h-full overflow-hidden truncate-6 md:truncate-none ">{{ $podcast->description }}</p>
                 </div>
                 {{-- NOTE add profile pic --}}
                 <p class="text-xl mt-3">by {{ $podcast->creator->name }}</p>
