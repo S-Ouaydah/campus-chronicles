@@ -62,8 +62,11 @@ class EpisodeController extends Controller
         }
 
         if ($formData->save()) {
+            flash()->addSuccess('Form submitted successfully!');
             return redirect('/dashboard');
         }
+        flash()->addError('An error has occured!');
+        return redirect('/dashboard');
     }
 
     /**

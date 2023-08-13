@@ -56,9 +56,11 @@ class PodcastController extends Controller
         }
 
         if ($formData->save()) {
-            return redirect('/dashboard')->with('success', 'Form submitted successfully!');
+            flash()->addSuccess('Form submitted successfully!');
+            return redirect('/dashboard');
         }
-        return redirect('/dashboard')->flash('error', 'an error has occured!');
+        flash()->addError('An error has occured!');
+        return redirect('/dashboard');
 
     }
 
