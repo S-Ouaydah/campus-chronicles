@@ -27,6 +27,8 @@ class SearchController extends Controller
     public function view(Request $request)
     {
         $searchTerm = $request->input('search');
+
+        $currentuser = Auth::user();
         
         // Perform the search across Podcasts, Episodes, and Accounts
         $podcasts = Podcast::where('title', 'like', '%'.$searchTerm.'%')->get();
@@ -37,7 +39,8 @@ class SearchController extends Controller
             'searchTerm' => $searchTerm,
             'podcasts' => $podcasts,
             'episodes' => $episodes,
-            'users' => $users
+            'users' => $users,
+            'currentuser' => $currentuser
         ]);
     }
 
