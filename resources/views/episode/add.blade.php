@@ -30,7 +30,7 @@
                 <!-- audio -->
                 <x-input-label for="audio_file" value="{{ __('Audio') }}" class="" />
 
-                <input type="file" id="audio_file" name="audio_file" accept="audio/mp3">
+                <input type="file" id="audio_file" name="audio_file" accept="audio/mp3" required>
 
                 <!-- podcast -->
                 <x-input-label for="podcast_id" value="{{ __('Podcast Name') }}" class="sr-only" />
@@ -41,7 +41,9 @@
                     @endforeach
                 </select>
 
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+                @if ($errors->any())
+                <p class="text-red-500">Failed to submit the form. Please check the entered information.</p>
+                @endif
             </div>
 
             <div class="mt-6 flex justify-end">

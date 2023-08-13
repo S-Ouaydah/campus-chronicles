@@ -10,8 +10,8 @@
             @foreach ($sortedEpisodes as $episode)
                 <div class="w-full h-[80px]  flex  justify-between items-center">
                     <div class="flex ">
-                        <div class="relative w-[45px] h-[45px]" wire:click="$emit('playAudio', '{{ $episode->audio_path }}', {{ $episode->episode_id}}, '{{ $episode->podcast->image_url }}')">
-                            <div  
+                        <div class="relative w-[45px] h-[45px]" wire:click="$emit('playAudio', '{{ $episode->audio_path }}', {{ $episode->episode_id}}, '{{ $episode->podcast->image_url }}',0)">
+                            <div
                                 class="w-[45px] h-[45px]  rounded bg-cover absolute bg-black flex items-center justify-center ">
                                 <i class="fa fa-play fa-stack-1x fa-inverse text-white leading-0 pl-1"></i>
                             </div>

@@ -62,6 +62,7 @@ class Episode extends Model
     {
         return $this->belongsToMany(User::class, 'listens');
     }
+
     //FIXME - shouldnt this be in users instead of episodes? / no bc you getting episode info not user info
     public static function getLikesByCurrentUser()
     {
@@ -69,22 +70,6 @@ class Episode extends Model
             ->where('likes.user_id', Auth::id())
             ->get();
     }
-
-
-//     function getNewEpisodes()
-// {
-//     return Episode::orderBy('created_at', 'desc')
-//         ->limit(5)
-//         ->get();
-// }
-
-
-
-
-
-
-
-
     public function getSequence()
     {
         return $this->sequence;
@@ -95,13 +80,12 @@ class Episode extends Model
         return $this->likes()->where('user_id', $userId)->exists();
     }
 
-
-
     public function getDuration()
     {
         $getID3 = new \getID3;
 
         $audioPath = storage_path('app/public/' . str_replace("storage/", "", $this->audio_path));
+
         // Get the file extension
         $fileExtension = pathinfo($audioPath, PATHINFO_EXTENSION);
 
@@ -122,13 +106,12 @@ class Episode extends Model
                 $audioPath .= '.mp3';
                 break;
         }
-        $fileInfo = $getID3->analyze($audioPath);
+         $fileInfo = $getID3->analyze($audioPath);
         //handle error
         if (isset($fileInfo['error'])) {
             return '00:00';
         }
-
-        $playtimeString = $fileInfo['playtime_string'];
+         $playtimeString = $fileInfo['playtime_string'];
 
         // Convert "mm:ss" to "hh:mm:ss" format
         sscanf($playtimeString, "%d:%d", $minutes, $seconds);

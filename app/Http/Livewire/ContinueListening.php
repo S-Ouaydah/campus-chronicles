@@ -19,7 +19,7 @@ class ContinueListening extends Component
     public function mount()
     {
         $this->refreshEpsToContinue();
-       
+
     }
 
     public function render()
@@ -27,12 +27,12 @@ class ContinueListening extends Component
         $epsToContinue = $this->getEpsToContinue();
         $nextEpisodes = $this-> getNextToWatch();
 
-    
- 
+
+
         return view('livewire.continue-listening', [
             "epsToContinue" => $epsToContinue,
             "nextEpisodes" => $nextEpisodes,
-           
+
 
         ]);
     }
@@ -51,7 +51,7 @@ class ContinueListening extends Component
     public function getNextToWatch()
     {
         $userId = auth()->id();
-    
+
         $completedPodcasts = Listen::select('episodes.podcast_id')
             ->join('episodes', 'listens.episode_id', '=', 'episodes.id')
             ->where('listens.user_id', $userId)
@@ -59,9 +59,9 @@ class ContinueListening extends Component
             ->groupBy('episodes.podcast_id')
             ->pluck('episodes.podcast_id')
             ->toArray();
-    
+
         $nextEpisodes = [];
-        
+
         foreach ($completedPodcasts as $podcastId) {
             $latestListen = Listen::where('user_id', $userId)
                 ->where('isComplete', 1)
@@ -70,24 +70,24 @@ class ContinueListening extends Component
                 })
                 ->orderBy('created_at', 'desc')
                 ->first();
-    
+
             if ($latestListen) {
                 $sequence = $latestListen->episode->sequence;
-    
+
                 $nextEpisode = Episode::where('podcast_id', $podcastId)
                     ->where('sequence', '>', $sequence)
                     ->orderBy('sequence')
                     ->first();
-    
+
                 if ($nextEpisode) {
                     $nextEpisodes[] = $nextEpisode;
                 }
             }
         }
-    
+
         return $nextEpisodes;
     }
-    
+
 
     public function isNewEp($episodeId)
     {
@@ -102,21 +102,21 @@ class ContinueListening extends Component
 
         return false;
     }
-    
-    
-    
-    
-    
-    
-
-    public function removeFromContinue($listenId)
-    {
-        $listen = Listen::findOrFail($listenId);
-        $listen->delete();
-        $this->epsToContinue = $this->getEpsToContinue();
 
 
-    }
+
+
+
+
+
+    // public function removeFromContinue($listenId)
+    // {
+    //     $listen = Listen::findOrFail($listenId);
+    //     $listen->delete();
+    //     $this->epsToContinue = $this->getEpsToContinue();
+
+
+    // }
 
     public function refreshEpsToContinue()
     {

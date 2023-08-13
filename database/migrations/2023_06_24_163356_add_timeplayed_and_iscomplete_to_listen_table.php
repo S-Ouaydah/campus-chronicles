@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('listens', function (Blueprint $table) {
-            $table->time('time_played')->nullable();
+            $table->float('time_played')->nullable();
+            $table->float('ratio_played')->nullable();
             $table->boolean('isComplete')->default(false);
         });
     }
@@ -24,6 +25,7 @@ return new class extends Migration
     {
         Schema::table('listens', function (Blueprint $table) {
             $table->dropColumn('time_played');
+            $table->dropColumn('ratio_played');
             $table->dropColumn('isComplete');
         });
     }

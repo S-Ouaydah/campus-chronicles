@@ -45,7 +45,9 @@ Route::get('/history', function () {
     return view('history');
 })->name('history');
 
-Route::get('/profile',  [ProfileController::class, 'view'])->middleware(['auth'])->name('profile');
+Route::get('/profile/{id}',  [ProfileController::class, 'profile_view'])->name('profile.viewer');
+
+Route::get('/myprofile',  [ProfileController::class, 'view'])->middleware(['auth'])->name('profile');
 
 // Route::get('/category/{name}',[PodcastCategoryController::class, 'show' ]);
 

@@ -63,7 +63,7 @@
             },
         });
     </script>
-    <Style>
+    <style>
         .swiper-pagination-bullet-active {
             background-color: black;
             width: 16px;
@@ -77,10 +77,7 @@
 
         }
 
-        
-
-        .scrollbar-right::-webkit-scrollbar-track {}
-
+    
         .scrollbar-right::-webkit-scrollbar-thumb {
 
             background-color: #888;

@@ -8,8 +8,7 @@
     @elseif(empty($user->bio))
         <span wire:click="startEditing" class="opacity-75 hover:opacity-90 cursor-pointer select-none">Add Bio</span>
     @else
-        <div class="flex items-end p-0 m-0">
-
+        <div class="flex items-start p-0 m-0">
         <p  class=" opacity-90 m-0 max-w-[500px] truncate-6">{!! nl2br(e($bio)) !!}</p>
         <i wire:click="startEditing" class="ml-4 fa-solid fa-pen text-sm "></i>
         </div>
