@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            {{-- @livewire('continue-listening') --}}
+            @livewire('continue-listening')
             <div class="mt-10 select-none">
                 <h1 class="mt-20 text-xl font-medium">Recommended For You</h1>
                 <div class="swiper-container mt-5">
@@ -75,85 +75,70 @@
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
-
         @endauth
+    </div>
 
- <div class="mt-10 select-none">
-                <h1 class=" text-xl font-medium">Featured Podcast</h1>
+    <div class="mt-10 select-none">
+        <h1 class=" text-xl font-medium">Featured Podcast</h1>
         @livewire('featured-podcast')
+    </div>
+    <div class="mt-10 overflow-hidden select-none">
+        <h1 class="text-xl font-medium">Popular Podcasts</h1>
+        <div class="swiper-container">
+            <div class="swiper-wrapper flex gap-10 mt-5">
+                @foreach ($popularPodcasts as $podcast)
+                    <div class="swiper-slide relative m-0 h-[167px] w-[250px] xl:h-[200px] xl:w-[300px]">
+                        <a href="{{ route('podcast.show', $podcast->id) }}">
+                            <div
+                                class="h-[167px] w-[250px] xl:h-[200px] xl:w-[300px] rounded-xl bg-cover px-6 py-6 absolute bg-black">
+                                <p class="relative text-white opacity-70 h-full text-xs xl:text-sm">
+                                    {{ $podcast->description }}
+                                </p>
+                            </div>
+                            <div class="h-[167px] w-[250px] xl:h-[200px] xl:w-[300px] rounded-xl bg-cover flex justify-end flex-col px-6 py-6 absolute hover:opacity-0"
+                                style="background-image: url('{{ asset($podcast->image_url) }}');">
+                                <h2 class="relative text-white text-lg xl:text-xl font-medium">
+                                    {{ $podcast->title }}
+                                </h2>
+                                <p class="relative text-white text-sm xl:text-xl opacity-80">
+                                    {{ $podcast->creator->name }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+            <div class="swiper-pagination"></div>
         </div>
+    </div>
 
-        <div class="mt-10 overflow-hidden select-none">
-            <h1 class="text-xl font-medium">Popular Podcasts</h1>
-            <div class="swiper-container">
-                <div class="swiper-wrapper flex gap-10 mt-5">
-                    @foreach ($popularPodcasts as $podcast)
-                        <div class="swiper-slide relative m-0 h-[167px] w-[250px] xl:h-[200px] xl:w-[300px]">
-                            <a href="{{ route('podcast.show', $podcast->id) }}">
-                                <div
-                                    class="h-[167px] w-[250px] xl:h-[200px] xl:w-[300px] rounded-xl bg-cover px-6 py-6 absolute bg-black">
-                                    <p class="relative text-white opacity-70 h-full text-xs xl:text-sm">
-                                        {{ $podcast->description }}
-                                    </p>
-                                </div>
-                                <div class="h-[167px] w-[250px] xl:h-[200px] xl:w-[300px] rounded-xl bg-cover flex justify-end flex-col px-6 py-6 absolute hover:opacity-0"
-                                    style="background-image: url('{{ asset($podcast->image_url) }}');">
-                                    <h2 class="relative text-white text-lg xl:text-xl font-medium">
-                                        {{ $podcast->title }}
-                                    </h2>
-                                    <p class="relative text-white text-sm xl:text-xl opacity-80">
-                                        {{ $podcast->creator->name }}
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
+
+
+    <div class="mt-20 w-full h-[250px]  bg-[#C0EE9B]  rounded-3xl flex  gap-20 select-none">
+        <div class="ml-20 flex flex-col justify-end"><img class="h-[225px] " src="{{ asset('storage/da.png') }}">
+        </div>
+        <div class="text-2xl font-bold flex flex-col justify-center gap-5">
+            <h4>Become a Creator and share your experience on Champus Chronicles now.</h4>
+            @auth
+                <p class=" text-xl font-medium">Switch your email to isae and start the grind!!</p>
+                <div class="inline-block">
+                    <a href="{{ route('settings.edit') }}"
+                        class="bg-black text-white font-medium text-lg px-6 py-3 rounded-xl">Edit your Email</a>
                 </div>
-                <div class="swiper-pagination"></div>
-            </div>
+            @endauth
+            @guest
+                <p class="mt-4 text-xl font-medium">Sign up with your isae account and start the grind!!</p>
+                <div class="inline-block">
+                    <a href="{{ route('register') }}"
+                        class="bg-black text-white font-medium text-lg px-6 py-3 rounded-xl">Register</a>
+                </div>
+            @endguest
         </div>
 
 
+    </div>
 
-        <div class="mt-20 w-full h-[250px]  bg-[#C0EE9B]  rounded-3xl flex  gap-20 select-none">
-            <div class="ml-20 flex flex-col justify-end"><img class="h-[225px] " src="{{ asset('storage/da.png') }}">
-            </div>
-            <div class="text-2xl font-bold flex flex-col justify-center gap-5">
-                <h4>Become a Creator and share your experience on Champus Chronicles now.</h4>
-                @auth
-                    <p class=" text-xl font-medium">Switch your email to isae and start the grind!!</p>
-                    <div class="inline-block">
-                        <a href="{{ route('settings.edit') }}"
-                            class="bg-black text-white font-medium text-lg px-6 py-3 rounded-xl">Edit your Email</a>
-                    </div>
-                @endauth
-                @guest
-                    <p class="mt-4 text-xl font-medium">Sign up with your isae account and start the grind!!</p>
-                    <div class="inline-block">
-                        <a href="{{ route('register') }}"
-                            class="bg-black text-white font-medium text-lg px-6 py-3 rounded-xl">Register</a>
-                    </div>
-                @endguest
-            </div>
+    @livewire('categories-swiper')
 
 
-        </div>
-
-        @livewire('categories-swiper')
-
-        {{-- <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                @if ($categories)
-                    @include('partials.explore-categories')
-                @else
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <h2 class="text-lg font-medium text-gray-900 p-4">
-                            {{ __('There\'s no categories') }}
-                        </h2>
-
-                    </div>
-                @endif
-            </div>
-
-        </div> --}}
 </x-app-layout>

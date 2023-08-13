@@ -35,6 +35,11 @@ player.on("pause", (event) => {
     console.log("inside pause");
     document.dispatchEvent(new Event("Ppause", { bubbles: true }));
 });
+player.on("ended", (event) => {
+    const instance = event.detail.plyr;
+    console.log("inside ended");
+    document.dispatchEvent(new Event("Pended", { bubbles: true }));
+});
 
 function tryPlay(player) {
     var playPromise = player.play();

@@ -29,7 +29,7 @@
                                     </div>
                                 </div>
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                    <i class="fa-solid fa-play text-[#71C719]  opacity-95 hover:opacity-100 text-6xl"  wire:click="$emit('playAudio', '{{ $episode->audio_path }}', {{ $episode->id }}, '{{ $episode->podcast->image_url }}')"></i>
+                                    <i class="fa-solid fa-play text-[#71C719]  opacity-95 hover:opacity-100 text-6xl"  wire:click="$emit('playAudio', '{{ $episode->audio_path }}', {{ $episode->id }}, '{{ $episode->podcast->image_url }}',0)"></i>
                                 </div>
                             </div>
 

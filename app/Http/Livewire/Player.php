@@ -14,22 +14,20 @@ class Player extends Component
     public $episodeTitle;
     public $imageUrl;
     public $durationPlayed;
-    public $timePlayed;
+    // public $timePlayed;
     public $playing;
     public $position;
 
-    protected $listeners = ['playAudio', 'continueAudio', 'saveProgress'];
+    protected $listeners = ['playAudio', 'saveProgress'];
 
 
     public function mount()
     {
-        // $this->durationPlayed = 0; // Initialize durationPlayed to 0
         $this->getCookie();
-        // $this->playAudio($this->audio,$this->episodeId,$this->imageUrl);
 
     }
 
-    public function playAudio($audioPath, $episodeId, $imageUrl)
+    public function playAudio($audioPath, $episodeId, $imageUrl, $position)
     {
         if ($audioPath == null || $this->audio == $audioPath) {
             return;
@@ -37,61 +35,44 @@ class Player extends Component
         $this->audio = $audioPath;
         $this->episodeId = $episodeId;
         $this->imageUrl = $imageUrl;
+        $this->position = $position;
     }
 
-    public function continueAudio($audioPath, $episodeId, $imageUrl, $timePlayed)
+    public function saveProgress($totalTime,$source,$episodeId,$imageUrl,$playing,$position)
     {
-        if ($audioPath == null || $this->audio == $audioPath) {
-            return;
-        }
-        $this->audio = $audioPath;
-        $this->episodeId = $episodeId;
-        $this->imageUrl = $imageUrl;
-        $this->timePlayed = $timePlayed;
-    }
-
-    public function saveProgress($timePlayed, $totalTime, $completed,$source,$episodeId,$imageUrl,$playing,$position)
-    {
-        $this->durationPlayed = $timePlayed;
 
         $this->setCookie($episodeId, $source, $imageUrl,$playing,$position);
 
-        if (Auth::check()) {
+        if (Auth::check() && $totalTime > 0) {
             $userId = Auth::id();
-            $timeColumn = 'time_played';
+            $posColumn = 'time_played';
 
-            if ($this->episodeId && $this->durationPlayed >= 10) {
-                $listen = Listen::where('user_id', $userId)
-                    ->where('episode_id', $this->episodeId)
-                    ->whereRaw("TIME_TO_SEC($timeColumn) < ?", [$totalTime - 1])
-                    ->first();
+            $ratio = $position / $totalTime;
+            $completed = $ratio >= 0.99;
 
-                if ($listen) {
-                    // Update the existing row
-                    $listen->isComplete = $completed;
+            if ($this->episodeId && $position >= 10) {
+
+                $listen = Listen::firstOrNew([
+                    'user_id' => $userId,
+                    'episode_id' => $this->episodeId,
+                ]);
+
+                if (!$listen->isComplete) {
                     if ($completed) {
-                        $listen->time_played = gmdate('H:i:s', $this->durationPlayed + 1);
-                    } else {
-                        $listen->time_played = gmdate('H:i:s', $this->durationPlayed);
-                    }
-
-
-
-                    $listen->save();
-                    if ($this->durationPlayed === $totalTime)
-                        return;
-                } else {
-                    // Create a new row
-                    if ($this->durationPlayed < $totalTime) {
-                        Listen::create([
-                            'user_id' => $userId,
-                            'episode_id' => $this->episodeId,
-                            'time_played' => $this->durationPlayed,
-                            'isComplete' => $completed,
-                        ]);
+                        $listen->isComplete = true;
+                        $listen->time_played = $totalTime;
+                        $listen->ratio_played = 1;
+                        // $listen->completed_at = now();
+                    } elseif ($position > $listen->time_played) {
+                            $listen->ratio_played = $ratio;
+                            $listen->time_played = $position;
                     }
                 }
+
+                $listen->save();
             }
+        }else{
+            dd($totalTime,$source,$episodeId,$imageUrl,$playing,$position);
         }
     }
 
@@ -104,7 +85,6 @@ class Player extends Component
             $this->imageUrl = $cookie->imgUrl;
             $this->playing = $cookie->playing;
             $this->position = $cookie->position;
-            // $this->playAudio($this->audio,$this->episodeId,$this->imageUrl);
         }
     }
 
@@ -116,7 +96,7 @@ class Player extends Component
             'playing' => $playing,
             'position' => $position,
         ];
-        Cookie::queue('plyrCookie', json_encode($cookieValues), 3600*8); //valid for 8 hours
+        Cookie::queue('plyrCookie', json_encode($cookieValues), 3600*8); //for 8 hours
 
     }
 

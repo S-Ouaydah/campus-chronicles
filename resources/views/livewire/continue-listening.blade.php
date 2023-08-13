@@ -11,15 +11,15 @@
                 <div class="bg-[#D9D9D9] w-[600px] h-[250px] mt-3 rounded-3xl flex">
                     <div class="w-[40%] bg-black rounded-s-3xl bg-cover"
                         style="background-image: url('{{ asset($episode->episode->podcast->image_url) }}');"
-                        wire:click="$emit('continueAudio','{{ $episode->episode->audio_path }}', {{ $episode->episode_id }}, '{{ $episode->episode->podcast->image_url }}', {{ strtotime($episode->time_played) - strtotime('00:00:00') }})">
+                        wire:click="$emit('playAudio','{{ $episode->episode->audio_path }}', {{ $episode->episode_id }}, '{{ $episode->episode->podcast->image_url }}', {{ $episode->time_played}})">
                     </div>
                     <div class=" w-[60%]">
                         <div class="p-5 flex flex-col justify-between h-full">
                             <div class=" flex flex-col justify-between">
                                 <div class="flex justify-between w-[100%]">
                                     <h4 class="font-medium text-lg">Episode {{ $episode->episode->sequence }} :</h4>
-                                    <i wire:click="removeFromContinue({{ $episode->id }})"
-                                        class="fa-solid fa-xmark leading-none opacity-80 hover:opacity-100"></i>
+                                    {{-- <i wire:click="removeFromContinue({{ $episode->id }})"
+                                        class="fa-solid fa-xmark leading-none opacity-80 hover:opacity-100"></i> --}}
                                 </div>
 
                                 <h4 class="font-medium text-lg ">{{ $episode->episode->title }}</h4>
@@ -32,7 +32,8 @@
                                 <div class="w-[100%] h-2 flex justify-start bg-[#C0EE9B] mt-2 ">
 
                                     <div class="h-2 bg-black  "
-                                        style="width: {{ ((strtotime($episode->time_played) - strtotime('00:00:00')) / (strtotime($episode->episode->getDuration()) - strtotime('00:00:00'))) * 100 }}%;">
+                                        {{-- style="width: {{$listen->ratio * 100 }}%;" --}}
+                                        >
                                     </div>
 
 
@@ -64,7 +65,7 @@
                                 </div>
                                 <div class="flex gap-3 items-center">
                                     <div class="bg-black p-4 !h-12 !w-12 flex justify-center items-center rounded-lg">
-                                        <i class="leading-0 fa-solid fa-play text-white text-center opacity-90 hover:opacity-100 text-lg" wire:click="$emit('playAudio', '{{ $episode->audio_path }}', {{ $episode->id }}, '{{ $episode->podcast->image_url }}')"></i>
+                                        <i class="leading-0 fa-solid fa-play text-white text-center opacity-90 hover:opacity-100 text-lg" wire:click="$emit('playAudio', '{{ $episode->audio_path }}', {{ $episode->id }}, '{{ $episode->podcast->image_url }}',0)"></i>
                                     </div>
                                     <div>
                                         <p class="text-white text-lg font-medium w-[275px] truncate">{{ $episode->podcast->title }}</p>
@@ -84,7 +85,7 @@
     </div>
 
 </div>
-@push('scripts')
+{{-- @push('scripts') CAUSES ERRORS, SWIPER SHOULD BE REMOVED ANYWAYS
     <script>
         setInterval(function() {
             var excludeContainer = document.querySelector('.pickup-swiper-container');
@@ -93,8 +94,8 @@
 
         var swiper = new Swiper('.pickup-swiper-container', {
             slidesPerView: 'auto',
-            
+
             // Add more options as needed
         });
     </script>
-@endpush
+@endpush --}}

@@ -62,6 +62,7 @@ class Episode extends Model
     {
         return $this->belongsToMany(User::class, 'listens');
     }
+
     //FIXME - shouldnt this be in users instead of episodes? / no bc you getting episode info not user info
     public static function getLikesByCurrentUser()
     {
@@ -69,21 +70,6 @@ class Episode extends Model
             ->where('likes.user_id', Auth::id())
             ->get();
     }
-
-
-//     function getNewEpisodes()
-// {
-//     return Episode::orderBy('created_at', 'desc')
-//         ->limit(5)
-//         ->get();
-// }
-
-
-
-
-
-
-
 
     public function getSequence()
     {
@@ -94,8 +80,6 @@ class Episode extends Model
     {
         return $this->likes()->where('user_id', $userId)->exists();
     }
-
-
 
     public function getDuration()
     {
@@ -123,21 +107,25 @@ class Episode extends Model
                 $audioPath .= '.mp3';
                 break;
         }
-        $fileInfo = $getID3->analyze($audioPath);
-        $playtimeString = $fileInfo['playtime_string'];
+        if (file_exists($audioPath)) {
+            $fileInfo = $getID3->analyze($audioPath);
+            $playtimeString = $fileInfo['playtime_string'];
 
-        // Convert "mm:ss" to "hh:mm:ss" format
-        sscanf($playtimeString, "%d:%d", $minutes, $seconds);
-        $hours = 0;
+            // Convert "mm:ss" to "hh:mm:ss" format
+            sscanf($playtimeString, "%d:%d", $minutes, $seconds);
+            $hours = 0;
 
-        if ($minutes >= 60) {
-            $hours = floor($minutes / 60);
-            $minutes = $minutes % 60;
+            if ($minutes >= 60) {
+                $hours = floor($minutes / 60);
+                $minutes = $minutes % 60;
+            }
+
+            $duration = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+
+            return $duration;
+        }else{
+            return "00:00:00";
         }
-
-        $duration = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
-
-        return $duration;
     }
 
 

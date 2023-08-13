@@ -25,7 +25,7 @@
                 <div class="w-full h-[80px]  flex  justify-between items-center text-white">
                     <div class="flex ">
                         <div class="relative w-[45px] h-[45px]"
-                            wire:click="$emit('playAudio', '{{ $episode->audio_path }}', {{ $episode->id }}, '{{ $episode->podcast->image_url }}')">
+                            wire:click="$emit('playAudio', '{{ $episode->audio_path }}', {{ $episode->id }}, '{{ $episode->podcast->image_url }}',0)">
                             <div
                                 class="w-[45px] h-[45px]  rounded bg-cover absolute bg-[#C0EE9B] flex items-center justify-center ">
                                 <i class="fa fa-play fa-stack-1x fa-inverse text-black leading-0 "></i>
