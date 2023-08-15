@@ -76,7 +76,7 @@
                 </div>
             </div>
         @endauth
-    </div>
+    
 
     <div class="mt-10 select-none">
         <h1 class=" text-xl font-medium">Featured Podcast</h1>
@@ -139,6 +139,7 @@
     </div>
 
     @livewire('categories-swiper')
+    </div>
 
 
 </x-app-layout>

@@ -26,8 +26,8 @@
 
         <div class="flex flex-col w-full sm:flex-row sm:w-[90%] lg:w-[70%] xl:w-[55%] 3xl:w-[45%] sm:h-[700px] sm:mt-6 shadow-md rounded-none sm:rounded-3xl">
             <img class="w-full sm:w-[50%]  sm:rounded-s-3xl object-cover"
-             src="{{ asset('auth-pic5.jpg') }}">
-            <div class="w-full sm:w-[50%]  px-[8%] py-16 bg-white  overflow-hidden rounded-none sm:rounded-e-3xl flex flex-col justify-center ">
+             src="{{ asset('auth-pic.jpg') }}">
+            <div class="w-full sm:w-[50%]  px-[8%] py-8 xl:py-16 bg-white  overflow-hidden rounded-none sm:rounded-e-3xl flex flex-col justify-center ">
 
                 {{ $slot }}
             </div>
