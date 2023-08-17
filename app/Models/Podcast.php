@@ -40,4 +40,17 @@ class Podcast extends Model
     {
         return $this->episodes()->get();
     }
+
+    public static function getPodTitle($id)
+    {
+        // Assuming Podcast model has a 'title' column and you're using Eloquent
+        $podcast = Podcast::find($id);
+
+        if ($podcast) {
+            return $podcast->title;
+        }
+
+        // Return a default value or an error message if the podcast is not found
+        return 'Podcast not found';
+    }
 }

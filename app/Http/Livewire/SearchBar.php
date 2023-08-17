@@ -2,14 +2,17 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Episode;
 use App\Models\Podcast;
+use App\Models\User;
 use Livewire\Component;
 
 class SearchBar extends Component
 {
     public $query;
     public $podcasts;
-    // public $highlightindex;
+    public $episodes;
+    public $creators;
 
     public function mount()
     {
@@ -23,28 +26,16 @@ class SearchBar extends Component
         // $this->highlightindex = 0;
     }
 
-    // public function incrementHighlight()
-    // {
-    //     if ($this->highlightindex === count($this->podcasts) - 1) {
-    //         $this->highlightindex =0;
-    //         return;
-    //     }
-    //     $this->highlightindex++;
-    // }
-
-    // public function decrementHighlight()
-    // {
-    //     if ($this->highlightindex === 0) {
-    //         $this->highlightindex = count($this->podcasts) - 1;
-    //         return;
-    //     }
-    //     $this->highlightindex--;
-    // }
-
     public function updatedQuery()
     {
         // sleep(2);  data delay testing
         $this->podcasts = Podcast::whereRaw('lower(title) like ?', ['%' . strtolower($this->query) . '%'])
+            ->get()
+            ->toArray();
+        $this->episodes = Episode::whereRaw('lower(title) like ?', ['%' . strtolower($this->query) . '%'])
+            ->get()
+            ->toArray();
+        $this->creators = User::whereRaw('lower(name) like ?', ['%' . strtolower($this->query) . '%'])
             ->get()
             ->toArray();
     }

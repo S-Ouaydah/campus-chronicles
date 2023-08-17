@@ -5,7 +5,7 @@
 
     </label>
     {{-- Bind $profilePicture --}}
-    <input id="profilePicture"  type="file" class="hidden" wire:model="profilePicture"  >
+    <input id="profilePicture"  type="file" accept="image/*,image/gif" class="hidden" wire:model="profilePicture"  >
 
     <div id="profile-picture-upload" class=" bg-cover h-[220px] w-[220px] rounded-full" style="background-image: url('{{ asset($pfpPath) }}');"></div>
 

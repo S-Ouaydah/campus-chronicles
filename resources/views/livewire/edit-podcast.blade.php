@@ -8,7 +8,7 @@
                 <label for="podPic" class="cursor-pointer">
                     <i class="fa-solid fa-camera bg-[#121212] hover:bg-[#151515] leading-none p-3 rounded-full text-white text-2xl m-0 absolute bottom-[20px] right-[20px]"></i>
                 </label>
-                <input id="podPic" type="file" class="hidden" wire:model="podPic">
+                <input id="podPic" type="file" accept="image/*,image/gif" class="hidden" wire:model="podPic">
             </div>
             <div class="relative w-2/3 px-1/12 flex flex-col ">
                 @Auth()

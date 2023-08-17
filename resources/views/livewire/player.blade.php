@@ -30,7 +30,7 @@
     }
 
     document.addEventListener("Pready", function(event) {
-        console.log("Hello from " +  @js($playing));
+        console.log("Hello from " +  @js($position));
         player.forward(@js($position))
         if (@js($playing)) {
             player.play();
