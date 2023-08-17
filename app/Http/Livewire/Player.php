@@ -11,10 +11,8 @@ class Player extends Component
 {
     public $audio;
     public $episodeId;
-    public $episodeTitle;
     public $imageUrl;
     public $durationPlayed;
-    // public $timePlayed;
     public $playing;
     public $position;
 
@@ -71,8 +69,6 @@ class Player extends Component
 
                 $listen->save();
             }
-        }else{
-            dd($totalTime,$source,$episodeId,$imageUrl,$playing,$position);
         }
     }
 
@@ -89,10 +85,17 @@ class Player extends Component
     }
 
     public function setCookie($episodeId, $audioPath, $imgUrl,$playing,$position) {
+        // This is a dirty dirty hack
+        $audio = str_replace(['http://localhost:8000/', '.mp3'], '', $audioPath);
+        if ($audioPath != null && $this->audio != $audio) {
+            $episode = \App\Models\Episode::where('audio_path', $audio)->first();
+            $this->episodeId = $episode?->id;
+            $this->imageUrl = $episode?->podcast->image_url;
+        }
         $cookieValues = [
             'audio_path' => $audioPath,
-            'episodeId' => $episodeId,
-            'imgUrl' => $imgUrl,
+            'episodeId' => $this->episodeId,
+            'imgUrl' => $this->imageUrl,
             'playing' => $playing,
             'position' => $position,
         ];
@@ -106,6 +109,7 @@ class Player extends Component
         return view('livewire.player', [
             'source' => asset($this->audio),
             'episodeId' => $this->episodeId,
+            'episodeTitle' => $this->episodeId ? \App\Models\Episode::find($this->episodeId)->title : null,
             'imageUrl' => $this->imageUrl,
         ]);
     }

@@ -19,6 +19,14 @@
     white-space: normal !important;
  }
 }
+.truncate-1{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+}
 .truncate-3 {
     @apply truncate;
     display: -webkit-box;

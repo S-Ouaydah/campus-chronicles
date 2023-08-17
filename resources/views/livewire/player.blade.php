@@ -1,5 +1,6 @@
 <div class="w-full fixed bottom-0 flex flex-nowrap h-12 z-10" >
     <img src="{{ asset($imageUrl) }}" class="contain h-12 w-12">
+    <h4 class="font-medium p-3 max-w-[200px] truncate-1 bg-white">{{ $episodeTitle }}</h4>
 
     <div class="flex-grow " wire:ignore>
         <audio crossorigin playsinline id="audioPlayer">
@@ -64,13 +65,13 @@
                 },
             ],
         };
-       
+
         player.play();
              setTimeout(function() {
                 player.currentTime = position; // Set the current time to the desired time played
                 player.play();
             }, 100);
-        
+
     });
 </script>
 @endpush
