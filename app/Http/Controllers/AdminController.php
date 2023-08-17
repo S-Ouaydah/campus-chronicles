@@ -45,7 +45,7 @@ class AdminController extends Controller
         if ($formData->save()) {
             return redirect('/admindashboard')->with('success', 'Form submitted successfully!');
         }
-        return redirect('/admindashboard')->flash('error', 'an error has occured!');
+        return redirect('/admindashboard')->with('error', 'an error has occured!');
 
     }
 
@@ -85,14 +85,14 @@ class AdminController extends Controller
     {
         $category->delete();
         
-        return Redirect::route('admindashboard');
+        return Redirect::route('admindashboard')->with('success', 'Deleted successfully!');
     }
 
     public function destroy_user(User $user)
     {
         $user->delete();
         
-        return Redirect::route('admindashboard');
+        return Redirect::route('admindashboard')->with('success', 'Deleted successfully!');
     }
 
 }

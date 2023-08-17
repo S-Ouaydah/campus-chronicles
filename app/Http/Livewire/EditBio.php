@@ -48,11 +48,12 @@ class EditBio extends Component
         //     'bio' => ['nullable', 'max:512']
         //     ]);
         $this->user->bio = $this->bio;
-        $this->user->save();
+        if($this->user->save()){
+            flash('saved successfully!', 'success');
+        };
 
         $this->originalBio = $this->bio;
         $this->editing = false;
-
     }
 
 

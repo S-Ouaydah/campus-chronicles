@@ -37,7 +37,9 @@ class UpdateUserProfilePicture extends Component
         // Store the new profile picture
         $newProfilePicture = $this->profilePicture->store('public/user_profiles');
         $user->pfp_path = "storage/user_profiles/". basename($newProfilePicture);
-        $user->save();
+        if($user->save()){
+            flash('picture updated successfully!', 'success');
+        };
 
         // Emit an event to refresh the parent component
         $this->emit('profilePictureUpdated');

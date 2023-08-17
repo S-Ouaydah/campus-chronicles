@@ -11,6 +11,7 @@
                 <input id="podPic" type="file" class="hidden" wire:model="podPic">
             </div>
             <div class="relative w-2/3 px-1/12 flex flex-col ">
+                @Auth()
                 @if (auth()->user()->isISAE && auth()->user()->id == $podcast->creator_id)
                     <button wire:click="discard" class="absolute right-0 m-12 px-6 btn btn-primary">
                         Discard
@@ -23,6 +24,7 @@
                 <p class="text-xl">by {{ $podcast->creator->name }}</p>
                 <button wire:click="save" class="btn btn-primary px-2 my-2 bg-primary-base">Save</button>
                 @endif
+                @endauth
             </div>
         </form>
     @else
@@ -33,11 +35,13 @@
                     alt="podcast image">
             </div>
             <div class="relative w-2/3 px-1/12 flex flex-col ">
+                @Auth
                 @if (auth()->user()->isISAE && auth()->user()->id == $podcast->creator_id)
                     <button wire:click="edit" class="absolute right-0 m-12 px-6 btn btn-primary">
                         Edit
                     </button>
                 @endif
+                @endauth
                 <h1 class="text-4xl pt-12 pb-3 font-medium">{{ $podcast->title }}</h1>
                 <div class="mt-3">
                     <p class="text-md h-full overflow-hidden truncate-6 md:truncate-none ">{{ $podcast->description }}</p>

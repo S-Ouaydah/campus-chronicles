@@ -71,8 +71,6 @@ class Player extends Component
 
                 $listen->save();
             }
-        }else{
-            dd($totalTime,$source,$episodeId,$imageUrl,$playing,$position);
         }
     }
 

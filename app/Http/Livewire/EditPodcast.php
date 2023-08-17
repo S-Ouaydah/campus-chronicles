@@ -75,7 +75,7 @@ class EditPodcast extends Component
         $newPodPic = $this->podPic->store('public/podcast-pics');
         $this->podcast->image_url = "storage/podcast-pics/". basename($newPodPic);
         $this->podcast->save();
-
+        flash('picture updated successfully!', 'success');
 
      }
     public function render()
