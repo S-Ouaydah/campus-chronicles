@@ -64,12 +64,13 @@
                 },
             ],
         };
-        // starting from a position is not working... (so i have not bothered fixing **continue-listening.blade.php**)
-        player.currentTime = position+30;
-        player.forward(position+30);
-        console.log(position+30 + "pos")
-        console.log(player.currentTime + "currtime")
+       
         player.play();
+             setTimeout(function() {
+                player.currentTime = position; // Set the current time to the desired time played
+                player.play();
+            }, 100);
+        
     });
 </script>
 @endpush
