@@ -6,9 +6,12 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Models\Podcast;
 use App\Models\PodcastCategory;
+use App\Models\Listen;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -41,12 +44,74 @@ class DashboardController extends Controller
      */
     public function show()
     {
+
+
         $categories = PodcastCategory::all();
-        $podcasts = Podcast::where( 'creator_id', Auth::user()->id )->get();
-        return view('dashboard',[
+        $podcasts = Podcast::where('creator_id', Auth::user()->id)
+            ->orderBy('created_at', 'desc') // Order by 'created_at' column in descending order
+            ->get();
+        $podcastIds = Podcast::where('creator_id', auth()->id())->pluck('id');
+        $countPods = $podcasts->count();
+
+        // Get the total number of listens for the episodes in the creator's podcasts
+        $totalListensThisWeek = Listen::whereIn('episode_id', function ($query) use ($podcastIds) {
+            $query->select('id')
+                ->from('episodes')
+                ->whereIn('podcast_id', $podcastIds);
+        })
+            ->whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()]) // Filter listens within the past week
+            ->count();
+
+        $totalListensLastWeek = Listen::whereIn('episode_id', function ($query) use ($podcastIds) {
+            $query->select('id')
+                ->from('episodes')
+                ->whereIn('podcast_id', $podcastIds);
+        })
+            ->whereBetween('created_at', [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]) // Filter listens within the previous week
+            ->count();
+
+
+
+        $totalSubscriptions = Podcast::where('creator_id', auth()->id())->sum('subscriber_count');
+
+        $totalSubscriptionsThisWeek = Podcast::where('creator_id', auth()->id())
+            ->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+            ->sum('subscriber_count');
+
+
+        $percentageChange = 0;
+        if ($totalListensLastWeek != 0) {
+            $percentageChange = (($totalListensThisWeek - $totalListensLastWeek) / $totalListensLastWeek) * 100;
+        }
+
+        $totalLikes = DB::table('likes')
+            ->join('episodes', 'likes.episode_id', '=', 'episodes.id')
+            ->join('podcasts', 'episodes.podcast_id', '=', 'podcasts.id')
+            ->where('podcasts.creator_id', auth()->id())
+            ->count();
+
+        $totalLikesThisWeek = DB::table('likes')
+            ->join('episodes', 'likes.episode_id', '=', 'episodes.id')
+            ->join('podcasts', 'episodes.podcast_id', '=', 'podcasts.id')
+            ->where('podcasts.creator_id', auth()->id())
+            ->whereBetween('likes.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+            ->count();
+
+
+
+        return view('dashboard', [
             'categories' => $categories,
             'podcasts' => $podcasts,
+            'totalListensThisWeek' => $totalListensThisWeek,
+            'totalSubscriptions' => $totalSubscriptions,
+            'countPods' => $countPods,
+            'percentageChange' => $percentageChange,
+            'totalSubscriptionsThisWeek' => $totalSubscriptionsThisWeek,
+            'totalLikes' => $totalLikes,
+            'totalLikesThisWeek' => $totalLikesThisWeek,
         ]);
+
+
     }
 
     /**
