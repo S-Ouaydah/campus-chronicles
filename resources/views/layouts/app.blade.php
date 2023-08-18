@@ -43,7 +43,7 @@
         <main>
             {{ $slot }}
         </main>
-        <div class=" mt-20 bg-black mx-[5%]  3xl:mx-[10%]  h-[300px] rounded-t-3xl"></div>
+        {{-- <div class=" mt-20 bg-black mx-[5%]  3xl:mx-[10%]  h-[300px] rounded-t-3xl"></div> --}}
     </div>
 
     

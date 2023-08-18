@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="bg-black pl-8">
+    <div class="bg-[#0c0c0d] pl-8">
         <div class="relative p-1/12 flex items-center">
 
             @livewire('update-user-profile-picture')
