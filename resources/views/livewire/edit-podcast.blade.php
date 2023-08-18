@@ -47,7 +47,7 @@
                     <p class="text-md h-full overflow-hidden truncate-6 md:truncate-none ">{{ $podcast->description }}</p>
                 </div>
                 {{-- NOTE add profile pic --}}
-                <p class="text-xl mt-3">by {{ $podcast->creator->name }}</p>
+                <a class="text-xl mt-3" href="{{ route('profile.viewer', $podcast->creator->id) }}">by {{ $podcast->creator->name }}</a>
                 <livewire:subscribe-button :currentPage="'other-page'" :podcastId="$podcast->id" />
 
 

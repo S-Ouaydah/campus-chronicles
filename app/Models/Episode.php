@@ -19,12 +19,13 @@ class Episode extends Model
             'podcast_id',
             'audio_path',
             'sequence',
+            'creator_id',
         ];
     public static function getTitle($id)
     {
         return Episode::find($id)->title;
     }
-    
+
     public function podcast()
     {
         return $this->belongsTo(Podcast::class);

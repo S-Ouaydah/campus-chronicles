@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Episode;
 use App\Models\Podcast;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class EpisodeController extends Controller
 {
@@ -21,9 +23,23 @@ class EpisodeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($validatedData)
     {
-        //
+        $currentUser = Auth::user();
+
+        $epcount = Podcast::find($validatedData['podcast_id'])->episodes->count() + 1;
+        $filename = $validatedData['podcast_id'] . "_" . $epcount;
+
+        $episode = new Episode([
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
+            'podcast_id' => $validatedData['podcast_id'],
+            'sequence' => $epcount,
+            'audio_path' => "storage/audio_paths/" . $filename,
+            'creator_id' => $currentUser->id,
+        ]);
+
+        return $episode;
     }
 
     /**
@@ -31,41 +47,34 @@ class EpisodeController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-            'podcast_id' => 'required|exists:podcasts,id',
-        ]);
-        $currentuser = Auth::user();
-        $formData = new Episode();
-        
-        $formData->creator_id = $currentuser->id;
-        $formData->title = $validatedData['title'];
-        $formData->description = $validatedData['description'];
-        $formData->podcast_id = $validatedData['podcast_id'];
-        
-        $epcount = Podcast::find($formData->podcast_id)->episodes->count() + 1;
-        $filename = $validatedData['podcast_id'] . "_" . $epcount;
-        // get sequence from podcast_id nb of episodes
-        $formData->sequence = $epcount;
+        try {
+            $validatedData = $request->validate([
+                'title' => ['required',Rule::unique('episodes')->where(function ($query) use ($request) {
+                    return $query->where('podcast_id', $request->input('podcast_id'));
+                })],
+                'description' => 'required',
+                'podcast_id' => 'required|exists:podcasts,id',
+                'audio_file' => 'required|file|mimetypes:audio/mpeg',
+            ]);
+            $file = $request->file('audio_file');
+            $epcount = Podcast::find($validatedData['podcast_id'])->episodes->count() + 1;
+            $filename = $validatedData['podcast_id'] . "_" . $epcount;
 
+            $episode = $this->create($validatedData);
 
-        $formData->audio_path = "storage/audio_paths/" . $filename;
+            $file = $request->file('audio_file');
+            $filename = "{$episode->podcast_id}_{$episode->sequence}";
 
-
-        // Get the file object
-        $file = $request->file('audio_file');
-
-        // Save the file to storage with a specific filename
-        if (!Storage::putFileAs('public/audio_paths', $file, $filename.'.mp3')) {
-            //err handling
+            if (Storage::putFileAs('public/audio_paths', $file, $filename)) {
+                if (!$episode->save()) {
+                    flash()->addError('An error occurred while saving the episode!');
+                }
+            } else {
+                flash()->addError('An error occurred during file saving!');
+            }
+        } catch (ValidationException $e) {
+            flash()->addError('An error occurred, check the information entered!');
         }
-
-        if ($formData->save()) {
-            flash()->addSuccess('Form submitted successfully!');
-            return redirect('/dashboard');
-        }
-        flash()->addError('An error has occured!');
         return redirect('/dashboard');
     }
 
