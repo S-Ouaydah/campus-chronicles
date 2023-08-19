@@ -1,17 +1,20 @@
-<div class="swiper-slide relative h-[167px] w-[250px] xl:h-[200px] xl:w-[300px] mb-5">
-    <a href="{{ route('podcast.show', $podcast->id) }}">
-        <div class="h-[167px] w-[250px] xl:h-[200px] xl:w-[300px] rounded-xl bg-cover px-6 py-6 absolute bg-black">
-            <p class="relative text-white opacity-70 h-full text-xs xl:text-sm">
-                {{ $podcast->description }}
-            </p>
+<div class=" relative  h-[275px] ">
+<a href="{{ route('podcast.show', $podcast->id) }}" class="block w-full h-full">
+    <div class="relative h-[275px]  bg-black rounded-xl overflow-hidden">
+        <div class="h-[275px] absolute inset-0 px-4 sm:px-6 py-4 sm:py-6 rounded-xl bg-opacity-70 bg-black">
+            <p class="text-white text-xs sm:text-sm xl:text-base">{{ $podcast->description }}</p>
         </div>
-        <div class="h-[167px] w-[250px] xl:h-[200px] xl:w-[300px] rounded-xl bg-cover flex justify-end flex-col px-6 py-6 absolute hover:opacity-0" style="background-image: url('{{ asset($podcast->image_url) }}');">
-            <h2 class="relative text-white text-lg xl:text-xl font-medium">
+        <div class="h-[275px] flex justify-end flex-col  absolute inset-0 px-4 sm:px-6 py-4 sm:py-6 rounded-xl bg-cover bg-no-repeat bg-center transition-opacity duration-300 hover:opacity-0"
+            style="background-image: url('{{ asset($podcast->image_url) }}');">
+            <h2 class="text-white text-base sm:text-lg xl:text-xl font-medium">
                 {{ $podcast->title }}
             </h2>
             <p class="relative text-white text-sm xl:text-xl opacity-80">
                 {{ $podcast->creator->name }}
             </p>
         </div>
-    </a>
+    </div>
+</a>
+
 </div>
+

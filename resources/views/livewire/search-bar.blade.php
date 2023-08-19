@@ -5,14 +5,11 @@ use App\Models\Podcast;
 <div class="relative flex-auto">
     <div class="">
         <form action="{{ route('search') }}" method="get" class="form-control">
-            <input 
-                name="search"
-                class="bg-gray-200 rounded-2xl px-5 xl:px-10 py-2.5 flex-auto focus:ring-0 outline-none border-none w-full"
-                type="search"
-                placeholder="search...."
-                wire:model="query"
-                wire:keydown.escape="resets"
-            >
+            <div class="flex items-center bg-gray-200 rounded-2xl ">
+                <a href="{{ route('search')}}"><i class="fa-solid fa-magnifying-glass pl-5 xl:pl-10 py-2.5 "></i></a>
+                <input name="search" class="bg-gray-200 flex-auto focus:ring-0 outline-none border-none w-full px-5 xl:px-10 py-2.5 rounded-2xl"
+                    type="search" placeholder="search...." wire:model="query" wire:keydown.escape="resets">
+            </div>
         </form>
 
         @if (!empty($query))
@@ -36,7 +33,7 @@ use App\Models\Podcast;
                 @if (!empty($episodes))
                     @foreach (array_slice($episodes, 0, 5) as $i => $episode)
                         <a class="list-item  list-none p-1" href="{{ route('podcast.show', $episode['podcast_id']) }}">
-                            {{ $episode['title']. " - " . Podcast::getPodTitle($episode['podcast_id']) }}
+                            {{ $episode['title'] . ' - ' . Podcast::getPodTitle($episode['podcast_id']) }}
                         </a>
                     @endforeach
                 @else
