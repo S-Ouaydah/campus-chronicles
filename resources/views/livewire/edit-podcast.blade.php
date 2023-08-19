@@ -53,44 +53,30 @@
                 <!-- Delete button -->
                 <x-danger-button
                         x-data=""
-                        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-                    >{{ __('Delete Account') }}
+                        x-on:click.prevent="$dispatch('open-modal', 'confirm-podcast-deletion')"
+                    >{{ __('Delete Podcast') }}
                 </x-danger-button>
                 <!-- Deletion confirmation -->
-                <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-                    <form method="post" action="{{ route('settings.destroy') }}" class="p-6">
+                <x-modal name="confirm-podcast-deletion" :show="$errors->podDeletion->isNotEmpty()" focusable>
+                    <form method="post" action="{{ route('podcast.destroy', $podcast) }}" class="p-6">
                         @csrf
                         @method('delete')
 
                         <h2 class="text-lg font-medium text-gray-900">
-                            {{ __('Are you sure you want to delete your account?') }}
+                            {{ __('Are you sure you want to delete this podcast?') }}
                         </h2>
 
                         <p class="mt-1 text-sm text-gray-600">
-                            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                            {{ __('Once the podcast is deleted, all of its resources and episodes will be permanently deleted.') }}
                         </p>
-
-                        <div class="mt-6">
-                            <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
-                            <x-text-input
-                                id="password"
-                                name="password"
-                                type="password"
-                                class="mt-1 block w-3/4"
-                                placeholder="{{ __('Password') }}"
-                            />
-
-                            <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
-                        </div>
-
+                        <!-- potentially write podcast name for more verification -->
                         <div class="mt-6 flex justify-end">
                             <x-secondary-button x-on:click="$dispatch('close')">
                                 {{ __('Cancel') }}
                             </x-secondary-button>
 
                             <x-danger-button class="ml-3">
-                                {{ __('Delete Account') }}
+                                {{ __('Delete Podcast') }}
                             </x-danger-button>
                         </div>
                     </form>

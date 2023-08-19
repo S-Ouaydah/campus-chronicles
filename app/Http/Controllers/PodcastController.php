@@ -7,6 +7,7 @@ use App\Models\Podcast;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 
@@ -52,7 +53,8 @@ class PodcastController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'title' => ['required','max:255',
+                'title' => [
+                    'required', 'max:255',
                     Rule::unique('podcasts')->where(function ($query) {
                         return $query->where('creator_id', Auth::id());
                     }),
@@ -60,7 +62,7 @@ class PodcastController extends Controller
                 'description' => 'required',
                 'category_id' => 'required|exists:podcast_categories,id',
                 'pod_pic' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validating the image file
-            ],[
+            ], [
                 'title.unique' => 'You already have a podcast with this title!',
                 'category_id.exists' => ' Category does not exist!',
                 'pod_pic.mimes' => 'Unsupported image format!',
@@ -114,7 +116,25 @@ class PodcastController extends Controller
      */
     public function destroy(Podcast $podcast)
     {
-        //
-    }
+        $image_url = $podcast->image_url;
+        $audioPaths = [];
 
+        foreach ($podcast->episodes as $episode) {
+            $audioPaths[] = "public/audio_paths/" . basename($episode->audio_path) . ".mp3";
+        }
+
+        // Delete the podcast
+        if ($podcast->delete()) {
+            // Delete podcast image from storage
+            Storage::delete("public/podcast-pics/" . basename($image_url));
+            // Delete episodes audios
+            foreach ($audioPaths as $audioPath) {
+                Storage::delete($audioPath);
+            }
+
+            return redirect('/dashboard')->with('success', 'Podcast and its episodes deleted successfully!');
+        }
+
+        return redirect('/dashboard')->with('error', 'An error has occured!');
+    }
 }

@@ -115,6 +115,18 @@ class EpisodeController extends Controller
      */
     public function destroy(Episode $episode)
     {
-        //
+       
+        $audioPath = "public/audio_paths/" . basename($episode->audio_path) . ".mp3";
+        $pod_id = $episode->podcast_id;
+
+        // Delete the episode
+        if ($episode->delete()) {
+            // Delete episode audio
+            Storage::delete($audioPath);
+            
+            return redirect('/podcast/'. $pod_id)->with('success', 'episode deleted successfully!');
+        }
+
+        return redirect('/podcast/'. $pod_id)->with('error', 'An error has occured!');
     }
 }

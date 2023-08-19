@@ -110,7 +110,7 @@ class Player extends Component
             'source' => asset($this->audio),
             'episodeId' => $this->episodeId,
             //  this episode find causes the explore page to explode when theres no episodes
-            'episodeTitle' => $this->episodeId ? \App\Models\Episode::find($this->episodeId)->title : null,
+            'episodeTitle' => $this->episodeId ? \App\Models\Episode::find($this->episodeId)?->title : null,
             'imageUrl' => $this->imageUrl,
         ]);
     }

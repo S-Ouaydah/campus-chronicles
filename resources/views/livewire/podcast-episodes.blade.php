@@ -1,5 +1,5 @@
 <div>
-<!-- the div is important -->
+    <!-- the div is important -->
     @foreach ($episodes as $episode)
     <li class="flex flex-row m-6">
         <div class="relative rounded-lg w-1/8 pb-1/8 mr-6">
@@ -27,6 +27,36 @@
             <i class="far fa-heart"></i>
             @endif
         </button>
+
+        <!-- Delete button -->
+        <x-danger-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-episode-deletion-{{ $episode->id }}')">
+            {{ __('Delete Episode') }}
+        </x-danger-button>
+        <!-- Deletion confirmation -->
+        <x-modal name="confirm-episode-deletion-{{ $episode->id }}" :show="$errors->epDeletion->isNotEmpty()" focusable>
+            <form method="post" action="{{ route('episode.destroy', $episode) }}" class="p-6">
+                @csrf
+                @method('delete')
+
+                <h2 class="text-lg font-medium text-gray-900">
+                    {{ __('Are you sure you want to delete this episode?') }}
+                </h2>
+
+                <p class="mt-1 text-sm text-gray-600">
+                    {{ __('Once the episode is deleted, all of its resources will be permanently deleted.') }}
+                </p>
+                <!-- potentially write episode name for more verification -->
+                <div class="mt-6 flex justify-end">
+                    <x-secondary-button x-on:click="$dispatch('close')">
+                        {{ __('Cancel') }}
+                    </x-secondary-button>
+
+                    <x-danger-button class="ml-3">
+                        {{ __('Delete Episode') }}
+                    </x-danger-button>
+                </div>
+            </form>
+        </x-modal>
     </li>
     @endforeach
 

@@ -34,7 +34,6 @@ Route::get('/profile', [ProfileController::class, 'getSubsByUser'])->name('profi
 
 Route::get('/podcast/{id}', [PodcastController::class, 'show'])->name('podcast.show');
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -48,8 +47,6 @@ Route::get('/history', function () {
 Route::get('/profile/{id}',  [ProfileController::class, 'profile_view'])->name('profile.viewer');
 
 Route::get('/myprofile',  [ProfileController::class, 'view'])->middleware(['auth'])->name('profile');
-
-// Route::get('/category/{name}',[PodcastCategoryController::class, 'show' ]);
 
 Route::get('/search' , [SearchController::class, 'view'])->name('search');
 
@@ -70,7 +67,10 @@ Route::middleware(['auth' , 'verified' ,'isAdmin'])->group(function() {
 Route::middleware(['auth' , 'verified' ,'verifyIsae'])->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'show'])->name('dashboard');
     Route::post('/dashboard/episode', [EpisodeController::class, 'store'])->name('episode.store');
+    Route::delete('/podcast/{episode}', [EpisodeController::class, 'destroy'])->name('episode.destroy');
     Route::post('/dashboard/podcast', [PodcastController::class, 'store'])->name('podcast.store');
+    Route::delete('/podcast/{podcast}', [PodcastController::class, 'destroy'])->name('podcast.destroy');
+
 });
 
 
