@@ -70,8 +70,7 @@ class EpisodeController extends Controller
 
             $file = $request->file('audio_file');
             $filename = "{$episode->podcast_id}_{$episode->sequence}";
-            $filePath = 'public/audio_paths' . $filename . '.mp3';
-            $episode->audio_length = $this->getDuration($filePath);
+            $episode->audio_length = $this->getDuration($file);
 
             if (Storage::putFileAs('public/audio_paths', $file, $filename.'.mp3')) {
                 if (!$episode->save()) {
@@ -92,7 +91,6 @@ class EpisodeController extends Controller
     public function getDuration($audioPath){
         $getID3 = new \getID3();
         $fileInfo = $getID3->analyze($audioPath);
-
         if (isset($fileInfo['playtime_seconds'])) {
             return $fileInfo['playtime_seconds'];
         }

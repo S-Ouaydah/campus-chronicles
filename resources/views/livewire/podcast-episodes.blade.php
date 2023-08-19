@@ -19,25 +19,23 @@
             <div class="text-xl">{{ $episode->title }}</div>
             <div class="text-sm">{{ $episode->description }}</div>
         </div>
-        {{-- TODO livewire functionality (+turn red on click) --}}
 
         <button wire:click="like({{$episode->id}})" class="max-h-10 px-4 btn ">
             @if ($episode->isLikedBy(auth()->user()))
-            <i class="fas fa-heart text-black"></i>
+            <i class="fas fa-heart text-red-500"></i>
             @else
-            <i class="far fa-heart"></i>
+            <i class="far fa-heart  text-gray-800 hover:text-red-700  transition ease-in-out duration-250"></i>
             @endif
         </button>
 
         <!-- Delete button -->
         @Auth()
         @if (auth()->user()->isISAE && (isset($podcast) && auth()->user()->id == $podcast->creator_id))
-        <div class="flex items-center justify-center">
-            <button type="submit" class="vertical-align inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150" x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-episode-deletion-{{ $episode->id }}')">{{ __('Delete Episode') }}
+            <button type="submit" class="max-h-10 px-4 btn font-semibold text-gray-800 hover:text-gray-900  transition ease-in-out duration-150" x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-episode-deletion-{{ $episode->id }}')">
+                <i class="fa-solid fa-trash-can"></i>
             </button>
-        </div>
         @endif
-        @endauth        
+        @endauth
         <!-- Deletion confirmation -->
         <x-modal name="confirm-episode-deletion-{{ $episode->id }}" :show="$errors->epDeletion->isNotEmpty()" focusable>
             <form method="post" action="{{ route('episode.destroy', $episode) }}" class="p-6">

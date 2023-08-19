@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use getID3\getID3;
+use Carbon\CarbonInterval;
 
 class Episode extends Model
 {
@@ -89,8 +89,8 @@ class Episode extends Model
     {
         $duration = $this->audio_length;
         if ($duration != null) {
-        $carbonDuration = Carbon::now()->subSeconds($duration);
-            return $carbonDuration->format('H:i:s');
+            $carbonDuration = CarbonInterval::seconds($duration)->cascade();
+            return $carbonDuration->format('%H:%I:%S');
         }
         return '00:00:00';
     }
