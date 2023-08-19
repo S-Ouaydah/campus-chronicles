@@ -64,10 +64,10 @@ Route::middleware(['auth' , 'verified' ,'isAdmin'])->group(function() {
     Route::post('/admindashboard/category', [AdminController::class, 'store'])->name('category.store');
     Route::delete('/admindashboard/category/{category}', [AdminController::class, 'destroy_category'])->name('category.destroy');
     Route::delete('/admindashboard/user/{user}', [AdminController::class, 'destroy_user'])->name('user.destroy');
-    
+
 });
 
-Route::middleware(['auth' , 'verified' ,'verifyisae'])->group(function() {
+Route::middleware(['auth' , 'verified' ,'verifyIsae'])->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'show'])->name('dashboard');
     Route::post('/dashboard/episode', [EpisodeController::class, 'store'])->name('episode.store');
     Route::post('/dashboard/podcast', [PodcastController::class, 'store'])->name('podcast.store');

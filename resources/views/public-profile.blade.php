@@ -8,6 +8,10 @@
             <div class="flex items-start p-0 m-0 text-white">
                 <p class=" opacity-90 m-0 max-w-[400px] break-all">{!! nl2br(e($userBio)) !!}</p>
             </div>
+            {{-- follow button --}}
+            <div class="flex items-end">
+                @livewire('follow-button', ['creatorId' => $user->id])
+            </div>
         </div>
     </div>
 
@@ -18,13 +22,13 @@
             @if (!$podcasts->isEmpty())
                     @foreach ($podcasts as $podcast)
                         <div>
-                        <a 
+                        <a
                             class="list-item"
                             href="{{ route('podcast.show', $podcast['id']) }}">
-                            {{ $podcast['title'] }} 
+                            {{ $podcast['title'] }}
                         </a>
                         </div>
-                    
+
                     @endforeach
                 @else
                     <p>No podcasts found !</p>

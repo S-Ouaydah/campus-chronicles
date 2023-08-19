@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedInteger('podcast_count')->nullable();
+            
             $table->timestamps();
         });
     }

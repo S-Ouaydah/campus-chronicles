@@ -11,22 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('episodes', function (Blueprint $table) {
+        Schema::create('follows', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->unsignedInteger('sequence');
-            $table->string('audio_path');
-
-            $table->foreignId('podcast_id')
-            ->constrained()
-            ->onDelete('cascade');
+            $table->foreignId('follower_id')
+                ->constrained('users')
+                ->onDelete('cascade');
             $table->foreignId('creator_id')
                 ->constrained('users')
                 ->onDelete('cascade');
 
             $table->timestamps();
-            
+
+            $table->unique(['follower_id', 'creator_id']);
         });
     }
 
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('episodes');
+        Schema::dropIfExists('follows');
     }
 };

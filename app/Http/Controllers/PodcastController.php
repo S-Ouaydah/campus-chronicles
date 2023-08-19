@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Podcast;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+
 
 class PodcastController extends Controller
 {
@@ -20,11 +23,26 @@ class PodcastController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(array $validatedData)
     {
-        return view('podcast.create', [
+        $currentuser = Auth::user();
 
+        $podcast = new Podcast([
+            'creator_id' => $currentuser->id,
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
+            'category_id' => $validatedData['category_id'],
         ]);
+
+        if (isset($validatedData['pod_pic'])) {
+            $image = $validatedData['pod_pic'];
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/podcast-pics', $filename);
+
+            $podcast->image_url = 'storage/podcast-pics/' . $filename;
+        }
+
+        return $podcast;
     }
 
     /**
@@ -32,36 +50,34 @@ class PodcastController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-            'category_id' => 'required|exists:podcast_categories,id',
-            'pod_pic' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validating the image file
-        ]);
-        $currentuser = Auth::user();
+        try {
+            $validatedData = $request->validate([
+                'title' => ['required','max:255',
+                    Rule::unique('podcasts')->where(function ($query) {
+                        return $query->where('creator_id', Auth::id());
+                    }),
+                ],
+                'description' => 'required',
+                'category_id' => 'required|exists:podcast_categories,id',
+                'pod_pic' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validating the image file
+            ],[
+                'title.unique' => 'You already have a podcast with this title!',
+                'category_id.exists' => ' Category does not exist!',
+                'pod_pic.mimes' => 'Unsupported image format!',
+            ]);
 
-        $formData = new Podcast();
-        $formData->creator_id = $currentuser->id;
-        $formData->title = $validatedData['title'];
-        $formData->description = $validatedData['description'];
-        $formData->category_id = $validatedData['category_id'];
+            $podcast = $this->create($validatedData);
 
-         // Handling the image upload and storing the file path in the database
-         if ($request->hasFile('pod_pic')) {
-            $image = $request->file('pod_pic');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/podcast-pics', $filename); // Save the image in the storage directory
-    
-            $formData->image_url = 'storage/podcast-pics/' . $filename; // Save the image path in the database
+            if ($podcast->save()) {
+                flash()->addSuccess('Podcast created successfully!');
+            } else {
+                flash()->addError('An error has occurred!');
+            }
+        } catch (ValidationException $e) {
+            flash()->addError($e->getMessage());
         }
 
-        if ($formData->save()) {
-            flash()->addSuccess('Form submitted successfully!');
-            return redirect('/dashboard');
-        }
-        flash()->addError('An error has occured!');
         return redirect('/dashboard');
-
     }
 
     /**

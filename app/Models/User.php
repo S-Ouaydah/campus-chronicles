@@ -26,7 +26,8 @@ class User extends Authenticatable
         'email',
         'password',
         'bio',
-        'isISAE'
+        'isISAE',
+        'isAdmin'
     ];
 
     /**
@@ -68,12 +69,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Podcast::class, 'subscriptions');
     }
+
     public function profile_pic(){
         $user = Auth::user();
         if(empty($user->pfp_path)) return "storage/user_profiles/default.jpg";
         return $this->pfp_path;
     }
-
 
     public function bio(){
          return $this->bio;
@@ -86,16 +87,32 @@ class User extends Authenticatable
 
     }
 
-
     public function likedEpisodes()
     {
         return $this->belongsToMany(Episode::class, 'likes', 'user_id', 'episode_id')->withTimestamps();
     }
 
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'creator_id', 'follower_id');
+    }
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id','creator_id');
+    }
 
-
-
-
-
-
+    public function follow()
+    {
+        $user = auth()->user();
+        if ($user) {
+            $this->followers()->attach($user->id);
+        }
+    }
+    public function unfollow()
+    {
+        $user = auth()->user();
+        if ($user) {
+            $this->followers()->detach($user->id);
+        }
+    }
 }

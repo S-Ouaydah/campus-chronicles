@@ -22,6 +22,8 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->timestamps();
+
+            $table->unique(['user_id', 'episode_id']);
         });
         Schema::create('listens', function (Blueprint $table) {
             $table->id();
@@ -31,7 +33,12 @@ return new class extends Migration
             $table->foreignId('episode_id')
                 ->constrained()
                 ->onDelete('cascade');
+            $table->float('time_played')->nullable();
+            $table->float('ratio_played')->nullable();
+            $table->boolean('isComplete')->default(false);
+
             $table->timestamps();
+
         });
 
     }
@@ -41,6 +48,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('likes');
+        Schema::dropIfExists('listens');
     }
 };

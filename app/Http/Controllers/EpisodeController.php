@@ -55,6 +55,10 @@ class EpisodeController extends Controller
                 'description' => 'required',
                 'podcast_id' => 'required|exists:podcasts,id',
                 'audio_file' => 'required|file|mimetypes:audio/mpeg',
+            ],[
+                'title.unique' => ' Episode title must be unique in a podcast!',
+                'podcast_id.exists' => ' Podcast does not exist!',
+                'audio_file.mimetypes' => ' Audio file must be in mp3 format!',
             ]);
             $file = $request->file('audio_file');
             $epcount = Podcast::find($validatedData['podcast_id'])->episodes->count() + 1;
@@ -65,16 +69,20 @@ class EpisodeController extends Controller
             $file = $request->file('audio_file');
             $filename = "{$episode->podcast_id}_{$episode->sequence}";
 
-            if (Storage::putFileAs('public/audio_paths', $file, $filename)) {
+
+            if (Storage::putFileAs('public/audio_paths', $file, $filename.'.mp3')) {
                 if (!$episode->save()) {
                     flash()->addError('An error occurred while saving the episode!');
+                } else {
+                    flash()->addSuccess('Episode created successfully!');
                 }
             } else {
                 flash()->addError('An error occurred during file saving!');
             }
         } catch (ValidationException $e) {
-            flash()->addError('An error occurred, check the information entered!');
+            flash()->addError($e->getMessage());
         }
+
         return redirect('/dashboard');
     }
 

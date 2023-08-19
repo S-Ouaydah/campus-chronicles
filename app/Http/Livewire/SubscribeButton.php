@@ -23,7 +23,7 @@ class SubscribeButton extends Component
     {
         $user = Auth::user();
         if (!$user) {
-            session()->flash('message', 'Login to subscribe!');
+            // flash('message', 'Login to subscribe!');
             return redirect()->route('login');
         }
         $userId = auth()->id();
@@ -47,13 +47,6 @@ class SubscribeButton extends Component
 
         $this->subscribed = false;
         $this->decrementSubscriberCount();
-    }
-
-    public function render()
-    {
-        return view('livewire.subscribe-button', [
-            'buttonClass' => $this->getButtonClass(),
-        ]);
     }
 
     private function checkIfSubscribed()
@@ -86,5 +79,12 @@ class SubscribeButton extends Component
         } else {
             return $this->subscribed ? 'bg-black text-white' : 'bg-black text-white';
         }
+    }
+
+    public function render()
+    {
+        return view('livewire.subscribe-button', [
+            'buttonClass' => $this->getButtonClass(),
+        ]);
     }
 }

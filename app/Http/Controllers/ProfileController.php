@@ -17,7 +17,7 @@ use PhpParser\Node\Expr\Cast\String_;
 class ProfileController extends Controller
 {
 
-  
+
     public function view()
     {
         /** @var \App\Models\User $user */
@@ -50,14 +50,14 @@ class ProfileController extends Controller
             "subscriptions" => $subscriptions,
             "historyTable" => $historyTable,
             "sortedHistory" => $sortedHistory,
-            
+
 
 
         ]);
 
 
     }
-  
+
     public function profile_view(String $uid)
     {
         /** @var \App\Models\User $user */
@@ -69,12 +69,12 @@ class ProfileController extends Controller
 
 
 
-        return view('notmyprofile', [
+        return view('public-profile', [
             "pfpPath" => $pfpPath,
             "userBio" => $userBio,
             "podcasts" => $podcasts,
             "user" => $user,
-       
+
 
 
         ]);

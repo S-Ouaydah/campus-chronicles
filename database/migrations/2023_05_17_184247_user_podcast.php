@@ -22,6 +22,8 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->timestamps();
+
+            $table->unique(['podcast_id', 'user_id']);
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('subscriptions');
     }
 };

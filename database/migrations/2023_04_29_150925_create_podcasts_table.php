@@ -19,6 +19,15 @@ return new class extends Migration
             $table->unsignedBigInteger('creator_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedInteger('subscriber_count')->default(0);
+            
+            $table->foreign('creator_id')
+            ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->foreign('category_id')
+            ->references('id')
+                ->on('podcast_categories')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

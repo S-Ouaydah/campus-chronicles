@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('isISAE');
+            $table->boolean('isISAE')->default(false);
             $table->boolean('isAdmin')->default(false);
             $table->string('pfp_path')->nullable();
             $table->string('bio')->nullable();

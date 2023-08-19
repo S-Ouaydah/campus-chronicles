@@ -30,7 +30,6 @@ class Episode extends Model
     {
         return $this->belongsTo(Podcast::class);
     }
-    // NOTE creator is redundant, but it's here for clarity?
     public function creator()
     {
         return $this->belongsTo(User::class);
