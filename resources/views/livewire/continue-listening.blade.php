@@ -1,4 +1,4 @@
-<div class="mt-10 flex justify-between gap-10 select-none">
+<div class="mt-10 flex justify-between gap-10 select-none box-border p-2">
     <div>
         <h4 class="text-black text-2xl font-medium ">Continue Listening</h4>
         @if ($epsToContinue->all() === [])

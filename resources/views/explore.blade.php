@@ -1,16 +1,10 @@
 <x-app-layout>
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Explore') }}
-    </h2>
-    </x-slot> --}}
 
     <div class="mx-[5%]  3xl:mx-[10%] mt-10 pb-20">
-        @livewire('categories-swiper')
 
         @auth
 
-        <div class="w-full h-[550px] 3xl:h-[600px] flex justify-between select-none">
+        <div class="w-full h-[550px] 3xl:h-[600px] flex justify-between select-none box-border p-2">
             <div class="w-[70%] mr-4 h-[550px] 3xl:h-[600px] flex flex-col justify-between">
 
                 <div class="h-[44%] w-full  bg-[#C0EE9B]  rounded-3xl  items-center justify-between inline-flex mb-4 mr-4 p-12">
@@ -42,12 +36,19 @@
 
             </div>
         </div>
-
+        @endauth
+        @livewire('categories-swiper')
+        @auth
         @livewire('continue-listening')
-        <div class="mt-10 select-none">
-            <h1 class="mt-20 text-xl font-medium">Recommended For You</h1>
+        <div class=" select-none box-border p-2">
+            <h1 class="mt-5 text-xl font-medium">Recommended For You</h1>
             <div class="swiper-container mt-5">
                 <div class="swiper-wrapper gap-10">
+                    @if ($recommendedPodcasts->isEmpty())
+                    <div>
+                        <p class="text-center text-gray-500">No podcasts recommended yet!</p>
+                    </div>
+                    @else
                     @foreach ($recommendedPodcasts as $podcast)
                     <div class="relative m-0 h-[167px] w-[250px] swiper-slide xl:h-[200px] xl:w-[300px] slide ">
                         <a href="{{ route('podcast.show', $podcast->id) }}">
@@ -67,6 +68,7 @@
                         </a>
                     </div>
                     @endforeach
+                    @endif
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -75,12 +77,12 @@
 
 
 
-        <div class="mt-10 select-none">
+        <div class="mt-5 select-none box-border p-2">
             <h1 class=" text-xl font-medium">Featured Podcast</h1>
             {{-- @livewire('featured-podcast') --}}
         </div>
 
-        <div class="mt-10 overflow-hidden select-none">
+        <div class="mt-5 overflow-hidden select-none box-border p-2">
             <h1 class="text-xl font-medium">Popular Podcasts</h1>
             <div class="swiper-container">
                 <div class="swiper-wrapper flex gap-10 mt-5">

@@ -1,6 +1,6 @@
-<div class="select-none">
+<div class="select-none box-border p-2">
     <h1 class="mt-20 text-xl font-medium">Discover Categories</h1>
-    <div class="flex gap-5 mt-5 items-center">
+    <div class="flex gap-5 mt-5 items-center overflow-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-transparent">
     <i class="fa-solid fa-bars py-4 px-5 rounded-xl bg-black text-white leading-0"></i>
         @foreach ($categories as $category)
             <button

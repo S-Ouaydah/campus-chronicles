@@ -1,5 +1,5 @@
 
-                <div class="h-[56%] mt-4">
+                <div class="h-[56%] mtz-4">
                     <div class="flex justify-between h-full">
                         @foreach ($lastNewEpisodes as $index => $episode)
                             <div

@@ -3,4 +3,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide scrollbar arrows (up and down buttons) */
+::-webkit-scrollbar-button {
+    display: none;
+}
+/* Thin scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Scrollbar thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 10px;
+}
+
+/* On hover, make the thumb darker */
+::-webkit-scrollbar-thumb:hover {
+    background: #333;
+}
+/* Track (the area behind the scrollbar) */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
 
