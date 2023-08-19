@@ -59,7 +59,7 @@ class DashboardController extends Controller
                 ->from('episodes')
                 ->whereIn('podcast_id', $podcastIds);
         })
-            ->whereBetween('created_at', [Carbon::now()->subWeek(), Carbon::now()]) // Filter listens within the past week
+            ->whereBetween('created_at', [ Carbon::now()->subDays(7), Carbon::now()]) // Filter listens within the past week
             ->count();
 
         $totalListensLastWeek = Listen::whereIn('episode_id', function ($query) use ($podcastIds) {

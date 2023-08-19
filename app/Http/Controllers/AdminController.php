@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\PodcastCategory;
 use App\Models\User;
+use App\Models\Listen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -56,9 +58,15 @@ class AdminController extends Controller
     {
         $categories = PodcastCategory::all();
         $users = User::where('isAdmin', false)->get();
+        $usersThisWeek = User::whereBetween('created_at', [ Carbon::now()->subDays(7), Carbon::now()])->get();
+        $listenCount = Listen::count();
+        $listensPastWeek = Listen::where('created_at', '>=',  Carbon::now()->subDays(7))->get()->count();
         return view('admindashboard', [
            'categories' => $categories,
            'users' => $users,
+           'usersThisWeek' => $usersThisWeek,
+           'listenCount' => $listenCount,
+           'listensPastWeek' => $listensPastWeek ,
         ]);
     }
 

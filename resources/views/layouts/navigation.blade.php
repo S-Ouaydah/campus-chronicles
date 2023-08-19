@@ -6,7 +6,7 @@
             ->getName() == 'profile' ||
         Request()
             ->route()
-            ->getName() == 'dashboard'
+            ->getName() == 'dashboard' || Request()->route()->getName() == 'admindashboard'
     ) {
         echo 'absolute z-10';
     } ?>">
@@ -18,7 +18,8 @@
                     <a href="{{ url('/explore') }}">
                                   {{-- <x-application-logo class="block h-9 w-auto fill-current text-white" /> --}}
                                   @if (Request()->route()->getName() == 'profile' ||
-                                  Request()->route()->getName() == 'dashboard')
+                                  Request()->route()->getName() == 'dashboard' || Request()->route()->getName() == 'admindashboard') 
+
                               <img class="h-6"src="https://i.ibb.co/FBLwJBP/logo-white.png">
                           @else
                               <img class="h-6"src="https://i.ibb.co/stTsyMP/logo-black.png">
@@ -97,7 +98,8 @@
 
 
                         @if (Request()->route()->getName() == 'profile' ||
-                                Request()->route()->getName() == 'dashboard')
+                                Request()->route()->getName() == 'dashboard' || Request()->route()->getName() == 'admindashboard' 
+                                )
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md  hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">

@@ -1,12 +1,12 @@
 <section class="space-y-6">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Create Category') }}
+            {{ __('Categories Managment') }}
         </h2>
     </header>
 
     <!-- create -->
-    <x-primary-button style="margin: 0 5px;" x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-category-form')">{{ __('Create') }}</x-primary-button>
+    <x-primary-button style="margin: 5px 5px;" x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-category-form')">{{ __('Create') }}</x-primary-button>
 
     <x-modal name="create-category-form" :show="false" focusable>
         <form method="post" action="{{ route('category.store') }}" class="p-6" enctype="multipart/form-data">
@@ -45,10 +45,10 @@
 
     <x-modal name="view-category" :show="false" focusable>
 
-        <h2 class="text-lg font-semibold text-gray-900">
+        <h2 class="text-lg font-semibold text-gray-900 p-4">
             {{ __('All Categories') }}
         </h2>
-        <div class="flex flex-col space-y-6">
+        <div class="flex flex-col space-y-6 p-4">
 
             <!-- Categories -->
 
@@ -60,7 +60,7 @@
                     @method('DELETE')
                     <x-danger-button type="submit" class="">Delete</x-danger-button>
                 </form>
-                <a href="" class="text-blue-500">Update</a>
+                
             </div>
             @endforeach
 
