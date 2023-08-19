@@ -5,7 +5,7 @@
     </h2>
     </x-slot> --}}
 
-    <div class="mx-[5%]  3xl:mx-[10%] mt-10">
+    <div class="mx-[5%]  3xl:mx-[10%] mt-10 pb-20">
         @livewire('categories-swiper')
 
         @auth
@@ -90,30 +90,6 @@
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
-        </div>
-
-
-
-        <div class="mt-20 w-full h-[250px]  bg-[#C0EE9B]  rounded-3xl flex  gap-20 select-none">
-            <div class="ml-20 flex flex-col justify-end"><img class="h-[225px] " src="{{ asset('storage/da.png') }}">
-            </div>
-            <div class="text-2xl font-bold flex flex-col justify-center gap-5">
-                <h4>Become a Creator and share your experience on Champus Chronicles now.</h4>
-                @auth
-                <p class=" text-xl font-medium">Switch your email to isae and start the grind!!</p>
-                <div class="inline-block">
-                    <a href="{{ route('settings.edit') }}" class="bg-black text-white font-medium text-lg px-6 py-3 rounded-xl">Edit your Email</a>
-                </div>
-                @endauth
-                @guest
-                <p class="mt-4 text-xl font-medium">Sign up with your isae account and start the grind!!</p>
-                <div class="inline-block">
-                    <a href="{{ route('register') }}" class="bg-black text-white font-medium text-lg px-6 py-3 rounded-xl">Register</a>
-                </div>
-                @endguest
-            </div>
-
-
         </div>
 
     </div>

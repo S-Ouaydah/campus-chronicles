@@ -17,8 +17,8 @@ return new class extends Migration
             $table->text('description');
             $table->unsignedInteger('sequence');
             $table->string('audio_path');
-            $table->float('audio_length');
-            
+            $table->float('audio_length')->nullable();
+
             $table->timestamps();
 
         });
