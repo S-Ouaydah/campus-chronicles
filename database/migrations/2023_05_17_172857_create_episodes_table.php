@@ -18,14 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('sequence');
             $table->string('audio_path');
             $table->float('audio_length');
-
-            $table->foreignId('podcast_id')
-            ->constrained()
-            ->onDelete('cascade');
-            $table->foreignId('creator_id')
-                ->constrained('users')
-                ->onDelete('cascade');
-
+            
             $table->timestamps();
 
         });
