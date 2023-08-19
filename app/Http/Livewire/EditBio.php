@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
 
+
 class EditBio extends Component
 {
     public $bio = '' ;
