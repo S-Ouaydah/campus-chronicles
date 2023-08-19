@@ -24,10 +24,7 @@
                     @endif
                     @endauth
                     @guest
-                    <a href="/">
-                        {{-- <x-application-logo class="block h-9 w-auto fill-current text-white" /> --}}
-                        <img class="h-6" src="https://i.ibb.co/stTsyMP/logo-black.png">
-                    </a>
+                    <img class="h-6" src="https://i.ibb.co/stTsyMP/logo-black.png">
                     @endguest
                 </div>
 
@@ -66,10 +63,9 @@
             @endphp
 
 
+        
+            
             @guest
-            @auth
-            <a href="{{ url('/dashboard') }}" class="text-black hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
-            @else
             <div>
                 <a href="{{ route('login') }}" class=" font-medium text-white rounded-2xl bg-black px-6  py-2.5  ml-5">Log
                     in</a>
@@ -79,9 +75,8 @@
                 <a href="{{ route('register') }}" class=" bg-[#71C719] px-6  py-2.5 font-medium  rounded-2xl ml-4 text-black hover:text-gray-900 dark:text-black  ">Register</a>
                 @endif
             </div>
-
-            @endauth
             @endguest
+            
 
 
             @auth
