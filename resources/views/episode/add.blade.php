@@ -10,7 +10,7 @@
             @csrf
 
             <h2 class="text-lg font-medium text-gray-900">
-                {{ __('fill the episode details underneath') }}
+                {{ __('Add A New Episode') }}
             </h2>
 
             <div class="flex flex-col space-y-6 ">

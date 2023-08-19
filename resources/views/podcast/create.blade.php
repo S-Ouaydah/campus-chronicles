@@ -16,7 +16,7 @@
             @csrf
 
             <h2 class="text-lg font-medium text-gray-900">
-                {{ __('fill the Podcast details underneath') }}
+                {{ __('Create A New Podcast') }}
             </h2>
 
             <div class="flex flex-col space-y-6 ">

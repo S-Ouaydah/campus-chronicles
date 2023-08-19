@@ -51,11 +51,16 @@
                 <livewire:subscribe-button :currentPage="'other-page'" :podcastId="$podcast->id" />
                 
                 <!-- Delete button -->
-                <x-danger-button
+                
+                <div>
+                    <button
+                        type="submit"
+                        class="mt-5 inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150"
                         x-data=""
                         x-on:click.prevent="$dispatch('open-modal', 'confirm-podcast-deletion')"
-                    >{{ __('Delete Podcast') }}
-                </x-danger-button>
+                        >{{ __('Delete Podcast') }}
+                    </button>
+                </div>
                 <!-- Deletion confirmation -->
                 <x-modal name="confirm-podcast-deletion" :show="$errors->podDeletion->isNotEmpty()" focusable>
                     <form method="post" action="{{ route('podcast.destroy', $podcast) }}" class="p-6">
