@@ -15,7 +15,7 @@ class CategoriesSwiper extends Component
     public function mount()
     {
         $this->categories = PodcastCategory::all();
-        $this->activeTab = $this->categories->first()->id;
+        $this->activeTab = $this->categories->first()?->id;
     }
 
     public function render()

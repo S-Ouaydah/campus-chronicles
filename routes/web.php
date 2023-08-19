@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LikeController;
 use App\Http\Middleware\VerifyISAE;
 use App\Http\Middleware\VerifyProfile;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +76,22 @@ Route::middleware(['auth' , 'verified' ,'verifyIsae'])->group(function() {
     Route::delete('/podcast/{podcast}', [PodcastController::class, 'destroy'])->name('podcast.destroy');
 
 });
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+ 
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/explore');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 
 require __DIR__.'/auth.php';

@@ -23,7 +23,11 @@ class NewEpisodes extends Component
 
     public function rotateEpisode()
     {
-        $this->activeEpisodeIndex = ($this->activeEpisodeIndex + 1) % count($this->lastNewEpisodes);
+        $count = count($this->lastNewEpisodes);
+        if ($count != 0) {
+            $this->activeEpisodeIndex = ($this->activeEpisodeIndex + 1) % $count ;
+        }
+        $this->activeEpisodeIndex = 0;
     }
 
     public function render()
