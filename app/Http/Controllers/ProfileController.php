@@ -12,6 +12,8 @@ use Livewire\WithFileUploads;
 use Livewire\TemporaryUploadedFile;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Subscriptions;
+use Illuminate\Support\Facades\DB;
+
 use PhpParser\Node\Expr\Cast\String_;
 
 class ProfileController extends Controller
@@ -60,13 +62,16 @@ class ProfileController extends Controller
 
     }
 
-    public function profile_view(String $uid)
+    public function profile_view(string $uid)
     {
         /** @var \App\Models\User $user */
         $user = User::findOrFail($uid);
         $podcasts = $user->podcasts;
         $pfpPath = $user->profile_pic();
         $userBio = $user->bio();
+        $followerCount = DB::table('follows')
+            ->where('creator_id', $uid)
+            ->count();
 
 
 
@@ -76,6 +81,7 @@ class ProfileController extends Controller
             "userBio" => $userBio,
             "podcasts" => $podcasts,
             "user" => $user,
+            "followerCount" => $followerCount ,
 
 
 
