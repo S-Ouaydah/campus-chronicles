@@ -7,12 +7,10 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <h2>Podcasts</h2>
-            <ul>
+            <ul class="max-w-xs gap-3">
                 @if (!$podcasts->isEmpty())
                 @foreach ($podcasts as $podcast)
-
-                @include('partials.podcast-bubble')
-
+                    @include('partials.podcast-bubble')
                 @endforeach
                 @else
                 <li>No podcasts found !</li>
@@ -49,7 +47,7 @@
                         @endphp
                     @endif
                 @endforeach
-                
+
                 @if (!$creatorsShown)
                     <li>No creators found !</li>
                 @endif

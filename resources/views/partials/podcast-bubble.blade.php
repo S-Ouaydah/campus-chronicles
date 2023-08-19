@@ -1,4 +1,4 @@
-<div class=" relative  h-[275px] ">
+<div class=" relative  h-[275px] pt-3 m-3 ">
 <a href="{{ route('podcast.show', $podcast->id) }}" class="block w-full h-full">
     <div class="relative h-[275px]  bg-black rounded-xl overflow-hidden">
         <div class="h-[275px] absolute inset-0 px-4 sm:px-6 py-4 sm:py-6 rounded-xl bg-opacity-70 bg-black">
