@@ -20,6 +20,7 @@ class Episode extends Model
             'audio_path',
             'sequence',
             'creator_id',
+            'audoi_length'
         ];
     public static function getTitle($id)
     {
@@ -84,51 +85,14 @@ class Episode extends Model
         return $this->likes()->where('user_id', $userId)->exists();
     }
 
-    public function getDuration()
+    public function getFormattedDuration()
     {
-        $getID3 = new \getID3;
-
-        $audioPath = storage_path('app/public/' . str_replace("storage/", "", $this->audio_path));
-
-        // Get the file extension
-        $fileExtension = pathinfo($audioPath, PATHINFO_EXTENSION);
-
-        // Analyze the file based on its extension
-        switch ($fileExtension) {
-            case 'mp3':
-                $audioPath .= '.mp3';
-                break;
-            case 'wav':
-                $audioPath .= '.wav';
-                break;
-            case 'ogg':
-                $audioPath .= '.ogg';
-                break;
-            // Add more cases for other file formats as needed
-            default:
-                // Handle unsupported file formats or provide a default extension
-                $audioPath .= '.mp3';
-                break;
+        $duration = $this->audio_length;
+        if ($duration != null) {
+        $carbonDuration = Carbon::now()->subSeconds($duration);
+            return $carbonDuration->format('H:i:s');
         }
-         $fileInfo = $getID3->analyze($audioPath);
-        //handle error
-        if (isset($fileInfo['error'])) {
-            return '00:00';
-        }
-         $playtimeString = $fileInfo['playtime_string'];
-
-        // Convert "mm:ss" to "hh:mm:ss" format
-        sscanf($playtimeString, "%d:%d", $minutes, $seconds);
-        $hours = 0;
-
-        if ($minutes >= 60) {
-            $hours = floor($minutes / 60);
-            $minutes = $minutes % 60;
-        }
-
-        $duration = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
-
-        return $duration;
+        return '00:00:00';
     }
 
 

@@ -73,11 +73,9 @@ class DashboardController extends Controller
 
 
         $totalSubscriptions = Podcast::where('creator_id', auth()->id())->sum('subscriber_count');
-
         $totalSubscriptionsThisWeek = Podcast::where('creator_id', auth()->id())
             ->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
             ->sum('subscriber_count');
-
 
         $percentageChange = 0;
         if ($totalListensLastWeek != 0) {
@@ -89,7 +87,6 @@ class DashboardController extends Controller
             ->join('podcasts', 'episodes.podcast_id', '=', 'podcasts.id')
             ->where('podcasts.creator_id', auth()->id())
             ->count();
-
         $totalLikesThisWeek = DB::table('likes')
             ->join('episodes', 'likes.episode_id', '=', 'episodes.id')
             ->join('podcasts', 'episodes.podcast_id', '=', 'podcasts.id')
@@ -97,18 +94,35 @@ class DashboardController extends Controller
             ->whereBetween('likes.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
             ->count();
 
+        $totalFollowers = DB::table('follows')
+            ->where('creator_id', auth()->id())
+            ->count();
+        $totalFollowersThisWeek = DB::table('follows')
+            ->where('creator_id', auth()->id())
+            ->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+            ->count();
 
-
+        $totalEpisodes = DB::table('episodes')
+            ->where('creator_id', auth()->id())
+            ->count();
+        $totalEpisodesThisWeek = DB::table('episodes')
+            ->where('creator_id', auth()->id())
+            ->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+            ->count();
         return view('dashboard', [
             'categories' => $categories,
             'podcasts' => $podcasts,
-            'totalListensThisWeek' => $totalListensThisWeek,
-            'totalSubscriptions' => $totalSubscriptions,
             'countPods' => $countPods,
+            'totalListensThisWeek' => $totalListensThisWeek,
             'percentageChange' => $percentageChange,
+            'totalSubscriptions' => $totalSubscriptions,
             'totalSubscriptionsThisWeek' => $totalSubscriptionsThisWeek,
             'totalLikes' => $totalLikes,
             'totalLikesThisWeek' => $totalLikesThisWeek,
+            'totalFollowers' => $totalFollowers,
+            'totalFollowersThisWeek' => $totalFollowersThisWeek,
+            'totalEpisodes' => $totalEpisodes,
+            'totalEpisodesThisWeek' => $totalEpisodesThisWeek
         ]);
 
 

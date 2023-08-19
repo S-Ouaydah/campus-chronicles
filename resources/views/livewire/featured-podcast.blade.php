@@ -48,7 +48,7 @@
                     </h4>
                     <h4 class="text-sm opacity-75 w-[150px] text-start">{{ $episode->getLikeDate() }}
                     </h4>
-                    <h4 class="text-sm opacity-75 w-[50px] text-start">{{ $episode->getDuration() }}</h4>
+                    <h4 class="text-sm opacity-75 w-[50px] text-start">{{ $episode->getFormattedDuration() }}</h4>
                     <div class="flex gap-5 items-center">
 
                         <button wire:click="like({{ $episode->id }})" class="max-h-10 px-4 btn ">

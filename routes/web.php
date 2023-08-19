@@ -12,7 +12,8 @@ use App\Http\Controllers\SearchController;
 use App\Models\Episode;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LikeController;
-
+use App\Http\Middleware\VerifyISAE;
+use App\Http\Middleware\VerifyProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,6 @@ use App\Http\Controllers\LikeController;
 // routes/web.php
 
 
-Route::get('/profile', [ProfileController::class, 'getSubsByUser'])->name('profile.index');
 
 
 
@@ -44,7 +44,9 @@ Route::get('/history', function () {
     return view('history');
 })->name('history');
 
-Route::get('/profile/{id}',  [ProfileController::class, 'profile_view'])->name('profile.viewer');
+// Route::get('/profile', [ProfileController::class, 'getSubsByUser'])->name('profile.index');
+
+Route::get('/profile/{id}',  [ProfileController::class, 'profile_view'])->middleware('verifyProfile')->name('profile.viewer');
 
 Route::get('/myprofile',  [ProfileController::class, 'view'])->middleware(['auth'])->name('profile');
 

@@ -10,8 +10,8 @@
             @foreach ($epsToContinue as $episode)
                 <div class="bg-[#D9D9D9] w-[600px] h-[250px] mt-3 rounded-3xl flex">
                     <div class="w-[40%] bg-black rounded-s-3xl bg-cover"
-                        style="background-image: url('{{ asset($episode->episode->podcast->image_url) }}');"
-                        wire:click="$emit('playAudio','{{ $episode->episode->audio_path }}', {{ $episode->episode_id }}, '{{ $episode->episode->podcast->image_url }}', {{ $episode->time_played}})">
+                        style="background-image: url('{{ asset($episode->podcast->image_url) }}');"
+                        wire:click="$emit('playAudio','{{ $episode->audio_path }}', {{ $episode_id }}, '{{ $episode->podcast->image_url }}', {{ $episode->time_played}})">
                     </div>
                     <div class=" w-[60%]">
                         <div class="p-5 flex flex-col justify-between h-full">
@@ -22,13 +22,13 @@
                                         class="fa-solid fa-xmark leading-none opacity-80 hover:opacity-100"></i> --}}
                                 </div>
 
-                                <h4 class="font-medium text-lg ">{{ $episode->episode->title }}</h4>
-                                <h4 class="font-medium">{{ $episode->episode->podcast->title }}<br>By
-                                    {{ $episode->episode->creator->name }}</h4>
+                                <h4 class="font-medium text-lg ">{{ $episode->title }}</h4>
+                                <h4 class="font-medium">{{ $episode->podcast->title }}<br>By
+                                    {{ $episode->creator->name }}</h4>
                             </div>
                             <div>
                                 <h4 class="font-medium opacity-80 ">{{ $episode->time_played }} out of
-                                    {{ $episode->episode->getDuration() }}</h4>
+                                    {{ $episode->getFromattedDuration() }}</h4>
                                 <div class="w-[100%] h-2 flex justify-start bg-[#C0EE9B] mt-2 ">
 
                                     <div class="h-2 bg-black  "

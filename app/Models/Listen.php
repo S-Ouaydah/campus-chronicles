@@ -36,7 +36,17 @@ class Listen extends Model
         return Carbon::parse($date)->diffForHumans();
     }
 
+    public function getFormattedTimePlayed(){
+        $time = $this->time_played;
+        if($time != null){
+
+            $hours = floor($time / 3600);
+            $mins = floor($time / 60 % 60);
+            $secs = floor($time % 60);
+            return sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+        }
+        return '00:00:00';
+    }
 
 
-  
 }

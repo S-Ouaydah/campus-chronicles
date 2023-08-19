@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->unsignedInteger('sequence');
             $table->string('audio_path');
+            $table->float('audio_length');
 
             $table->foreignId('podcast_id')
             ->constrained()
@@ -26,7 +27,7 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->timestamps();
-            
+
         });
     }
 

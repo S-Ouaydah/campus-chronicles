@@ -9,6 +9,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use getID3\getID3;
+use Carbon\Carbon;
 
 class EpisodeController extends Controller
 {
@@ -68,7 +70,8 @@ class EpisodeController extends Controller
 
             $file = $request->file('audio_file');
             $filename = "{$episode->podcast_id}_{$episode->sequence}";
-
+            $filePath = 'public/audio_paths' . $filename . '.mp3';
+            $episode->audio_length = $this->getDuration($filePath);
 
             if (Storage::putFileAs('public/audio_paths', $file, $filename.'.mp3')) {
                 if (!$episode->save()) {
@@ -86,6 +89,15 @@ class EpisodeController extends Controller
         return redirect('/dashboard');
     }
 
+    public function getDuration($audioPath){
+        $getID3 = new \getID3();
+        $fileInfo = $getID3->analyze($audioPath);
+
+        if (isset($fileInfo['playtime_seconds'])) {
+            return $fileInfo['playtime_seconds'];
+        }
+        return null;
+    }
     /**
      * Display the specified resource.
      */
@@ -115,7 +127,7 @@ class EpisodeController extends Controller
      */
     public function destroy(Episode $episode)
     {
-       
+
         $audioPath = "public/audio_paths/" . basename($episode->audio_path) . ".mp3";
         $pod_id = $episode->podcast_id;
 
@@ -123,7 +135,7 @@ class EpisodeController extends Controller
         if ($episode->delete()) {
             // Delete episode audio
             Storage::delete($audioPath);
-            
+
             return redirect('/podcast/'. $pod_id)->with('success', 'episode deleted successfully!');
         }
 

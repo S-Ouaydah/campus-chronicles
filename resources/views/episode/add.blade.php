@@ -1,20 +1,17 @@
 <section class="space-y-6 flex items-center">
-   
+
     <button  class="px-14 py-10 text-xl" x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'add-episode-form')">
         {!! __('Add<br>Episode') !!}
     </button>
-    
+
     <x-modal name="add-episode-form" :show="false" focusable>
         <form method="post" action="{{ route('episode.store') }}" class="p-6" enctype="multipart/form-data">
             @csrf
-
             <h2 class="text-lg font-medium text-gray-900">
                 {{ __('Add A New Episode') }}
             </h2>
-
             <div class="flex flex-col space-y-6 ">
-
                 <!-- title -->
                 <x-input-label for="title" value="{{ __('Title') }}" class="sr-only" />
 
@@ -38,10 +35,6 @@
                     <option value="<?= $podcast->id ?>"><?= $podcast->title ?></option>
                     @endforeach
                 </select>
-
-                @if ($errors->any())
-                <p class="text-red-500">Failed to submit the form. Please check the entered information.</p>
-                @endif
             </div>
 
             <div class="mt-6 flex justify-end">

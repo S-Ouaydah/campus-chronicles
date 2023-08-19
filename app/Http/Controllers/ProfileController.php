@@ -30,6 +30,7 @@ class ProfileController extends Controller
         $userBio = $user->bio();
         $showForm = false;
         $subscriptions = Subscriptions::getSubsByUser($user->id);
+        $following = $user->following()->get();
 
 
         $historyTable = Listen::getHistoryByUser($user->id);
@@ -50,6 +51,7 @@ class ProfileController extends Controller
             "subscriptions" => $subscriptions,
             "historyTable" => $historyTable,
             "sortedHistory" => $sortedHistory,
+            "following" => $following,
 
 
 
