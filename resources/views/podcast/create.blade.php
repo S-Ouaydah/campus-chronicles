@@ -1,10 +1,14 @@
 <section class="space-y-6">
 
 
-    <button  class="px-14 py-10 text-xl" x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'create-podcast-form')">
-        {!! __('Create<br>New Podcast') !!}
-    </button>
+    <header>
+        <h2 class="text-lg font-medium text-gray-900">
+            {{ __('Create New Podcast') }}
+        </h2>
+    </header>
+
+    <x-primary-button style="margin: 0 5px;" x-data="" x-on:click.prevent="$dispatch('open-modal', 'create-podcast-form')">{{ __('Add') }}</x-primary-button>
+
 
 
     <x-modal name="create-podcast-form" :show="false" focusable>

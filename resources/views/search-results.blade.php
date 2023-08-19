@@ -11,7 +11,7 @@
                 @if (!$podcasts->isEmpty())
                 @foreach ($podcasts as $podcast)
 
-                    @include('partials.podcast-bubble')
+                @include('partials.podcast-bubble')
 
                 @endforeach
                 @else
@@ -20,11 +20,11 @@
             </ul>
 
             <h2>Episodes</h2>
-           
+
             <ul>
                 @if (!$episodes->isEmpty())
 
-                    @livewire('podcast-episodes',['podcast' => null ,'episodes'=>$episodes])
+                @livewire('podcast-episodes',['podcast' => null ,'episodes'=>$episodes])
 
                 @else
                 <li>No episodes found !</li>
@@ -33,26 +33,25 @@
 
             <h2>Creators</h2>
             <ul>
-                @if (!$users->isEmpty())
+                @php
+                    $creatorsShown = false;
+                @endphp
+
                 @foreach ($users as $user)
-                @if($currentuser)
-                @if($user->id != $currentuser->id)
-                <li>
-                    <a class="list-item" href="{{ route('profile.viewer', $user['id']) }}">
-                        {{ $user['name'] }}
-                    </a>
-                </li>
-                @endif
-                @else
-                <li>
-                    <a class="list-item" href="{{ route('profile.viewer', $user['id']) }}">
-                        {{ $user['name'] }}
-                    </a>
-                </li>
-                @endif
+                    @if (!$currentuser || ($user->id != $currentuser->id && $user->isISAE))
+                        <li>
+                            <a class="list-item" href="{{ route('profile.viewer', $user['id']) }}">
+                                {{ $user['name'] }}
+                            </a>
+                        </li>
+                        @php
+                            $creatorsShown = true;
+                        @endphp
+                    @endif
                 @endforeach
-                @else
-                <li>No creators found !</li>
+                
+                @if (!$creatorsShown)
+                    <li>No creators found !</li>
                 @endif
             </ul>
         </div>

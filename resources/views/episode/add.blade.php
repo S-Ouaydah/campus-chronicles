@@ -1,12 +1,10 @@
 <section class="space-y-6 flex items-center">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Add Episode') }}
-        </h2>
-    </header>
-
-    <x-primary-button style="margin: 0 5px;" x-data="" x-on:click.prevent="$dispatch('open-modal', 'add-episode-form')">{{ __('Add') }}</x-primary-button>
-
+   
+    <button  class="px-14 py-10 text-xl" x-data=""
+        x-on:click.prevent="$dispatch('open-modal', 'add-episode-form')">
+        {!! __('Add<br>Episode') !!}
+    </button>
+    
     <x-modal name="add-episode-form" :show="false" focusable>
         <form method="post" action="{{ route('episode.store') }}" class="p-6" enctype="multipart/form-data">
             @csrf

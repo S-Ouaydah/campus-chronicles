@@ -77,7 +77,7 @@
 
         <div class="mt-10 select-none">
             <h1 class=" text-xl font-medium">Featured Podcast</h1>
-            @livewire('featured-podcast')
+            {{-- @livewire('featured-podcast') --}}
         </div>
 
         <div class="mt-10 overflow-hidden select-none">

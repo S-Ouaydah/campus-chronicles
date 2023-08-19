@@ -37,19 +37,16 @@
             </div>
 
             <div class="text-black font-bold text-lg absolute  rounded-xl bg-[#C0EE9B] right-[25%] -bottom-14 sm:right-80">
-                @include('podcast.create')</div>
+                @include('episode.add')
+            </div>
 
         </div>
     </div>
 
     <div class="py-12 mx-[6%] ">
 
-
-
-
-
         <div class="max-w-xl mt-20">
-            @include('episode.add')
+            @include('podcast.create')
         </div>
         <div
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 3xl:grid-cols-5  gap-5 sm:gap-10 w-full mt-10 select-none overflow-x-hidden">

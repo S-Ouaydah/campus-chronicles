@@ -66,8 +66,9 @@ class EditPodcast extends Component
         $this->validate([
             'podPic' => 'image|max:2048576', // 2MB Max
         ]);
-        $user = Auth::user();
-        $previousPodPic = $user->pod_pic;
+        
+        $previousPodPic = $this->podcast->image_url;
+
         if ($previousPodPic) {
             Storage::delete('public/podcast-pics/' . basename($previousPodPic));
         }
