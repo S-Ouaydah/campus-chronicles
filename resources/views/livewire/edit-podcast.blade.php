@@ -51,7 +51,8 @@
                 <livewire:subscribe-button :currentPage="'other-page'" :podcastId="$podcast->id" />
                 
                 <!-- Delete button -->
-                
+                @Auth()
+                @if (auth()->user()->isISAE && auth()->user()->id == $podcast->creator_id)
                 <div>
                     <button
                         type="submit"
@@ -61,6 +62,8 @@
                         >{{ __('Delete Podcast') }}
                     </button>
                 </div>
+                @endif
+                @endauth
                 <!-- Deletion confirmation -->
                 <x-modal name="confirm-podcast-deletion" :show="$errors->podDeletion->isNotEmpty()" focusable>
                     <form method="post" action="{{ route('podcast.destroy', $podcast) }}" class="p-6">

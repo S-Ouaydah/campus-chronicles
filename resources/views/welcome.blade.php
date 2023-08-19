@@ -44,7 +44,7 @@
 
 
 
-                <a href="/"><img class="h-6" src="{{asset('logo-black.png')}}"></a>
+                <img class="h-6" src="{{asset('logo-black.png')}}" >
                 <div class="nav2">
 
                     <a href="{{ route('explore') }}"
