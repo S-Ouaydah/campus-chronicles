@@ -3,7 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Podcast;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Sequence;
+use Database\Factories\ListStorage;
+use Database\Factories\PodcastFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,6 +20,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
+            'id'
             'name' => 'Test User',
             'email' => 'test@user.com',
             'isISAE' => false,
@@ -24,52 +30,43 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@isae.edu.lb',
             'isISAE' => true,
         ]);
-        // \App\Models\PodcastCategory::factory(10)->create();
-        // \App\Models\Podcast::factory(10)->create(['creator_id' => 1]);
-        // \App\Models\Episode::factory(50)->create([
-        //     'title' => fake()->sentence(),
-        //     'description' => fake()->text(),
-        //     'podcast_id' => fake()->randomDigit(1, 10),
-        //     'sequence' => fake()->randomDigit(1, 7),
-        //     'creator_id' => 1,
-        // ]);
-        // $seq = 0;
-        // \App\Models\Episode::factory(50)->create([
-        //     'title' => fake()->sentence(),
-        //     'description' => fake()->text(),
-        //     'podcast_id' => function () {
-        //         return \App\Models\Podcast::factory()->create([
-        //             'creator_id' => function(){
-        //                 return \App\Models\User::factory()->create()->id;
-        //             },
-        //             'category_id' => function(){
-        //                 return \App\Models\PodcastCategory::factory()->create()->id;
-        //             },
-        //         ])->id;
-        //     },
-        //     'audio_path'=> fake()->sentence(),
-        //     'sequence'=> $seq++,
-        //     'creator_id'=> 1,
-        // ]);
-        $podcastCategories = \App\Models\PodcastCategory::factory(10)->create();
+        $creator2 = \App\Models\User::factory()->create([
+            'name' => 'Test Two Isae',
+            'email' => 'test2@isae.edu.lb',
+            'isISAE' => true,
+        ]);
+        $admin = \App\Models\User::factory()->create([
+            'name' => 'Test Admin',
+            'email' => 'admin@isae.edu.lb',
+            'isISAE' => true,
+            'isAdmin' => true,
+        ]);
 
-        \App\Models\Podcast::factory(20)->create([
-            'image_url' => 'https://picsum.photos/300',
-            'creator_id' => 1,
-            'category_id' => function () use ($podcastCategories) {
-                return $podcastCategories->random()->id;
-            },
-        ])->each(function ($podcast) {
-            $seq = 0;
-            for ($i = 0; $i < 5; $i++) {
-                \App\Models\Episode::factory()->create([
-                    'podcast_id' => $podcast->id,
-                    'creator_id' => 1,
-                    'sequence' => $seq++,
-                ]);
-            }
-        });
-        $episodes = \App\Models\Episode::inRandomOrder()->limit(10)->get();
-        $creator->likes()->attach($episodes);
+        for ($c=0; $c < 10; $c++) {
+            $podcastCategory = \App\Models\PodcastCategory::factory()->create();
+            \App\Models\Podcast::factory(10)->create([
+                // titles using the getTitles in podcastFactory
+                'title' => new Sequence(function ($seq) use ($podcastCategory) {
+                    $titles = PodcastFactory::getTitles()[$podcastCategory->name];
+                    return $titles[$seq->index % count($titles)];
+                }),
+                'creator_id' => new Sequence(2, 3),
+                'category_id' => $podcastCategory->id,
+            ])->each(function ($podcast) {
+                $count = rand(4, 14);
+                $seq = 0;
+                for ($i = 0; $i < $count; $i++) {
+                    \App\Models\Episode::factory()->create([
+                        'podcast_id' => $podcast->id,
+                        'creator_id' => $podcast->creator_id,
+                        'sequence' => $seq++,
+                    ]);
+                }
+            });
+        }
+
+
+        // $episodes = \App\Models\Episode::inRandomOrder()->limit(10)->get();
+        // $creator->likes()->attach($episodes);
     }
 }

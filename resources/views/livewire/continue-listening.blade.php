@@ -8,6 +8,8 @@
             </div>
         @else
             @foreach ($epsToContinue as $episode)
+                @if ($episode->podcast)
+
                 <div class="bg-[#D9D9D9] w-[600px] h-[250px] mt-3 rounded-3xl flex">
                     <div class="w-[40%] bg-black rounded-s-3xl bg-cover"
                         style="background-image: url('{{ asset($episode->podcast->image_url) }}');"
@@ -45,6 +47,7 @@
 
 
                 </div>
+                @endif
             @endforeach
         @endif
 

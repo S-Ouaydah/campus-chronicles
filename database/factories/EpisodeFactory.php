@@ -9,6 +9,16 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class EpisodeFactory extends Factory
 {
+    public function getRandomPath(){
+        //return random path from a list
+    $pathList = array(
+            "storage/pod1",
+            "storage/pod2",
+            "storage/pod3",
+            "storage/pod4",
+        );
+        return $pathList[fake()->numberBetween(0, 2)];
+    }
     /**
      * Define the model's default state.
      *
@@ -18,9 +28,8 @@ class EpisodeFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
-            'description' => fake()->text(),
-            'podcast_id' => fake()->numberBetween(1, 100),
-            'audio_path' => fake()->sentence(),
+            'description' => fake()->realtext(200),
+            'audio_path' => self::getRandomPath(),
             'sequence' => fake()->numberBetween(1, 100)
         ];
     }
