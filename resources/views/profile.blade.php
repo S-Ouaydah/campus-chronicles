@@ -62,7 +62,7 @@
                         <h4 class="text-2xl xl:text-3xl font-bold">Your Subscrip-<br>tions List</h4>
                         <h4 class="text-lg xl:text-xl opacity-75">Contain {{ $subscriptions->count() }} Podcasts</h4>
                     </div>
-
+            {{-- TODO use the podcast bubble  --}}
                     <div class="swiper-container mt-5 overflow-x-hidden w-full	overflow-y-hidden">
                         <div class="swiper-wrapper">
 

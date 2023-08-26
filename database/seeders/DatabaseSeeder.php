@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory()->create([
-            'id'
             'name' => 'Test User',
             'email' => 'test@user.com',
             'isISAE' => false,
@@ -33,6 +32,21 @@ class DatabaseSeeder extends Seeder
         $creator2 = \App\Models\User::factory()->create([
             'name' => 'Test Two Isae',
             'email' => 'test2@isae.edu.lb',
+            'isISAE' => true,
+        ]);
+        $creator3 = \App\Models\User::factory()->create([
+            'name' => 'Crerator 3 Isae',
+            'email' => 'test3@isae.edu.lb',
+            'isISAE' => true,
+        ]);
+        $creator4 = \App\Models\User::factory()->create([
+            'name' => 'Test creator 4',
+            'email' => 'test4@isae.edu.lb',
+            'isISAE' => true,
+        ]);
+        $creator5 = \App\Models\User::factory()->create([
+            'name' => 'Test creator 5',
+            'email' => 'test5@isae.edu.lb',
             'isISAE' => true,
         ]);
         $admin = \App\Models\User::factory()->create([
@@ -50,7 +64,7 @@ class DatabaseSeeder extends Seeder
                     $titles = PodcastFactory::getTitles()[$podcastCategory->name];
                     return $titles[$seq->index % count($titles)];
                 }),
-                'creator_id' => new Sequence(2, 3),
+                'creator_id' => new Sequence(2,3,4,5,6),
                 'category_id' => $podcastCategory->id,
             ])->each(function ($podcast) {
                 $count = rand(4, 14);

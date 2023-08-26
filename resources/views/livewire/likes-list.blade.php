@@ -21,25 +21,21 @@
                             </div>
                         </div>
                         <div class="pl-4  w-[150px]  2xl:w-[400px] 3xl:w-[400px]">
-                            <h4 class="font-medium truncate">{{ $episode->title }}</h4>
                             <a href="{{ route('podcast.show', $episode->podcast->id) }}">
-                                <p class="opacity-75 text-sm truncate">{{ $episode->podcast->title }}
-                                </p>
+                                <h4 class="font-medium truncate">{{ $episode->title }}</h4>
+                                <p class="opacity-75 text-sm truncate">{{ $episode->podcast->title }}</p>
                             </a>
 
                         </div>
                     </div>
-                    <h4 class="text-sm opacity-75 w-[150px]text-start">{{ $episode->creator->name }}
+                    <h4 class="text-sm opacity-75 w-[150px]text-start" ><a href="{{ route('profile.viewer', $episode->creator->id) }}">
+                        {{ $episode->creator->name }}</a>
                     </h4>
-                    <h4 class="text-sm opacity-75 w-[150px] text-start">{{ $episode->getLikeDate() }}
-                    </h4>
+                    <h4 class="text-sm opacity-75 w-[150px] text-start">{{ $episode->getLikeDate() }}</h4>
                     <h4 class="text-sm opacity-75 w-[50px] text-start">{{ $episode->getFormattedDuration() }}</h4>
                     <div class="flex gap-5 items-center">
-
                         <i wire:click="unlikeEpisode({{ $episode->episode_id }})"
                             class="max-h-10 px-4 btn  fas fa-heart text-black cursor-pointer"></i>
-
-
                     </div>
                 </div>
             @endforeach

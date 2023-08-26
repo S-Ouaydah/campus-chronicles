@@ -26,8 +26,8 @@
 
 
                         <div class="pl-4  w-[200px] ">
-                            <h4 class="font-medium truncate">{{ $hepisode->episode->title }}</h4>
                             <a href="{{ route('podcast.show', $hepisode->episode->podcast->id) }}">
+                            <h4 class="font-medium truncate">{{ $hepisode->episode->title }}</h4>
                                 <p class="opacity-75 text-sm truncate">
                                     {{ $hepisode->episode->podcast->title }}
                                 </p>
@@ -45,7 +45,6 @@
 
                 </div>
             @endforeach
-
         @endif
     </div>
 </div>
