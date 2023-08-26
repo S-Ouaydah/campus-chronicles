@@ -34,13 +34,17 @@ class SearchController extends Controller
         $podcasts = Podcast::where('title', 'like', '%'.$searchTerm.'%')->get();
         $episodes = Episode::where('title', 'like', '%'.$searchTerm.'%')->get();
         $users = User::where('name', 'like', '%'.$searchTerm.'%')->get();
+        $topResult = User::where('name', 'like', '%' . $searchTerm . '%')
+        ->orderByRaw("CASE WHEN name LIKE '$searchTerm%' THEN 1 WHEN name LIKE '%$searchTerm' THEN 3 ELSE 2 END")
+        ->first();
 
         return view('search-results', [
             'searchTerm' => $searchTerm,
             'podcasts' => $podcasts,
             'episodes' => $episodes,
             'users' => $users,
-            'currentuser' => $currentuser
+            'currentuser' => $currentuser,
+            'topResult' => $topResult,
         ]);
     }
 

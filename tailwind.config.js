@@ -36,6 +36,10 @@ module.exports = {
                     'dark': '#569614',
                 },
                 'secondary': '#e0e0e0',
+                'card1': '#ffefe2',
+                'card2': '#effcef',
+                'card3': '#e6f5f9',
+                'card4': '#f4f6fa',
             },
             spacing: {
                 '1/2': '50%',
