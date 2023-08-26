@@ -5,12 +5,12 @@
             <div class="flex flex-col mt-10 sm:mt-0 lg:mt-5 w-full">
                 <div class="text-white text-2xl w-full">Analytics Overview</div>
                 <div class="flex flex-col sm:flex-row sm:flex-wrap gap-5 items-center select-none mt-5 w-full justify-center sm:justify-start ">
-                    <x-stat-card color="ffefe2" text="Podcasts" sub="" :count="$countPods" />
-                    <x-stat-card color="ffefe2" text="Episodes" :sub="$totalEpisodesThisWeek .' uploded this week'" :count="$totalEpisodes" />
-                    <x-stat-card color="effcef" text="Listens This Week" :sub="$percentageChange . ' % diff from the last week' " :count="$totalListensThisWeek" />
-                    <x-stat-card color="e6f5f9" text="Subscriptions" :sub="$totalSubscriptionsThisWeek . ' subscriptions this week' " :count="$totalSubscriptions" />
-                    <x-stat-card color="f4f6fa" text="Total Likes" :sub="$totalLikesThisWeek . ' likes this week' " :count="$totalLikes" />
-                    <x-stat-card color="f4f6fa" text="Total Followers" :sub="$totalFollowersThisWeek . ' followers this week' " :count="$totalFollowers" />
+                    <x-stat-card class="bg-red-100"  text="Podcasts" sub="" :count="$countPods" />
+                    <x-stat-card class="bg-blue-100"  text="Episodes" :sub="$totalEpisodesThisWeek .' uploded this week'" :count="$totalEpisodes" />
+                    <x-stat-card class="bg-green-100"  text="Listens This Week" :sub="$percentageChange . ' % diff from the last week' " :count="$totalListensThisWeek" />
+                    <x-stat-card class="bg-yellow-50"  text="Subscriptions" :sub="$totalSubscriptionsThisWeek . ' subscriptions this week' " :count="$totalSubscriptions" />
+                    <x-stat-card class="bg-purple-100"  text="Total Likes" :sub="$totalLikesThisWeek . ' likes this week' " :count="$totalLikes" />
+                    <x-stat-card class="bg-pink-100"  text="Total Followers" :sub="$totalFollowersThisWeek . ' followers this week' " :count="$totalFollowers" />
                 </div>
             </div>
 
