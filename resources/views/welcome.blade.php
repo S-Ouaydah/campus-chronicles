@@ -13,6 +13,8 @@
     <link href="https://fonts.cdnfonts.com/css/made-tommy-soft-outline" rel="stylesheet">
     <!-- Fonts Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('ico.ico')}}">
+<link rel="manifest" href="/site.webmanifest">
 
     <style>
         html {
@@ -32,49 +34,50 @@
 
 </head>
 
-<body class="antialiased">
-    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen  bg-center bg-trueGray-200  dark:trueGray-20  selection:text-white  ">
+<body class="antialiased mdx:h-screen">
+    <div
+        class="relative sm:flex flex-col sm:justify-start sm:items-center min-h-screen  bg-center bg-trueGray-200  dark:trueGray-20  selection:text-white h-full ">
 
 
         @if (Route::has('login'))
 
-        <div class="flex items-center px-[4%] sm:gap-1 xl:gap-16 w-full sm:fixed sm:top-0 sm:left-0 pt-8 text-left font-medium text-sm xl:text-base leading-none  ">
+            <div
+                class="flex items-center  px-[4%] sm:gap-1 xl:gap-16 w-full relative sm:top-0 sm:left-0 pt-8 text-left font-medium text-sm xl:text-base leading-none  ">
 
 
 
-            <img class="h-6" src="{{asset('logo-black.png')}}">
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
+                <img class="h-4 mdx:h-6" src="{{ asset('logo-black.png') }}">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
 
-                @if (auth()->check() && auth()->user()->isAdmin)
-                <x-nav-link :href="route('admindashboard')" :active="request()->routeIs('admindashboard')">
-                    {{ __('Admin Dashboard') }}
-                </x-nav-link>
-                @endif
+                    @if (auth()->check() && auth()->user()->isAdmin)
+                        <x-nav-link :href="route('admindashboard')" :active="request()->routeIs('admindashboard')">
+                            {{ __('Admin Dashboard') }}
+                        </x-nav-link>
+                    @endif
 
-                @if (auth()->check() && auth()->user()->isISAE)
-                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('My Studio') }}
-                </x-nav-link>
-                @endif
-
-
-                <x-nav-link :href="route('explore')" :active="request()->routeIs('explore')">
-                    {{ __('Explore') }}
-                </x-nav-link>
+                    @if (auth()->check() && auth()->user()->isISAE)
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('My Studio') }}
+                        </x-nav-link>
+                    @endif
 
 
-            </div>
+                    <x-nav-link  :href="route('explore')" :active="request()->routeIs('explore')">
+                        {{ __('Explore') }}
+                    </x-nav-link>
+
+
+                </div>
 
 
 
-            @livewire('search-bar')
-            <div class="nav4">
-                @auth
+                @livewire('search-bar')
+                <div class="nav4">
+                    @auth
 
-                <!-- Settings Dropdown -->
-                <div class="hidden sm:flex sm:items-center sm:ml-6 h-[42px]">
-
-                    <x-dropdown align="right" width="48">
+                        <!-- Settings Dropdown -->
+                        <div class="hidden sm:flex sm:items-center sm:ml-6 h-[42px]">
+                        <x-dropdown align="right" width="48">
 
 
                         @if (Request()->route()->getName() == 'profile' ||
@@ -140,65 +143,75 @@
                     </x-dropdown>
 
 
+                     
+
+
+                        </div>
+                    @else
+                        <a href="{{ route('login') }}" class="  text-white rounded-2xl bg-black px-4  text-sm mdx:text-base mdx:px-6  py-2.5  ml-1 mdx:ml-5">Log
+                            in</a>
+
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}"
+                                class=" bg-[#71C719] px-4   text-sm  mdx:text-base  mdx:px-6  py-2.5 rounded-2xl ml-1 mdx:ml-5 text-black hover:text-gray-900 dark:text-black  ">Register</a>
+                        @endif
+                    @endauth
+
                 </div>
 
-                @else
-                <a href="{{ route('login') }}" class="  text-white rounded-2xl bg-black px-6  py-2.5  ml-5">Log
-                    in</a>
+        @endif
+
+    </div>
+
+    <div class="landing flex mdx:flex-row flex-col-reverse  mdx:gap-40 items-center justify-evenly  h-full w-full select-none">
 
 
-                @if (Route::has('register'))
-                <a href="{{ route('register') }}" class=" bg-[#71C719] px-6  py-2.5 rounded-2xl ml-4 text-black hover:text-gray-900 dark:text-black  ">Register</a>
-                @endif
-                @endauth
+        <div class='left py-28 mdx:py-0'>
+            <!-- New Episode -->
+            <h3 class="font-medium"><span class="bg-black text-white py-1 px-2 mr-2">NEW</span> Knowledge Junction -
+                Ep2.</h3>
 
+
+            <div class="relative mt-7">
+                <img class="absolute right-[25%] sm:right-[0%]  h-[4rem] sm:h-[6rem]"
+                    src="{{ asset('arrow-landing.png') }}">
+                <h1 class="text-3xl sm:text-5xl font-bold"><span class="tracking-widest">Educational</span><br>podcasts
+                    that<br>inspire you to <span
+                        class="underline decoration-8 underline-offset-auto  decoration-[#71C719]">grow</span></h1>
             </div>
 
-            @endif
+            <p class="mt-3 font-medium"><span class="text-[#71C719]">Join</span> and <span
+                    class="text-[#71C719]">Learn</span> from the most experienced<br>
+                seniors in your educational field....</p>
 
-        </div>
+            <button class="bg-black text-white font-medium mt-8 py-3 px-5 leading-none"><a
+                    href="{{ route('explore') }}">Browse Podcasts<i
+                        class="fa-solid fa-arrow-right  ml-5 mr-3 text-[#71C719] leading-none"></i></a></button>
 
-        <div class="landing flex gap-40 items-center justify-evenly w-full select-none">
+            <div class="mt-5 flex">
 
+                <div class="mr-20 flex relative">
 
-            <div class='left'>
-                <!-- New Episode -->
-                <h3 class="font-medium"><span class="bg-black text-white py-1 px-2 mr-2">NEW</span> Knowledge Junction -
-                    Ep2.</h3>
-
-
-                <div class="relative mt-7">
-                    <img class="absolute right-[0%] h-[6rem]" src="{{asset('arrow-landing.png')}}">
-                    <h1 class="text-5xl font-bold"><span class="tracking-widest">Educational</span><br>podcasts
-                        that<br>inspire you to <span class="underline decoration-8 underline-offset-auto  decoration-[#71C719]">grow</span></h1>
-                </div>
-
-                <p class="mt-3 font-medium"><span class="text-[#71C719]">Join</span> and <span class="text-[#71C719]">Learn</span> from the most experienced<br>
-                    seniors in your educational field....</p>
-
-                <button class="bg-black text-white font-medium mt-8 py-3 px-5 leading-none"><a href="{{ route('explore') }}">Browse Podcasts<i class="fa-solid fa-arrow-right  ml-5 mr-3 text-[#71C719] leading-none"></i></a></button>
-
-                <div class="mt-5 flex">
-
-                    <div class="mr-20 flex relative">
-
-                        <div class="w-[3.5rem] h-[3.5rem] bg-gray-200 rounded-[50%] border-4 border-[#fdfdfd]"></div>
-                        <div class="w-[3.5rem] h-[3.5rem] bg-gray-200 rounded-[50%] absolute left-[30px] border-4 border-[#fdfdfd]">
-                        </div>
-                        <div class="w-[3.5rem] h-[3.5rem] bg-gray-200 rounded-[50%] absolute left-[60px] border-4 border-[#fdfdfd] ">
-                        </div>
-
+                    <div class="w-[3.5rem] h-[3.5rem] bg-gray-200 rounded-[50%] border-4 border-[#fdfdfd]"></div>
+                    <div
+                        class="w-[3.5rem] h-[3.5rem] bg-gray-200 rounded-[50%] absolute left-[30px] border-4 border-[#fdfdfd]">
                     </div>
-                    <div class=" font-medium ">50k+ Listeners<br>in Lebanon and the Middle East</div>
+                    <div
+                        class="w-[3.5rem] h-[3.5rem] bg-gray-200 rounded-[50%] absolute left-[60px] border-4 border-[#fdfdfd] ">
+                    </div>
 
                 </div>
+                <div class=" font-medium ">50k+ Listeners<br>in Lebanon and the Middle East</div>
 
-            </div>
-            <div class='right'>
-                <img class="h-[30rem] xl:h-[35rem]" src="{{asset('landing-pic.png')}}">
             </div>
 
         </div>
+        <div class='right py-32 mdx:py-0'>
+            <img class=" h-[20rem] sm:h-[25rem] md:h-[30rem] xl:h-[35rem]" src="{{ asset('landing-pic.png') }}">
+        </div>
+
+    </div>
     </div>
     </div>
     @livewireScripts

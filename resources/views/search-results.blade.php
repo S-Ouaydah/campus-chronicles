@@ -37,7 +37,7 @@
                         @if (!$episodes->isEmpty())
                             <div class="h-[500px] bg-gray-200 p-1 sm:p-4 rounded-xl w-full ">
 
-                                @livewire('podcast-episodes', ['podcast' => null, 'episodes' => $episodes])
+                                @livewire('episodes-search', [ 'episodes' => $episodes])
                             </div>
                         @else
                             <li>No episodes found !</li>

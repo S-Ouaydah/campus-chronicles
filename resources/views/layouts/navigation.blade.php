@@ -25,13 +25,13 @@
                                 Request()->route()->getName() == 'dashboard' ||
                                 Request()->route()->getName() == 'admindashboard' ||
                                 Request()->route()->getName() == 'profile.viewer')
-                            <img class="h-6" src="https://i.ibb.co/FBLwJBP/logo-white.png">
+                            <img class="h-6" src="{{asset('logo-white.png')}}">
                         @else
-                            <img class="h-6" src="https://i.ibb.co/stTsyMP/logo-black.png">
+                            <img class="h-6" src="{{asset('logo-black.png')}}">
                         @endif
                     @endauth
                     @guest
-                        <img class="h-6" src="https://i.ibb.co/stTsyMP/logo-black.png">
+                        <img class="h-6" src="{{asset('logo-black.png')}}">
                     @endguest
                 </div>
 

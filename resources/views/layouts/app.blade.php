@@ -19,6 +19,8 @@
     </style>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('ico.ico')}}">
+<link rel="manifest" href="/site.webmanifest">
 
     <!-- Scripts -->
 

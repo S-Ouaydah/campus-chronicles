@@ -1,8 +1,8 @@
-<div class="mt-10 flex justify-between gap-10 select-none box-border p-2">
+<div class="mt-10 flex flex-col lg:flex-row justify-between gap-10 select-none box-border p-2">
     <div>
         <h4 class="text-black text-2xl font-medium ">Continue Listening</h4>
         @if ($epsToContinue->all() === [])
-            <div class="bg-[#D9D9D9] w-[600px] h-[250px] mt-3 rounded-3xl flex justify-center items-center">
+            <div class="bg-[#D9D9D9] w-full sm:w-[600px] h-[250px] mt-3 rounded-3xl flex justify-center items-center">
                 <h4 class="font-medium opacity-80">You dont have any episode on your continue list !</h4>
 
             </div>

@@ -4,17 +4,17 @@
 
         @auth
 
-        <div class="w-full h-[550px] 3xl:h-[600px] flex justify-between select-none box-border p-2">
-            <div class="w-[70%] mr-4 h-[550px] 3xl:h-[600px] flex flex-col justify-between">
+        <div class="w-full h-[1500px] sm:h-[1000px]  xl:h-[550px] 3xl:h-[600px] flex xl:flex-row flex-col justify-between select-none box-border p-2">
+            <div class=" w-full xl:w-[65%] mr-4 h-full sm:h-[600px] 3xl:h-[600px] flex flex-col justify-between">
 
-                <div class="h-[44%] w-full  bg-[#C0EE9B]  rounded-3xl  items-center justify-between inline-flex mb-4 mr-4 p-12">
+                <div class="h-[30%] sm:h-[44%] w-full  bg-[#C0EE9B]  rounded-3xl  items-center justify-between inline-flex mb-4 mr-4 p-12">
                     <div class="flex-col justify-center items-start gap-[5px] inline-flex ">
                         <div class=" flex flex-col ">
                             <div class=" text-black font-medium text-2xl xl:text-3xl 2xl:text-3xl tracking-wide">Get<span class="font-bold"> Experientializated</span></div>
                             <div class="font-medium text-xl xl:text-2xl 2xl:text-2xl mt-4  tracking-wide">on<span class="font-bold"> Campus Chronicles</span></div>
                         </div>
                     </div>
-                    <div class="justify-center items-center gap-[5px] flex">
+                    <div class="justify-center items-center gap-[5px] hidden xl:flex ">
                         <div class="w-[419px] h-[237px] relative">
                             <img class="w-[419px] h-[237px] left-0 top-0 absolute" src="{{ asset('storage/banner/circle.png') }}">
                             <img class="w-[105px] h-[148px] left-[140px] top-[23px] absolute" src="{{ asset('storage/banner/arrow.png') }}">
@@ -30,7 +30,7 @@
 
 
 
-            <div class="w-[30%] ml-4 h-full 3xl:h-[600px] bg-[#D9D9D9] rounded-3xl p-11">
+            <div class="mt-8 xl:mt-0 w-full xl:w-[35%] ml-0 xl:ml-4 h-[600px] 3xl:h-[600px] bg-[#D9D9D9] rounded-3xl p-11">
                 <h4 class="text-black text-2xl font-medium">Trending This Week</h4>
                 @livewire('trending-this-week', ['trendingEps' => $trendingEps])
 

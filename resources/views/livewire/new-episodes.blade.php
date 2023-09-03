@@ -1,9 +1,9 @@
 
-                <div class="h-[56%] mtz-4">
-                    <div class="flex justify-between h-full">
+                <div class="h-[70%] sm:h-[56%] mtz-4">
+                    <div class="flex flex-col sm:flex-row justify-between h-full">
                         @foreach ($lastNewEpisodes as $index => $episode)
                             <div
-                                class="w-[64%] h-full mr-4 bg-[#090909] rounded-3xl p-12 flex flex-col justify-evenly {{ $index !== $activeEpisodeIndex ? 'hidden' : '' }}">
+                                class="w-full sm:w-[64%] h-full mr-4 bg-[#090909] rounded-3xl p-12 flex flex-col justify-evenly {{ $index !== $activeEpisodeIndex ? 'hidden' : '' }}">
                                 <h2 class="text-[#71C719] text-4xl font-medium">New Episodes</h2>
                                 <h4 class="text-white text-2xl mt-2 font-medium">{{ $episode->podcast->title }}<br><span
                                         class="text-[#5A5A5A]">By </span>{{ $episode->creator->name }}</h4>
@@ -21,7 +21,7 @@
 
                                 </div>
                             </div>
-                            <div class="relative w-[36%] ml-4 {{ $index !== $activeEpisodeIndex ? 'hidden' : '' }}">
+                            <div class="relative w-full h-full sm:w-[36%] ml-0 mt-4 sm:mt-0 sm:ml-4 {{ $index !== $activeEpisodeIndex ? 'hidden' : '' }}">
                                 <div class="absolute w-full h-full bg-black rounded-3xl">
                                     <div class="relative w-full h-full bg-cover saturate-0 rounded-3xl"
                                         style="background-image: url('{{ asset($episode->podcast->image_url) }}');"

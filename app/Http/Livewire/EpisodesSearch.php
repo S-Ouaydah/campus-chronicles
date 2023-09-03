@@ -5,15 +5,14 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Episode;
 use Illuminate\Support\Facades\Auth;
-
-
-class PodcastEpisodes extends Component
+class EpisodesSearch extends Component
 {
+    public $podcast;
     public $episodes;
 
-    public function mount($episodes)
+    public function mount($podcast,$episodes)
     {
-
+        $this->podcast = $podcast;
         $this->episodes = $episodes;
     }
     public function like($episodeId)
@@ -37,6 +36,6 @@ class PodcastEpisodes extends Component
     }
     public function render()
     {
-        return view('livewire.podcast-episodes',['episodes' => $this->episodes]);
+        return view('livewire.episodes-search',['episodes' => $this->episodes]);
     }
 }
