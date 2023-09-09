@@ -7,12 +7,10 @@ use App\Models\Episode;
 use Illuminate\Support\Facades\Auth;
 class EpisodesSearch extends Component
 {
-    public $podcast;
     public $episodes;
 
-    public function mount($podcast,$episodes)
+    public function mount($episodes)
     {
-        $this->podcast = $podcast;
         $this->episodes = $episodes;
     }
     public function like($episodeId)
