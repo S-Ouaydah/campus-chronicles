@@ -127,9 +127,9 @@
                                     @if (Auth::user()->pfp_path)
                                         <div class="bg-cover h-8 w-8 rounded-full"
                                             style="background-image: url('{{ asset(Auth::user()->pfp_path) }}');">
-                                        @else
-                                            <div class="bg-cover h-8 w-8 rounded-full"
-                                                style="background-image: url('{{ asset('storage/user_profiles/default.jpg') }}');">
+                                    @else
+                                        <div class="bg-cover h-8 w-8 rounded-full"
+                                            style="background-image: url('{{ asset('storage/user_profiles/default.jpg') }}');">
                                     @endif
                 </div>
                 <div class="text-black pl-5">{{ Auth::user()->name }}</div>

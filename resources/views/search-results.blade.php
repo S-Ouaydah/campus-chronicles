@@ -54,31 +54,35 @@
 
             <h2 class="font-medium text-xl">Creators</h2>
 
-            <ul>
+            <div class="flex flex ">
                 @php
                 $creatorsShown = false;
                 @endphp
 
                 @foreach ($users as $user)
                 @if (!$currentuser || ($user->id != $currentuser->id && $user->isISAE))
-                <li class="">
+                <div class="p-3" >
                     <a class=" flex flex-col  items-center" href="{{ route('profile.viewer', $user['id']) }}">
-                        <div class="h-[250px] w-[250px] bg-gray-500 rounded-full bg-cover" style="background-image: url('{{ asset($user->pfp_path) }}');"></div>
+                        @if ($user->pfp_path)
+                            <div class="h-[250px] w-[250px] bg-gray-500 rounded-full bg-cover" style="background-image: url('{{ asset($user->pfp_path) }}');"></div>
+                        @else
+                            <div class="h-[250px] w-[250px] bg-gray-500 rounded-full bg-cover" style="background-image: url('{{ asset('storage/user_profiles/default.jpg') }}');"></div>
+                        @endif
                         <h2>
                             {{ $user['name'] }}
                         </h2>
                     </a>
-                </li>
+                </div>
                 @php
-                $creatorsShown = true;
+                    $creatorsShown = true;
                 @endphp
                 @endif
                 @endforeach
 
                 @if (!$creatorsShown)
-                <li>No creators found !</li>
+                <div>No creators found !</div>
                 @endif
-            </ul>
+            </div>
         </div>
 
     </div>

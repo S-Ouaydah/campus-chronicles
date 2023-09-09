@@ -26,7 +26,7 @@
                 </div>
 
             </div>
-            <div class=" opacity-75"><Span class="text-base font-medium">{{ $episode->listen_count }} listening
+            <div class=" opacity-75"><Span class="text-base font-medium">{{ $episode->listen_count }} listens
                 </Span><Span class=" text-base "></Span>
             </div>
 
