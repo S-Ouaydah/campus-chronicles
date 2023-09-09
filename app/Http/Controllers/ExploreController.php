@@ -122,12 +122,8 @@ class ExploreController extends Controller
 
 
 
-        // Fetch popular podcasts based on total listens
-        $popularPodcasts = Podcast::withCount('episodes')
-            ->orderBy('episodes_count', 'desc')
-            ->take(10)
-            ->get();
-
+        // Fetch popular podcasts based on total likes
+        $popularPodcasts = Podcast::topPodcastsByLikes();
 
 
 
